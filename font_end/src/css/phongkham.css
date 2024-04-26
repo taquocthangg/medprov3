@@ -1,0 +1,307 @@
+p{
+    font-family: Avertaa;
+}
+.banner{
+    display: flex;
+    width: 100%;
+    height: 540px;
+    background: url("../img/phongkham/pkpm_bg.png");
+    background-size: cover;
+}
+.wrapper{
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1070px;
+    height: 410px;
+    margin-top:60px;
+}
+.info{
+    width: 420px;
+    text-align: center;
+    color: #fff;
+}
+.info h1{
+    margin-bottom: 20px;
+}
+.thongke{
+    width: 100%;
+    /* height: 430px; */
+    background-position:50% !important;
+    background-size: cover !important;
+    background: url('../img/phongkham/thongke/bg_clinic.svg');
+}
+.contents{
+    text-align: center;
+    padding: 30px;
+    font-weight: 700;
+    color: #1e56c5;
+    font-size: 28px;
+    
+}
+.title img{
+    width: 100%;
+}
+.show{
+    margin: 0 auto;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.thongso{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.content,.noidung__uudiem{
+    
+    font-size: 28px;
+    font-weight: 600;
+    color: #1e56c5;
+    font-family: Averta;
+}
+.decs{
+    font-size: 14px;
+    font-weight: 600;
+}
+.thongso img:hover{
+    cursor: pointer;
+}
+.content, .tilte{
+    text-align: center;
+}
+.containerStyle .content{
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+.containerStyle .tilte{
+    font-size: 20px;
+}
+.btn_phongkham{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 30px;
+}
+.btn_dangky, .btn_dangnhap{
+    background-image:linear-gradient(40deg,#ffd86f,#fc6262);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 176px;
+    height: 47px;
+    border-radius: 30px;
+    font-size: 14px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+
+}
+.btn_dangnhap{
+    background-image: linear-gradient(120deg,#fdfbfb,#ebedee)
+}
+.btn_dangky a{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-family: Avertaa;
+    font-weight: 700;
+    color: #fff;
+    text-transform: uppercase;
+}
+.btn_dangky svg{
+    display: flex;
+    font-size: 17px;
+}
+.btn_dangnhap a{
+    font-family: Avertaa;
+    font-weight: 800;
+    color: #7b8794;
+    text-transform: uppercase;
+}
+.containers{
+    margin: 0 auto;
+    max-width: 1266px;
+    display: flex;
+    flex-direction: column;
+}
+.phongkham__noidung{
+    background: url('https://medpro.vn/static/media/BG_CLINIC.2ca22859.svg');
+    padding: 50px;
+}
+.noidung__uudiem{
+    text-align: center;
+}
+.uudiem__container{
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+.name__title{
+    padding: 15px;
+}
+.btn__test{
+    margin: 0 auto;
+    cursor: pointer;
+    width: 140px;
+    border-radius: 5px;
+    padding: 10px;
+    background-image:linear-gradient(40deg,#ffd86f,#fc6262);
+    color: #fff;
+    cursor: grab;
+}
+
+
+
+/* Tại Sao  */
+.why__content{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    padding: 50px;
+}
+.why__content-title{
+    display: flex;
+    flex-direction: row;
+}
+.content-title_name{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.content__name-title{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    justify-content: center;
+    gap: 20px;
+}
+.content__name{
+display: flex;
+justify-content: flex-end;
+}
+.why__content-title p:first-child{
+    font-family: Averta;
+    font-size: 22px;
+    color: #1e56c5;
+}
+.why__content-icon{
+    margin: 0 auto;
+}
+.why__top{
+    margin-top: 20px;
+}
+.content-title_name span,.content__name-title{
+    line-height: 26px;
+    font-size: 16px;
+    font-family: Avertaa;
+    font-weight: 400;
+}
+.uudiem__logo img{
+    width: 400px;
+}
+
+
+.why__content-icon img{
+    width: 100%;
+}
+
+
+.why__container-mobile{
+    display: none;
+}
+
+
+/* Res */
+
+@media only screen and (max-width: 768px) {
+    .uudiem__logo img{
+        width: 100%;
+    }
+    .thongso{
+            gap:0;
+    }
+    .content{
+        margin-bottom: 20px;
+    }
+    .why__container-mobile{
+        display: block;
+    }
+    .Why__container-pc{
+        display: none;
+    }
+    .title{
+        display: none;
+    }
+    .info{
+        width: 100%;
+    }
+    .btn_phongkham{
+        flex-direction: column;
+    }
+    .wrapper{
+        flex-direction: column;
+    }
+    .show{
+        padding: 0;
+       width: 100%;
+       display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap:20px;
+    }
+    .thongke{
+        height: 820px;
+    }
+    .why__content-icon img{
+        max-width:100%;
+    }
+    .why__content{
+        display: block;
+    }
+    .why__content-title{
+        display: block;
+    }
+    .why__content-title{
+        display: block;
+    }
+    .uudiem__container{
+        display: block;
+
+    }
+    .uudiem__logo {
+        display: flex;
+        justify-content: center;
+       
+    }
+    .containerStyle{
+        padding-top:64px;
+    }
+    .content-title_name{
+        text-align: center;
+        padding-top: 40px;
+    }
+     .tilte{
+       padding:12px;
+    }
+    .why__content-icon img{
+        margin:0 auto;
+    }
+    .content__name{
+        margin-top: 50px;
+    }
+    .content__name-title{
+        text-align: center;
+    }
+    .why__content-icon  {
+        margin:20px 0;
+    }
+    .name__title{
+        font-weight: bold;
+        
+    }
+}

@@ -1,0 +1,6 @@
+export * from './auth'
+export * from './user'
+export * from './news_ctl'
+export * from './benhVien_ctl'
+export * from './bacSi'
+export * from './chuyenKhoa'

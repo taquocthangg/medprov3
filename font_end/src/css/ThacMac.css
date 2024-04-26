@@ -1,0 +1,158 @@
+.container_tm{
+    font-family:aveta;
+}
+.header_tm{
+    height:220px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(45deg,#6a78d1,#00a4bd)
+}
+.tieudett{
+    width: 100%;
+    height:100px;
+    display: flex;
+    justify-content: center;
+}
+.tieudett1{
+    width: 1140px;
+    display: flex;
+    flex-direction: column;
+}
+.mota,
+.tieudett1>h1{
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+}
+.mota{
+    margin-bottom: 16px;
+    font-size:17px;
+}
+.contenr_tm{
+
+    display: flex;
+    justify-content: center;
+}
+.warper{
+
+    width: 1140px;
+    margin: 30px 0;
+    display: flex;
+}
+.leff3{
+    height: 200px;
+
+}
+
+.right3{
+    display: flex;
+    flex-direction: column;
+    padding: 0 30px;
+}
+.left_item{
+    height: 46px;
+    width: 255px;
+    margin-bottom: 8px;
+
+}
+.left_itemc{
+    background: #1da1f2;
+    color: #fff;
+    border-radius: 5px;
+    
+}
+.left_itemc>h2{
+    font-size: 16px;
+    padding: 12px 15px;
+
+}
+.left_itemd{
+    display: flex;
+    align-items: center;
+}
+.left_itemd>a{
+    padding: 0 15px 0 10px;
+    color: #12263f;
+    cursor: pointer;
+    font-weight:400;
+}
+.left_itemd>a:hover{
+color: #307be7;
+}
+.contenr_tm .warper{
+    padding: 30px;
+}
+.title-item{
+    padding: 0 30px 0 15px;
+    border-top-right-radius:5px ;
+    border-top-left-radius:5px ;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    background-color: #e9e9e9;
+    color:#000;
+    position: relative;
+    
+}
+
+.right3{
+    margin-bottom: 10px;
+}
+.accordion-content{
+    border: 1px solid #307be7;
+    padding:16px;
+    line-height: 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@font-face {
+    font-family: aveta;
+    src: url("../font/Averta-Regular.d88182eb.woff");
+}
+@media only screen  and (max-width:46.1875em){
+    .header_tm{
+        display: none;
+    }
+    .warper{
+        margin-top: 0;
+        flex-direction: column;
+        width: 90%;
+    }
+    .item_right{
+        width: 100%;
+        height: 60px;
+        cursor: pointer;
+        background: #f8f8f9;
+        box-shadow: unset;
+        border-radius: 4px;
+        margin: 10px 0;
+        line-height: 30px;
+        font-size: 16px;
+        
+    }
+    .left_item{
+        width: 100%;
+    }
+    .left3{
+        width: 100%;
+        border-bottom: 2px solid #ccc;
+    }
+    .right3{
+        width: auto ;
+        padding:0;
+    }
+    .accordion {
+        margin-top:30px;
+    }
+    .title-item{
+        padding:7px 15px;
+        font-size: 16px;
+    }
+    .title-item>svg{
+        display: none;
+    }
+}

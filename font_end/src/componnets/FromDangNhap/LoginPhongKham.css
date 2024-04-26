@@ -1,0 +1,67 @@
+.dangnhap {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(50deg, #cee9e8, #8cddcb);
+
+}
+
+.login__wrapper {
+    margin: 0 auto;
+    margin-top: 60px;
+    border-radius: 10px;
+    padding: 50px;
+    background-image: linear-gradient(0, rgba(255, 255, 255, 0.97), rgba(255, 255, 255, 0.97));
+}
+
+.wrapper-logo {
+    padding: 30px;
+    margin-top: -30px;
+    text-align: center
+}
+
+.from__dangnhap input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #5b5757;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.dangnhap-back {
+    margin: 50px 0 0 200px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dangnhap-back a {
+    color: rgb(24, 151, 190);
+    font-size: 18px;
+}
+
+.btn {
+    border-radius: 5px;
+    padding: 10px;
+    background-image: linear-gradient(80deg, #3869a0, #69d1eb);
+    color: #fff;
+    cursor: grab;
+}
+
+.forget {
+    display: flex;
+    gap: 20px;
+    padding: 15px;
+}
+
+.forget a {
+    color: #0181ac;
+}
+
+@media only screen and (max-width:46.1875em) {
+    .login__wrapper {
+        margin-top: 100px;
+        padding: 25px;
+    }
+}

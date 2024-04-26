@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 13</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD" transform="translate(-1350.000000, -1344.000000)">
+            <g id="Các-tính-năng-của-MEDPRO" transform="translate(270.000000, 826.000000)">
+                <g id="Group-12" transform="translate(40.000000, 265.000000)">
+                    <g id="Right" transform="translate(1040.000000, 0.000000)">
+                        <g id="Group-15-Copy-6" transform="translate(0.000000, 253.000000)">
+                            <g id="Group-14">
+                                <g id="Group-13">
+                                    <circle id="Oval" fill="#EAEFF6" cx="40" cy="40" r="40"></circle>
+                                    <g id="news-report" transform="translate(18.000000, 18.000000)" fill-rule="nonzero">
+                                        <path d="M26.7612012,12.8326465 L0.691523438,40.6432617 C-0.252773437,41.6506641 -0.226669922,43.2737402 0.749794922,44.2502051 C1.72625977,45.2266699 3.34933594,45.2527734 4.35673828,44.3084766 L32.1672656,18.2387988 L26.7612012,12.8326465 Z" id="Path" fill="#463836"></path>
+                                        <polygon id="Path" fill="#FFD24D" points="34.3257715 27.0464941 30.4643848 23.1850195 22.7295703 27.961084 17.9535059 35.6959863 21.8148926 39.557373"></polygon>
+                                        <polygon id="Rectangle" fill="#FEE191" transform="translate(17.953809, 23.184879) rotate(135.000000) translate(-17.953809, -23.184879) " points="9.10765818 14.3387285 26.7999592 14.3387285 26.7999592 32.0310295 9.10765818 32.0310295"></polygon>
+                                        <path d="M42.5511035,14.2730859 C35.0818066,21.7423828 31.6272656,19.9030957 28.3622168,16.6378711 C25.097168,13.3726465 23.2577051,9.91819336 30.727002,2.44898438 C33.9922266,-0.816152344 39.2859668,-0.816152344 42.5511035,2.44898438 C45.8162402,5.71412109 45.8163281,11.0078613 42.5511035,14.2730859 Z" id="Path" fill="#F14742"></path>
+                                        <g id="Group" transform="translate(28.916016, 8.789062)" fill="#CD3F39">
+                                            <circle id="Oval" cx="0.785830078" cy="0.841289063" r="1"></circle>
+                                            <circle id="Oval" cx="1.11427734" cy="3.71285156" r="1"></circle>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

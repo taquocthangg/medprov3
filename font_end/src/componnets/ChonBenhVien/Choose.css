@@ -1,0 +1,68 @@
+.select__hopital {
+    max-width: 760px;
+    margin: 0 auto;
+    min-height: 500px;
+}
+
+.select__hopital-search {
+    display: flex;
+    gap: 50px;
+    padding: 20px 0;
+}
+
+.select__hopital-search input {
+    width: 420px;
+    height: 40px;
+    border: 1px solid #1da1f2;
+    border-radius: 10px;
+    padding: 0 1rem;
+}
+
+.hopotal__box-img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.select__hopital-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.hopotal__box {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.listItem {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 100px !important;
+}
+
+.hopotal__box-content-name {
+    padding-bottom: 5px;
+}
+
+.listItem:hover .hopotal__box-content-name {
+    color: #6495ed;
+    transition: all 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 960px) {
+    .format__header {
+        background-color: #1da1f2 !important;
+        padding-left: 1% !important;
+    }
+
+    .select__hopital {
+        max-width: 360px;
+    }
+
+    .select__hopital-list {
+        grid-template-columns: 1fr;
+    }
+}

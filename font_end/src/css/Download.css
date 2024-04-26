@@ -1,0 +1,52 @@
+.download__app-back {
+    background-color: #fff;
+}
+
+.download__app {
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+}
+
+.download__des {
+    margin: 0 auto;
+}
+
+.download__app-content {
+    text-transform: uppercase;
+    color: #12263f;
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.download__app-link a {
+    padding: 20px;
+}
+
+.download__app-function {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+.function_content-app {
+    margin: 0 auto;
+}
+
+.function_content-app img {
+    width: 340px;
+}
+
+.function_icon,
+.function_iconr {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px;
+    gap: 10px;
+}
+
+.function_iconr {
+    align-items: flex-start;
+}

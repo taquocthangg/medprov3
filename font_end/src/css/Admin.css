@@ -1,0 +1,60 @@
+.container_Admin {
+    display: flex;
+
+    grid-template-columns: 1fr 4fr;
+}
+
+.Admin_Simplebar {
+    width: 20%;
+    margin-right: 20px;
+}
+
+.container_Simplebar {
+    position: fixed;
+    top: 0;
+}
+
+.check_static {
+    display: none;
+}
+
+.header_Admin {
+    position: fixed;
+    z-index: 99999;
+}
+
+.content_Admin {
+    margin-top: 80px;
+    height: 550vh;
+    padding: 0 10px;
+}
+
+.image_Simplebar img {
+    width: 200px;
+}
+
+.btn_flash img {
+    width: 20px;
+}
+
+.header_admin_box {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 35px;
+    height: 100%;
+    align-items: center;
+    background-color: #fff;
+
+}
+
+/* 
+.App span {
+    position: relative;
+    margin-top: 0%;
+    margin-left: 0%;
+    transform: translate(0%, 0%);
+} */
+
+.css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked {
+    padding: 0;
+}

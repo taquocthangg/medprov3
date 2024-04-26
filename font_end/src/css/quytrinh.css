@@ -1,0 +1,61 @@
+.container_qt{
+    min-height:1000px;
+    width: 100%;
+}
+.background_qt{
+    height: 200px;
+    width: 100%;
+    background-image: url('../img/gioithieu/bg_gioi_thieu.png');
+    background-repeat:no-repeat !important;
+    background-position: 50%;
+    background-size:100%;
+    position: fixed;
+    z-index: -90000;
+}
+.text_qt{
+
+    height: 200px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.text_qt>p{
+    color: #fff;
+    opacity: 1;
+    font-size: 35px;
+    font-weight:600;
+
+}
+.content_qt{
+    background-color: #fff;
+    padding-bottom: 60px;
+}
+.kc_text{
+    padding-left:17px;
+}
+.text_right{
+    font-weight: 400;
+    padding-top: 10px;
+    font-size: 17px;
+    list-style-type:circle
+
+}
+.text_right:hover{
+    color: #307be7;
+    cursor: default;
+}
+@media only screen  and (max-width:46.1875em){
+    .text_qt{
+        display: none;
+    }
+    .Buoc{
+        width: 90%;
+        flex-direction: column;
+        
+    }
+    .content_hd ul li:first-child{
+        margin-top: 0;
+    }
+
+}

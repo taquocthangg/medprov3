@@ -1,0 +1,79 @@
+.dangky {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(40deg, #cee9e8, #8cddcb);
+
+}
+
+.name {
+    text-align: center;
+    padding: 50px;
+}
+
+.err {
+    font-size: 12px;
+    color: red;
+}
+
+.dangky button {
+    margin: 0 auto;
+    margin-left: 87%;
+    margin-top: 20px;
+    margin-bottom: 37px;
+    width: 120px;
+    border-radius: 5px;
+    padding: 10px;
+    background-image: linear-gradient(40deg, #ffd86f, #fc6262);
+    color: #fff;
+    cursor: grab;
+    display: flex;
+    align-items: center;
+}
+
+.from input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #5b5757;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.from {
+    width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.adress {
+    display: flex;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+select {
+    width: 300px;
+}
+
+.back {
+    margin: 50px 0 0 50px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.back a {
+    color: #fc6262;
+    font-size: 18px;
+}
+
+@media only screen and (max-width:46.1875em) {
+    .from {
+        display: block;
+        width: 85%;
+    }
+
+    .dangky button {
+        margin-left: 0%;
+    }
+}
