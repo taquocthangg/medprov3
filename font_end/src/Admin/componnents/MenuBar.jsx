@@ -1,5 +1,4 @@
 import React from 'react';
-import { Space } from "antd";
 import AppRouteAdmin from '../../componnets/AppRouteAdmin';
 import SideMenu from './SideMenu';
 import {
@@ -30,7 +29,7 @@ const menuConfig = {
                 icon: <ShopOutlined />,
                 items: [
                     {
-                        key: "/them-tin-tuc",
+                        key: "/tin-tuc",
                         label: "Thêm Tin Tức"
                     },
                     {
@@ -88,7 +87,7 @@ const menuConfig = {
                 icon: <ShopOutlined />,
                 items: [
                     {
-                        key: "/them-tin-tuc",
+                        key: "/tin-tuc",
                         label: "Thêm Tin Tức"
                     },
                     {

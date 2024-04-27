@@ -44,14 +44,14 @@ export default function SideMenu({ subMenus, additionalMenuItems }) {
                 </Menu.Item>
                 {subMenus?.map((menu, index) => (
                     <SubMenu key={`sub${index}`} icon={menu.icon} title={menu.title}>
-                        {menu.items.map((item, itemIndex) => (
+                        {menu.items.map((item, i) => (
                             <Menu.Item key={item.key}>
                                 <Link to={item.key}>{item.label}</Link>
                             </Menu.Item>
                         ))}
                     </SubMenu>
                 ))}
-                {additionalMenuItems?.map((item, index) => (
+                {additionalMenuItems?.map((item, i) => (
                     <Menu.Item key={item.key} icon={item.icon}>
                         <Link to={item.key}>{item.label}</Link>
                     </Menu.Item>

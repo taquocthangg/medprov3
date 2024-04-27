@@ -21,7 +21,7 @@ function App() {
           <ScrollToTop >
             {role_id == 'R4' ? <AppRouter /> : <MenuBar role_id={role_id} />}
           </ScrollToTop>
-          <Fooder />
+          {/* <Fooder /> */}
         </Router>
       }
     </div>
