@@ -33,15 +33,15 @@ export default function Add_Benh_Vien() {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
     const [dataHopital, setDataHopital] = useState({
-        name:"",
-        email:"",
-        password:"",
-        checkPassword:"",
-        sdt:"",
-        diaChi:"",
-        avatar:""
+        name: "",
+        email: "",
+        password: "",
+        checkPassword: "",
+        sdt: "",
+        diaChi: "",
+        avatar: ""
     });
-    const handlePostData=()=>{
+    const handlePostData = () => {
         console.log(dataHopital)
     }
     const handleChangeDataUser = (key, value) => {
@@ -95,51 +95,51 @@ export default function Add_Benh_Vien() {
                             <p className='lable_InsertHopital' > Nhập địa chỉ email<sup>*</sup></p>
                             <Input
                                 placeholder='Nhập email'
-                                onChange={(e)=>handleChangeDataUser("email",e.target.value)}
+                                onChange={(e) => handleChangeDataUser("email", e.target.value)}
                                 className='inout_InsertHopital'
-                                
+
                             />
                         </Flex>
                         <Flex vertical className='form_InsertHopital'>
                             <p className='lable_InsertHopital' >Nhập mật khẩu<sup>*</sup></p>
-                            <Input.Password 
-                            placeholder='Nhập mật khẩu' 
-                            className='inout_InsertHopital'
-                            onChange={(e)=>handleChangeDataUser("password",e.target.value)}
+                            <Input.Password
+                                placeholder='Nhập mật khẩu'
+                                className='inout_InsertHopital'
+                                onChange={(e) => handleChangeDataUser("password", e.target.value)}
                             />
                         </Flex>
                         <Flex vertical className='form_InsertHopital' >
                             <p className='lable_InsertHopital' >Nhập lại mật khẩu<sup>*</sup></p>
-                            <Input.Password 
-                            placeholder='Nhập lại mật khẩu' 
-                            className='inout_InsertHopital'
-                            onChange={(e)=>handleChangeDataUser("checkPassword",e.target.value)}
+                            <Input.Password
+                                placeholder='Nhập lại mật khẩu'
+                                className='inout_InsertHopital'
+                                onChange={(e) => handleChangeDataUser("checkPassword", e.target.value)}
                             />
                         </Flex>
                     </Col>
                     <Col span={8} style={{ padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' }}   >
                         <Flex vertical className='form_InsertHopital' >
                             <p className='lable_InsertHopital'  >Nhập số điện thoại<sup>*</sup></p>
-                            <Input 
-                            placeholder='Nhập số điện thoại'
-                             className='inout_InsertHopital'
-                             onChange={(e)=>handleChangeDataUser("sdt",e.target.value)}
+                            <Input
+                                placeholder='Nhập số điện thoại'
+                                className='inout_InsertHopital'
+                                onChange={(e) => handleChangeDataUser("sdt", e.target.value)}
                             />
                         </Flex>
                         <Flex vertical className='form_InsertHopital'  >
                             <p className='lable_InsertHopital'  >Nhập địa chỉ bệnh viện<sup>*</sup></p>
-                            <Input 
-                            placeholder='Nhập địa chỉ bệnh viện' 
-                            className='inout_InsertHopital'
-                            onChange={(e)=>handleChangeDataUser("diaChi",e.target.value)}
+                            <Input
+                                placeholder='Nhập địa chỉ bệnh viện'
+                                className='inout_InsertHopital'
+                                onChange={(e) => handleChangeDataUser("diaChi", e.target.value)}
                             />
                         </Flex>
                         <Flex vertical className='form_InsertHopital'>
                             <p className='lable_InsertHopital' >Tên bệnh viện<sup>*</sup></p>
                             <Input
-                             placeholder='Nhập tên bệnh viện' 
-                             className='inout_InsertHopital'
-                             onChange={(e)=>handleChangeDataUser("name",e.target.value)}
+                                placeholder='Nhập tên bệnh viện'
+                                className='inout_InsertHopital'
+                                onChange={(e) => handleChangeDataUser("name", e.target.value)}
                             />
                         </Flex>
 
@@ -182,10 +182,10 @@ export default function Add_Benh_Vien() {
 
                 </Row>
                 <Flex justify='center' >
-                    <Button 
-                    type='primary' 
-                    style={{ minWidth: '120px' }}
-                    onClick={()=>handlePostData()}
+                    <Button
+                        type='primary'
+                        style={{ minWidth: '120px' }}
+                        onClick={() => handlePostData()}
                     >
                         Xác nhận
                     </Button>

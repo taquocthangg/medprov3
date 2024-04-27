@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const screenWidth = window.innerWidth
 export default function ListHospital() {
   const [dataHospital, setDataHospital] = useState()
-  const [queryHospital, setQueryHospital] = useState()
+  const [queryHospital, setQueryHospital] = useState('')
   const columns = [
     {
       title: 'Mã bệnh viện',
@@ -107,11 +107,11 @@ export default function ListHospital() {
             },
           }}
         >
-          <Table columns={columns}
+          {/* <Table columns={columns}
             dataSource={dataHospital?.filter((item) => item?.name?.toLocaleLowerCase().includes(queryHospital))}
             pagination={{ pageSize: 5 }}
             bordered={true}
-          />
+          /> */}
         </ConfigProvider>
       </div>
     </div>

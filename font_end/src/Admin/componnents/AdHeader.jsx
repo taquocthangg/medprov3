@@ -8,7 +8,7 @@ import { DownOutlined, BellOutlined } from '@ant-design/icons';
 import { dataNoticeIcon } from '../../data'
 export default function AdHeader() {
     const [focusBtnBell, setFocusBtnBell] = useState(true)
-    console.log(focusBtnBell)
+    // console.log(focusBtnBell)
     const items = [
         {
             label: (
