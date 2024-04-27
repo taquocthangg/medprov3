@@ -1,0 +1,36 @@
+.container_addBenhVien{
+    background-image: url('../../img/phongkham/pkpm_bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.content_addBenhVien{
+    background: rgba(255, 255, 255, 0.5);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px rgba(255, 252, 252, 0.1); /* Bóng đổ với độ mờ và màu sắc xác định */
+    margin: 30px 0;
+    
+}
+.title_insertHopital{
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.lable_InsertHopital{
+    margin-bottom: 10px;
+    font-weight: bold;
+    color:#4a4a4a
+}
+.form_InsertHopital{
+    margin: 20px 0;
+    width: 70%;
+}
+.inout_InsertHopital{
+    background-color:rgba(255, 255, 255, 0.5);
+    border:none
+}
+.customUpload .ant-upload.ant-upload-select{
+    width: 200px !important;
+    height: 200px !important;
+}

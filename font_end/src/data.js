@@ -520,3 +520,51 @@ export const accordionData  = [
         content: '+ Trường hợp bạn đến trễ so với giờ hẹn trên phiếu khám bệnh, bạn vẫn có thể đến bệnh viện để được thăm khám, nhưng mọi sự tiếp nhận và thời gian khám bệnh sẽ theo sự sắp xếp của bệnh viện, tùy vào tình hình thực tế tại bệnh viện và phòng khám lúc đó.'
     }
 ]
+export const dataNoticeIcon = [
+    {
+      id: '000000001',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
+      title: 'Anh khoái đẹp trai',
+      datetime: '2017-08-09',
+      type: 'notification',
+    },
+    {
+      id: '000000002',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/OKJXDXrmkNshAMvwtvhu.png',
+      title: 'Test thử cái xem được không',
+      datetime: '2017-08-08',
+      type: 'notification',
+    },
+    {
+      id: '000000003',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/kISTdvpyTAhtGxpovNWd.png',
+      title: 'Ai ngờ sịn không tưởng',
+      datetime: '2017-08-07',
+      read: true,
+      type: 'notification',
+    },
+    {
+      id: '000000004',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png',
+      title: 'Quá vippp',
+      datetime: '2017-08-07',
+      type: 'notification',
+    },
+    {
+      id: '000000005',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
+      title: 'Không còn gì để bàn',
+      datetime: '2017-08-07',
+      type: 'notification',
+    },
+    {
+      id: '000000006',
+      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg',
+      title: 'Chuẩn không cần chỉnh viết dài ra test thử xem nó có xuống dòng được không ai ngờ xuống vcd',
+      description: '描述信息描述信息描述信息',
+      datetime: '2017-08-07',
+      type: 'message',
+      clickClose: true,
+    },
+
+  ];

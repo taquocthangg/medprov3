@@ -39,6 +39,7 @@
     "react-social-login-buttons": "^3.9.1",
     "react-spinners": "^0.13.8",
     "react-toastify": "^9.1.2",
+    "react-tooltip": "^5.26.3",
     "react-use-effect": "^0.0.1",
     "react-validation": "^3.0.7",
     "reactjs-social-login": "^2.6.3",
