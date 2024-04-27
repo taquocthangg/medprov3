@@ -59,11 +59,11 @@ const menuConfig = {
                 icon: <ShopOutlined />,
                 items: [
                     {
-                        key: "/benh-viens",
+                        key: "/them-chuyen-khoa",
                         label: "Thêm Chuyên Khoa"
                     },
                     {
-                        key: "/ds-benh-vien",
+                        key: "/ds-chuyen-khoa",
                         label: "DS Chuyên Khoa"
                     }
                 ]
@@ -73,11 +73,11 @@ const menuConfig = {
                 icon: <ShopOutlined />,
                 items: [
                     {
-                        key: "/benh-viens",
+                        key: "/them-bac-si",
                         label: "Thêm Bác Sĩ"
                     },
                     {
-                        key: "/ds-benh-vien",
+                        key: "/ds-bac-si",
                         label: "DS Bác Sĩ"
                     }
                 ]
@@ -112,26 +112,26 @@ const menuConfig = {
                 icon: <ShopOutlined />,
                 items: [
                     {
-                        key: "/benh-viens",
+                        key: "/them-lich-kham",
                         label: "Thêm Lịch Khám"
                     },
                     {
-                        key: "/ds-benh-vien",
-                        label: "Lịch Khám Đã Đặt"
+                        key: "/ds-lich-kham",
+                        label: "Danh sách lịch khám"
                     }
                 ]
             },
             {
-                title: "Chưa nghĩ ra",
+                title: "Bệnh Án",
                 icon: <ShopOutlined />,
                 items: [
                     {
-                        key: "/benh-viens",
-                        label: "Thêm Bác Sĩ"
+                        key: "/them-benh-an",
+                        label: "Thêm bệnh án"
                     },
                     {
-                        key: "/ds-benh-vien",
-                        label: "DS Bác Sĩ"
+                        key: "/ds-benh-an",
+                        label: "Danh sách bệnh án"
                     }
                 ]
             },
@@ -152,10 +152,10 @@ export default function MenuBar({ role_id }) {
 
     return (
         <div style={{ display: 'flex' }}>
-            <div className="menus" style={{ width: '200px', position: 'fixed', top: '120px', height: '100vh', overflowY: 'auto' }}>
+            <div className="menus" style={{ width: '250px', position: 'fixed', top: '120px', height: '100vh', overflowY: 'auto' }}>
                 <SideMenu subMenus={subMenus} additionalMenuItems={additionalMenuItems} />
             </div>
-            <div style={{ marginLeft: '200px' }}>
+            <div style={{ marginLeft: '250px' }}>
                 <AppRouteAdmin />
             </div>
         </div>

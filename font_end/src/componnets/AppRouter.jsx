@@ -12,6 +12,21 @@ import Admin from "../Admin/Admin";
 import Home from "../pages/Home";
 import LoginPhongKham from "./FromDangNhap/LoginPhongKham";
 import Login from "../pages/Login";
+import HuongDan from './../pages/HuongDan';
+import TinTuc from './../pages/TinTuc';
+import { ThacMac } from './../pages/ThacMac';
+import LienHe from './../pages/LienHe';
+import PhongKham from './../pages/PhongKham';
+import Choose from './ChonBenhVien/Choose';
+import ChonChucNang from './ChonHinhThuc/ChonChucNang';
+import DangKi from './../pages/DangKi';
+import QuenMatKhau from './../pages/Quen_Mat_Khau';
+import BenhVien from './../pages/Benh_vien';
+import User from './../pages/User';
+import Them_Moi_Chuyen_Khoa from './../pages/Them_Moi_Chuyen_Khoa';
+import GioiThieu from './../pages/GioiThieu';
+import Quytrinh from './../pages/QuyTrinh';
+import DangKy from './FromDangKy/DangKy';
 export default function AppRouter(role_id) {
     return (
 
@@ -28,38 +43,38 @@ export default function AppRouter(role_id) {
             <Route path='/' element={<Home />} />
             <Route path='dang-nhap' element={<LoginPhongKham />} />
             <Route path='login' element={<Login />} />
-            {/* <Route path='dang-ky' element={<DangKy />} />
-    <Route path='gioi-thieu' element={<GioiThieu />} />
-    <Route path='quy-trinh' element={<QuyTrinh />} />
-    <Route path='huong-dan' element={<HuongDan />} />
-    <Route path='tin-tuc' element={<TinTuc />} />
-    <Route path='thac-mac' element={<ThacMac />} />
-    <Route path='lien-he' element={<LienHe />} />
-    <Route path='phong-kham' element={<PhongKham />} />
-    <Route path='chon-benh-vien' element={<Choose />} />
-    <Route path='chon-benh-vien/chon-hinh-thuc' element={<ChonChucNang />} />
-    <Route path='dang-ki' element={<DangKi />} />
-    <Route path='quen-mat-khau' element={<QuenMatKhau />} />
-    <Route path='benh-vien/:getId' element={<BenhVien />} />
-    <Route path='user' element={<User />} />
+            <Route path='dang-ky' element={<DangKy />} />
+            <Route path='gioi-thieu' element={<GioiThieu />} />
+            <Route path='quy-trinh' element={<Quytrinh />} />
+            <Route path='huong-dan' element={<HuongDan/>} />
+            <Route path='tin-tuc' element={<TinTuc />} />
+            <Route path='thac-mac' element={<ThacMac />} />
+            <Route path='lien-he' element={<LienHe />} />
+            <Route path='phong-kham' element={<PhongKham />} />
+            <Route path='chon-benh-vien' element={<Choose />} />
+            <Route path='chon-benh-vien/chon-hinh-thuc' element={<ChonChucNang />} />
+            <Route path='dang-ki' element={<DangKi/>} />
+            <Route path='quen-mat-khau' element={<QuenMatKhau />} />
+            <Route path='benh-vien/:getId' element={<BenhVien />} />
+            <Route path='user' element={<User />} />
 
-    <Route path='benh-vien/:getId/them-moi-chuyen-khoa/:getId' element={<Them_Moi_Chuyen_Khoa />} />
-    <Route path='benh-vien/:getId/thembacsi/:getId' element={<Insert_Doctor />} />
-    <Route path='/update_Chuyen_Khoa/:getId' element={<Sua_Chuyen_Khoa />} />
-    <Route path='/updateUser/:getId' element={<Update_doctor />} />
-    <Route path='/*' element={<Err404 />} />
+            <Route path='benh-vien/:getId/them-moi-chuyen-khoa/:getId' element={<Them_Moi_Chuyen_Khoa />} />
+            {/* <Route path='benh-vien/:getId/thembacsi/:getId' element={<Insert_Doctor />} />
+            <Route path='/update_Chuyen_Khoa/:getId' element={<Sua_Chuyen_Khoa />} />
+            <Route path='/updateUser/:getId' element={<Update_doctor />} />
+            <Route path='/*' element={<Err404 />} />
 
 
-    <Route path='bac-si/:getId' element={<BacSi />} />
-    <Route path='DatKham' element={<DatKham />} />
-    <Route path='BenhAn' element={<BenhAn />} /> */}
+            <Route path='bac-si/:getId' element={<BacSi />} />
+            <Route path='DatKham' element={<DatKham />} />
+            <Route path='BenhAn' element={<BenhAn />} /> */}
 
             {/* Đặt lịch */}
-            {/* <Route path='/chon-benh-vien' element={<Choose />} />
+             {/* <Route path='/chon-benh-vien' element={<Choose />} />
             <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId' element={<Search_Chuyen_Khoa />} />
             <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId' element={<Search_Doctor />} />
-            <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId/chon-lich/:getId' element={<Select_day />} />
-            <Route /> */}
+            <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId/chon-lich/:getId' element={<Select_day />} /> */}
+            <Route />
         </Routes>
     )
 }

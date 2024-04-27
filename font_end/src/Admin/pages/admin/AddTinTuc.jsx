@@ -1,5 +1,5 @@
 import React from 'react'
-import MarkDown from '../../componnets/MarkDown/markDown'
+import MarkDown from '../../../componnets/MarkDown/markDown'
 
 export default function AddTinTuc() {
     return (
