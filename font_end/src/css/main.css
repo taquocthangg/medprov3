@@ -5,11 +5,6 @@
     scroll-behavior: smooth;
 }
 
-.SideMenuVertical {
-    position: sticky;
-    top: 200px;
-}
-
 @font-face {
     font-family: Averta;
     src: url(../font/Averta-Bold.30074e57.woff);

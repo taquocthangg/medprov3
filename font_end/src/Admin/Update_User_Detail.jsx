@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import "../css/Update_User_Detail.css";
 import background_Admin from "../img/Admin/backgroundUpdate.webp";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";

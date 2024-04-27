@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import "../css/Update_User_Detail.css";
 import background_Admin from "../img/Admin/backgroundUpdate.webp";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
@@ -92,7 +91,7 @@ const Insert_User_Detail = () => {
             </div>
             {/* ... (phần code còn lại không thay đổi) */}
 
-            <div className="content_detail_update" onClick={()=> history(-1)}>
+            <div className="content_detail_update" onClick={() => history(-1)}>
                 <Link >
                     <div className="icon_back_admin">
                         <IoArrowBackSharp />
@@ -104,7 +103,7 @@ const Insert_User_Detail = () => {
                         <p className="title_update_User">Email</p>
                         <input
                             type="text"
-                            
+
                             className="input_user"
                             onChange={(e) => handleInputChange("email", e.target.value)}
                         />
@@ -113,7 +112,7 @@ const Insert_User_Detail = () => {
                         <p className="title_update_User">Mật khẩu</p>
                         <input
                             type="text"
-                           
+
                             className="input_user"
                             onChange={(e) => handleInputChange("password", e.target.value)}
                         />
@@ -122,7 +121,7 @@ const Insert_User_Detail = () => {
                         <p className="title_update_User">Tên bệnh viện</p>
                         <input
                             type="text"
-                         
+
                             className="input_user"
                             onChange={(e) => handleInputChange("name", e.target.value)}
                         />
@@ -131,7 +130,7 @@ const Insert_User_Detail = () => {
                         <p className="title_update_User">Số điện thoại</p>
                         <input
                             type="text"
-                         
+
                             className="input_user"
                             onChange={(e) => handleInputChange("sdt", e.target.value)}
                         />
@@ -140,7 +139,7 @@ const Insert_User_Detail = () => {
                         <p className="title_update_User">Địa chỉ</p>
                         <input
                             type="text"
-                            
+
                             className="input_user"
                             onChange={(e) => handleInputChange("diaChi", e.target.value)}
                         />

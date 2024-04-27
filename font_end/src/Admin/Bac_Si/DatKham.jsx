@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { startOfDay } from 'date-fns';
-import "./BacSi.css";
 import axios from "axios";
 import { logout } from '../../pages/auth';
 
@@ -130,7 +129,7 @@ const DatKham = () => {
           <ul className="bacsi__header-list">
             <li className="bacsi_header-item">
               <Link to="/BacSi" className="bacsi_header-link">
-              ĐƠN KHÁM
+                ĐƠN KHÁM
               </Link>
             </li>
             <li className="bacsi_header-item">

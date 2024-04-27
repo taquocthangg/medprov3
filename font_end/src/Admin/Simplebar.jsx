@@ -1,25 +1,23 @@
 import { useState } from "react";
-import "../css/Admin.css"
-import "../css/Admin_Simplebar.css"
 import logo_icon from "../img/logo/logo.png"
-import {  FaRegUser } from "react-icons/fa";
+import { FaRegUser } from "react-icons/fa";
 import { FaHospital } from "react-icons/fa";
 import { BsNewspaper } from "react-icons/bs";
 const Simplebar = () => {
   const [activeButton, setActiveButton] = useState(true);
-  const [activeButton1,setAtiveButton1]=useState(true);
-  const [activeBtn2,setActiveBtn2]=useState(true);
-  const staticBtn_1=()=>{
+  const [activeButton1, setAtiveButton1] = useState(true);
+  const [activeBtn2, setActiveBtn2] = useState(true);
+  const staticBtn_1 = () => {
     setActiveButton(false);
     setActiveBtn2(true);
     setAtiveButton1(true);
   }
-  const staticBtn_2=()=>{
+  const staticBtn_2 = () => {
     setActiveButton(true);
     setActiveBtn2(false);
     setAtiveButton1(true);
   }
-  const staticBtn_3=()=>{
+  const staticBtn_3 = () => {
     setActiveButton(true);
     setActiveBtn2(true);
     setAtiveButton1(false);
@@ -38,21 +36,21 @@ const Simplebar = () => {
       </div>
       <div className="content_Simplebar">
         <ul className="menu_Simplebar" >
-          <li className={activeButton?('item_Simplebar item_textSimplebar') :('item_Simplebar item_SimplebarClick')}  onClick={staticBtn_1}    >
+          <li className={activeButton ? ('item_Simplebar item_textSimplebar') : ('item_Simplebar item_SimplebarClick')} onClick={staticBtn_1}    >
             <div className="icon_itemSimplebar" >
-            <FaRegUser />
+              <FaRegUser />
             </div>
             <p>Quản lý bênh nhân</p>
           </li>
-          <li className={activeButton1?('item_Simplebar item_textSimplebar') :('item_Simplebar item_SimplebarClick')}  onClick={staticBtn_3}      >
+          <li className={activeButton1 ? ('item_Simplebar item_textSimplebar') : ('item_Simplebar item_SimplebarClick')} onClick={staticBtn_3}      >
             <div className="icon_itemSimplebar" >
-            <FaHospital />
+              <FaHospital />
             </div>
             <p>Quản lý bệnh viên</p>
           </li>
-          <li className={activeBtn2?('item_Simplebar item_textSimplebar') :('item_Simplebar item_SimplebarClick')}   onClick={staticBtn_2}    >
+          <li className={activeBtn2 ? ('item_Simplebar item_textSimplebar') : ('item_Simplebar item_SimplebarClick')} onClick={staticBtn_2}    >
             <div className="icon_itemSimplebar" >
-            <BsNewspaper/>
+              <BsNewspaper />
             </div>
             <p>Quản lý tin tức</p>
           </li>

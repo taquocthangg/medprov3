@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import { isAuthenticated, decodeAccessToken, logout } from '../pages/auth';
-import './css.css'
-import '../css/Admin_header.css'
-import '../css/Admin_Simplebar.css'
 import { useParams } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa";
 import { FaHospital } from "react-icons/fa";
@@ -14,9 +11,9 @@ import Benh_An from "../User/Benh_An"
 import Xem_LK from "../User/Xem_LK"
 const User = () => {
     const [activeButton, setActiveButton] = useState(true);
-  const [activeButton1, setAtiveButton1] = useState(true);
-  const [activeBtn2, setActiveBtn2] = useState(true);
-  const [search_Header, setSearch_Header] = useState("");
+    const [activeButton1, setAtiveButton1] = useState(true);
+    const [activeBtn2, setActiveBtn2] = useState(true);
+    const [search_Header, setSearch_Header] = useState("");
     const navigate = useNavigate();
     const handleLogout = () => {
         // Thực hiện đăng xuất
@@ -25,25 +22,25 @@ const User = () => {
         // Chuyển hướng đến trang đăng nhập
         navigate('/');
     };
-    
+
     const staticBtn_1 = () => {
         setActiveButton(false);
         setActiveBtn2(true);
         setAtiveButton1(true);
-      }
-      const staticBtn_2 = () => {
+    }
+    const staticBtn_2 = () => {
         setActiveButton(true);
         setActiveBtn2(false);
         setAtiveButton1(true);
-      }
-      const staticBtn_3 = () => {
+    }
+    const staticBtn_3 = () => {
         setActiveButton(true);
         setActiveBtn2(true);
         setAtiveButton1(false);
-      }
-      const getSearch = (value) => {
+    }
+    const getSearch = (value) => {
         setSearch_Header(value);
-      }
+    }
     return (
         <div>
             <div className="container_Admin">

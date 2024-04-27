@@ -8,8 +8,9 @@ function initialize(io) {
 
         socket.on('joinGroupAndGetSchedule', async (data) => {
             const { userId, doctorId, activateDay } = data;
-            console.log(doctorId)
-            console.log(activateDay);
+            console.log("userId", userId)
+            console.log("doctorId", doctorId)
+            console.log("activateDay", activateDay);
             if (!userId || !doctorId) {
                 console.error('Missing userId or doctorId');
                 return;
@@ -21,7 +22,7 @@ function initialize(io) {
             const hasJoined = joinedGroups.has(`${userId}-${doctorId}`);
             if (hasJoined) {
                 console.error('User has already joined this group');
-                console.log(groups)
+                console.log("groups", groups)
                 return;
             }
 
@@ -166,12 +167,12 @@ const getLichKham = async (socket, doctorId, activateDay) => {
             count: `${counts}`,
             schedule: counts ? schedule : "Không có lịch khám"
         });
-        socket.on('getLichKham', {
-            err: 0,
-            mess: counts ? 'Lấy thông tin lịch khám thành công' : "Lấy thông tin lịch khám thất bại",
-            count: `${counts}`,
-            schedule: counts ? schedule : "Không có lịch khám"
-        });
+        // socket.on('getLichKham', {
+        //     err: 0,
+        //     mess: counts ? 'Lấy thông tin lịch khám thành công' : "Lấy thông tin lịch khám thất bại",
+        //     count: `${counts}`,
+        //     schedule: counts ? schedule : "Không có lịch khám"
+        // });
     } catch (error) {
         console.error("Đã xảy ra lỗi khi lấy thông tin lịch khám", error);
     }

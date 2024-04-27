@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 // import { choosehopital } from '../../data'
-import DatePicker from 'react-datepicker';
+import { DatePicker } from "antd";
 import '../../src/componnets/ChonBenhVien/Choose.css'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from './../pages/api'
 import io from 'socket.io-client';
-
+import moment from 'moment';
 const Select_day = () => {
   const socket = io('http://localhost:5000');
   const [query, setQuery] = useState("");
@@ -45,8 +45,9 @@ const Select_day = () => {
         socket.emit('getLichKham'); // Gửi yêu cầu để nhận lịch khám mới nhất
       }
     });
-    const activateDay = '2024-03-27'
+    const activateDay = '2024-04-27'
     const userId = localStorage.getItem('userId'); // Lấy userId từ localStorage hoặc từ nơi lưu trữ khác
+    console.log(userId)
     const doctorId = 8; // Thay doctorId bằng dữ liệu thích hợp
     socket.emit('joinGroupAndGetSchedule', { userId, doctorId, activateDay });
   })
@@ -148,7 +149,10 @@ const Select_day = () => {
     }
     socket.emit('themLichKham', (data));
   };
-
+  const disabledDate = current => {
+    // So sánh ngày hiện tại với ngày được chọn
+    return current && current < moment().startOf('day');
+  };
   return (
 
     <main>
@@ -168,9 +172,9 @@ const Select_day = () => {
             <label htmlFor="username">Chọn ngày : </label>
             <DatePicker
               selected={selectedDate}
-              minDate={new Date()}
-              onChange={handleDateChange} />
-
+              minDate={moment().startOf('day')}
+              onChange={handleDateChange}
+              disabledDate={disabledDate} />
             <p>Thông tin lịch khám:</p>
             <div className="bacsi_body_div">
 

@@ -1,17 +1,14 @@
-import "../css/Admin.css";
+
 import { useState } from "react";
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { IoIosSearch } from "react-icons/io";
 import axios from "axios";
-import "../css/Admin_header.css"
 import logo_icon from "../img/logo/logo.png"
 import { FaRegUser } from "react-icons/fa";
 import { FaHospital } from "react-icons/fa";
 import { BsNewspaper } from "react-icons/bs";
 import flash from "../img/Admin/Header_Admin/icon_flash.jpg"
 import { AiOutlineBell } from "react-icons/ai";
-import "../css/Admin_header.css"
-import "../css/Admin_Simplebar.css"
 import QuanLyBV from "./QuanLyBV";
 import QuanLyNews from "./QuanLyNews";
 import QuanLyUsert from "./QuanLyUsert";
