@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "./BacSi.css";
 import axios from "axios";
 const BenhAn = () => {
   const [query, setQuery] = useState("");
@@ -71,14 +70,14 @@ const BenhAn = () => {
             </li>
             <li className="bacsi_header-item">
               <Link to="/BenhAn" className="bacsi_header-link">
-                  BỆNH ÁN
+                BỆNH ÁN
               </Link>
             </li>
           </ul>
         </div>
         <div className="bacsi_body">
           <div className="bacsi_body-out">
-           < Link to="/" className="bacsi_body-logout">
+            < Link to="/" className="bacsi_body-logout">
               LOG OUT
             </Link>
           </div>
@@ -103,16 +102,16 @@ const BenhAn = () => {
                     </tr>
                   </thead>
                   <tbody className="bacsi_body_tbody">
-                  {data.map((item) => (
-                        <tr key={item.Data.id}>
-                          <td className="bacsi_body_td">{item.Data.User.name}</td>
-                          <td className="bacsi_body_td">{item.Data.User.sdt}</td>
-                          <td className="bacsi_body_td">{item.Data.User.diaChi}</td>
-                          <td className="bacsi_body_td">{item.Data.User.gioiTinh}</td>
-                          <td className="bacsi_body_td">{item.Data.User.namSinh}</td>
-                          <td className="bacsi_body_td">{item.Data.timeSlot}</td>
-                        </tr>
-                        ))}
+                    {data.map((item) => (
+                      <tr key={item.Data.id}>
+                        <td className="bacsi_body_td">{item.Data.User.name}</td>
+                        <td className="bacsi_body_td">{item.Data.User.sdt}</td>
+                        <td className="bacsi_body_td">{item.Data.User.diaChi}</td>
+                        <td className="bacsi_body_td">{item.Data.User.gioiTinh}</td>
+                        <td className="bacsi_body_td">{item.Data.User.namSinh}</td>
+                        <td className="bacsi_body_td">{item.Data.timeSlot}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </div>
               </table>

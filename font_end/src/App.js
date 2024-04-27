@@ -10,7 +10,11 @@ import AdHeader from "./Admin/componnents/AdHeader.jsx";
 
 
 function App() {
+<<<<<<< HEAD
   const role_id = 'R1';
+=======
+  const role_id = 'R4';
+>>>>>>> b98c1fdf4ae575b094537ca74e39fd1ca64e7fc0
   const isAdmin = ['R1', 'R2', 'R3'].includes(role_id);
 
   return (

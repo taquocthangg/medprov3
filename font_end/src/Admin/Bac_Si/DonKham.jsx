@@ -3,7 +3,6 @@ import { useNavigate, Link } from "react-router-dom";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { startOfDay } from 'date-fns';
-import "./BacSi.css";
 import axios from "axios";
 import { logout } from '../../pages/auth';
 

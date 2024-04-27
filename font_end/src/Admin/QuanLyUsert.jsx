@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from "react";
-import '../css/QuanLyUsert.css'
 import Table from './Table_User'
 import Update_User_Detail from './Update_User_Detail';
 const QuanLyUsert = ({ search_text }) => {
@@ -18,18 +17,18 @@ const QuanLyUsert = ({ search_text }) => {
     // setGetIdUser(idUser);
     // setView_detail(true)
 
-      try {
-        // Gửi yêu cầu DELETE đến API
-        const response = await axios.delete(`http://localhost:5000/api/v1/auth/xoaUser/` + idUser);
-        console.log(response)
-        fetchData();
-        if (response.data.mess == "Xóa user thành công") {
-         
-        }
-      } catch (error) {
-        console.error('Error deleting user:', error);
+    try {
+      // Gửi yêu cầu DELETE đến API
+      const response = await axios.delete(`http://localhost:5000/api/v1/auth/xoaUser/` + idUser);
+      console.log(response)
+      fetchData();
+      if (response.data.mess == "Xóa user thành công") {
+
       }
-    
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+
     //handleDeleteClick(idUser);
   };
   const fetchData = async () => {
@@ -78,7 +77,7 @@ const QuanLyUsert = ({ search_text }) => {
     }
 
   };
- 
+
 
   return (
     <div className="container_QuanLyUser">

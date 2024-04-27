@@ -1,13 +1,9 @@
-import "../css/Admin.css"
-import "../css/Admin_Simplebar.css"
+
 import logo_icon from "../img/logo/logo.png"
 import { FaRegUser } from "react-icons/fa";
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import { Link, useNavigate,useParams } from 'react-router-dom'
-import '../css/QuanLyUsert.css'
-import useId from "@mui/material/utils/useId";
-import { Alert } from "@mui/material";
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 const QuanLyBV = () => {
   const navigate = useNavigate();
@@ -17,17 +13,17 @@ const QuanLyBV = () => {
   const [getIdUser, setGetIdUser] = useState("");
   const [responseData, setResponseData] = useState(null);
   const [view_detailUpdate, setView_detail] = useState(false);
-  const [data_admin,setData_admin]=useState("");
-  const [yes,setYes]=useState(true)
+  const [data_admin, setData_admin] = useState("");
+  const [yes, setYes] = useState(true)
   const getId = localStorage.getItem('userId');
   const handleUpdateClick = (idUser) => {
     setGetIdUser(idUser);
 
   };
-  const Change_Static=()=>{
+  const Change_Static = () => {
     setView_detail(true);
   }
-  const Back_Change_Static=()=>{
+  const Back_Change_Static = () => {
     setView_detail(false);
     setYes(false)
   }
@@ -38,16 +34,16 @@ const QuanLyBV = () => {
       console.log(response)
       fetchData();
       if (response.data.mess == "Xóa user thành công") {
-       
+
       }
     } catch (error) {
       console.error('Error deleting user:', error);
     }
   };
-  
-  
 
- 
+
+
+
   const fetchData = async () => {
     try {
       const response = await axios.get('http://localhost:5000/api/v1/auth/getAllBenhVien');
@@ -100,7 +96,7 @@ const QuanLyBV = () => {
               <th>{item.email}</th>
               <th className='button_table_user'>
                 <button className='btn_table_user btn_update_table' onClick={() => handleUpdateClick(item.id)}> <Link to={`Update_Patent_Detail/${item.id}`}>Sửa</Link></button>
-                <button className='btn_table_user btn_delete_table'onClick={()=>delete_Change_User(item.id)}>Xóa</button>
+                <button className='btn_table_user btn_delete_table' onClick={() => delete_Change_User(item.id)}>Xóa</button>
               </th>
             </tr>
           ))}

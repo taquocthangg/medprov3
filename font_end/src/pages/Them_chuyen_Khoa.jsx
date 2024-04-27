@@ -1,11 +1,7 @@
-import "../css/Admin.css"
-import "../css/Admin_Simplebar.css"
-import logo_icon from "../img/logo/logo.png"
-import { FaRegUser } from "react-icons/fa";
+
 import axios from 'axios';
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import '../css/QuanLyUsert.css'
 const ThemChuyeKhoa = () => {
   const { getId } = useParams();
   const navigate = useNavigate();
@@ -31,7 +27,7 @@ const ThemChuyeKhoa = () => {
 
   };
   const fetchDataChuyenKhoa = async () => {
-     const response = await axios.get('http://localhost:5000/api/v1/auth/chuyenkhoa/' + getId)
+    const response = await axios.get('http://localhost:5000/api/v1/auth/chuyenkhoa/' + getId)
       .then(response => {
         setData_user(response.data.chuyenkhoa);
         setLoading(false);

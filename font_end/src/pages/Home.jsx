@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import api from './api';
 import { isAuthenticated, logout, handleAuthentication } from './auth';
 
+
 const userId = localStorage.getItem('userId');
 
 const Home = () => {

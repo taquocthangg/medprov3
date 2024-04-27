@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "./BacSi.css";
-import "../../css/Admin_header.css"
-import "../../css/Admin_Simplebar.css"
 import { useParams } from 'react-router-dom';
 import { FaRegUser } from "react-icons/fa";
 import { FaHospital } from "react-icons/fa";
@@ -78,7 +75,7 @@ const BacSi = () => {
                 <FaRegUser />
                 <p className="name_Simplebar">Bác sĩ</p>
               </div>
-             
+
             </div>
 
           </div>
@@ -140,14 +137,14 @@ const BacSi = () => {
         </div>
         <div className="content_Admin">
           <div className={activeButton1 ? 'check_static' : 'QuanLyNews'}>
-          <BenhAn search_text={search_Header} />
-            
+            <BenhAn search_text={search_Header} />
+
           </div>
           <div className={activeButton ? 'check_static' : 'QuanLyUsert'}>
             <DatKham />
           </div>
           <div className={activeBtn2 ? 'check_static' : "QuanLyBV"}>
-       <DonKham/>
+            <DonKham />
           </div>
         </div>
       </div>
