@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import '../../css/Admin_header.css'
 import { Avatar, ConfigProvider, Dropdown, Flex, Image, Input, Space } from 'antd'
 import icon_logo from '../../img/logo/logo.png'
@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom'
 import { Tooltip } from 'react-tooltip';
 import { DownOutlined, BellOutlined } from '@ant-design/icons';
 import { dataNoticeIcon } from '../../data'
+import QueryAdmin from '../service/QueryContext'
 export default function AdHeader() {
     const [focusBtnBell, setFocusBtnBell] = useState(true)
+    const {QueryValue,setQueryValue}=useContext(QueryAdmin)
     // console.log(focusBtnBell)
     const items = [
         {
@@ -56,6 +58,7 @@ export default function AdHeader() {
                             placeholder="Search"
                             //onSearch={onSearch}
                             style={{ width: '50%' }}
+                            onChange={(e)=>setQueryValue(e.target.value)}
                             allowClear
                         />
                     </ConfigProvider>

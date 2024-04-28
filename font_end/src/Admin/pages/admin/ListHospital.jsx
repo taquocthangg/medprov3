@@ -1,20 +1,59 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../../../css/admin/Insert_admin.css'
-import { Tooltip, Avatar, Flex, ConfigProvider, Table, Button, Input } from 'antd';
-import { Link } from 'react-router-dom';
+import { Tooltip, Avatar, Flex, ConfigProvider, Table, Button, Modal, message } from 'antd';
+import QueryAdmin from './../../service/QueryContext';
+import { dataHospital } from '../../../data_fake/dataHospital';
+import { EditOutlined, DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
+import ModalHopital from './ModalHopital';
 const screenWidth = window.innerWidth
+const { confirm } = Modal;
 export default function ListHospital() {
-  const [dataHospital, setDataHospital] = useState()
+  const [data, setDataHospital] = useState()
+  const [openModal, setOpenModal] = useState();
+  const [dataModal, setDataModal] = useState();
   const [queryHospital, setQueryHospital] = useState('')
+  const { value } = useContext(QueryAdmin)
+  const handleGetDataHospital = () => {
+    setDataHospital(dataHospital)
+  }
+  const handleDeleteHospital = (idHospital) => {
+    const indexToDelete = data.findIndex(hospital => hospital.id === idHospital);
+    if (indexToDelete !== -1) {
+      const newData = [...data]; // Tạo một bản sao của mảng dataHospital
+      newData.splice(indexToDelete, 1);
+      setDataHospital(newData);
+      message.success("Xóa thành công bệnh viện")
+    }
+  }
+  const showDeleteConfirm = (idHospital) => {
+    confirm({
+      title: 'Cảnh báo',
+      icon: <ExclamationCircleFilled />,
+      content: 'Dữ liệu sẽ mất và không thể khôi phục',
+      okText: 'Có',
+      okType: 'danger',
+      cancelText: 'Không',
+      onOk() {
+        try {
+
+          handleDeleteHospital(idHospital)
+
+        }
+        catch (e) {
+          message.error(e)
+        }
+      },
+      onCancel() {
+
+      },
+    });
+  }
+  const showModal = (data) => {
+    setOpenModal(true)
+    setDataModal(data)
+  }
+
   const columns = [
-    {
-      title: 'Mã bệnh viện',
-      dataIndex: 'name',
-      key: 'name',
-      align: 'center',
-      render: (text) => <p>{text}</p>,
-      width: 150,
-    },
     {
       title: 'Tên bệnh viện',
       dataIndex: 'name',
@@ -33,86 +72,121 @@ export default function ListHospital() {
     },
     {
       title: 'Địa Chỉ',
-      dataIndex: 'price',
-      key: 'price',
+      dataIndex: 'diaChi',
+      key: 'diaChi',
       align: 'center',
-      render: (price) => (
-        <Tooltip placement="topLeft" title={price}>
-
+      render: (diaChi) => (
+        <Tooltip placement="topLeft" title={diaChi}>
+          {diaChi}
         </Tooltip>
       ),
       width: '10%',
     },
     {
-      title: 'Số điện thoại',
-      dataIndex: 'describe',
-      key: 'describe',
+      title: 'Hotline',
+      dataIndex: 'sdt',
+      key: 'sdt',
       align: 'center',
       ellipsis: {
         showTitle: false,
       },
-      render: (describe) => (
-        <Tooltip placement="topLeft" title={describe}>
-          {describe}
+      render: (sdt) => (
+        <Tooltip placement="topLeft" title={sdt}>
+          {sdt}
         </Tooltip>
       ),
     },
     {
       title: 'Email',
-      dataIndex: 'species',
-      key: 'species',
+      dataIndex: 'email',
+      key: 'email',
       align: 'center',
       ellipsis: {
         showTitle: false,
       },
-      render: (species) => (
-        <Tooltip placement="topLeft" title={species}>
-          {species}
+      render: (email) => (
+        <Tooltip placement="topLeft" title={email}>
+          {email}
         </Tooltip>
       ),
     },
     {
-      title: 'Edit',
+      title: 'Chức Năng',
       dataIndex: 'Edit',
       key: 'Edit',
       align: 'center',
+
       ellipsis: {
         showTitle: false,
       },
-      render: (Edit, record) => (
-        <Flex gap={'20px'} wrap='wrap' justify='center'>
-          <Link to={`/admin/updatePets/${record?.id}`}>
-            <Button type="primary">Sửa</Button>
-          </Link>
-          {/* <DeletePets idPet={record?.id} setProducts={setProducts} /> */}
-        </Flex>
 
+      render: (Edit, record) => (
+        <div className="">
+          <Flex justify='center'>
+            <ConfigProvider
+              theme={{
+                components: {
+                  Button: {
+                    defaultBg: 'rgba(255, 255, 255, 0.5)',
+                  },
+                },
+              }}
+            >
+              <Button
+                style={{ border: 'none', background: 'none' }}
+                onClick={() => showModal(record)}
+
+              >
+                <EditOutlined style={{ fontSize: '20px', color: '#008CFF' }} />
+
+              </Button>
+              <Button style={{ border: 'none', background: 'none' }} onClick={() => showDeleteConfirm(record.id)}>
+                <DeleteOutlined style={{ fontSize: '20px', color: '#E55353' }} />
+              </Button>
+            </ConfigProvider>
+
+          </Flex>
+
+        </div>
       ),
+      width: '12%',
     },
   ];
+  useEffect(() => {
+    handleGetDataHospital()
+  }, [])
+
   return (
     <div style={{ padding: '25px 100px', width: `${screenWidth}` }} className='container_addBenhVien' >
       <p className='title_insertHopital'>Quản lý bệnh viện</p>
-      <Input placeholder='Nhập tên thú cưng' onChange={(e) => setQueryHospital(e.target.value.toLocaleLowerCase())} style={{ width: '20%' }} />
       <div className="content_ListHospital">
         <ConfigProvider
           theme={{
             components: {
               Table: {
-                headerBg: '#3F95FD',
-                headerColor: '#fff',
-                borderColor: '#ccc',
-                borderRadius: 10
+                headerBg: '#9FDFFB',
+                headerColor: '#000',
+                borderColor: '#9FDFFB',
+                borderRadius: 20,
+                footerBg: '#9FDFFB',
+                footerColor: '#000'
               },
+            },
+            token: {
+              colorBgContainer: 'rgba(255, 255, 255, 0.5)',
+              boxShadowSecondary: '0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05)'
             },
           }}
         >
-          {/* <Table columns={columns}
-            dataSource={dataHospital?.filter((item) => item?.name?.toLocaleLowerCase().includes(queryHospital))}
+          <Table columns={columns}
+            dataSource={data}
             pagination={{ pageSize: 5 }}
             bordered={true}
-          /> */}
+            style={{ boxShadow: '2px 2px 10px 0 rgba(0, 0, 0, 0.3)' }}
+          />
         </ConfigProvider>
+        <ModalHopital dataHopital={dataModal} dataHopitals={data} setDataHospital={setDataHospital} setOpenModal={setOpenModal} openModal={openModal} />
+
       </div>
     </div>
   )

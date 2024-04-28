@@ -6,6 +6,7 @@ import {
     ShopOutlined,
     NotificationOutlined,
 } from "@ant-design/icons";
+
 const screenWidth=window.innerWidth-250
 // Định nghĩa các danh sách subMenus và additionalMenuItems cho mỗi role_id
 const menuConfig = {
@@ -156,7 +157,7 @@ export default function MenuBar({ role_id }) {
             <div className="menus" style={{ width: '250px', position: 'fixed', top: '80px', overflowY: 'auto',backgroundColor:'#fff' }}>
                 <SideMenu subMenus={subMenus} additionalMenuItems={additionalMenuItems} />
             </div>
-            <div style={{ marginLeft:'250px', width: screenWidth,height:'400px'}}>
+            <div style={{ marginLeft:'250px', width: screenWidth,minHeight:'60vh'}}>
                 <AppRouteAdmin />
             </div>
         </div>
