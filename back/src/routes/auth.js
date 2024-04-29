@@ -42,5 +42,10 @@ router.get('/lich-kham-hoan-thanh/:id_benhnhan', controller.LichKhamHoanThanhbyB
 router.get('/lich-kham-hoan-thanh-bv/:id_benhnhan', controller.benhAn);
 router.get('/lich-kham-hoan-thanh-by-lichkham/:id_benhnhan', controller.benhAnTheoLich);
 router.get('/lich-kham-da-huy/:id_benhnhan', controller.lichKhamHuy);
+
+
+
+router.post('/create_payment_url', controller.createPayment);
+
 module.exports = router
 
