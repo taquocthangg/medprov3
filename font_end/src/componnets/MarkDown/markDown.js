@@ -4,12 +4,13 @@ import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css';
 import { addNews, uploadImage } from '../../pages/api';
 import io from 'socket.io-client';
-
+import '../../css/admin/Insert_admin.css'
+import { Flex, Button } from 'antd';
 // Khởi tạo parser Markdown
 const mdParser = new MarkdownIt(/* Markdown-it options */);
-// Hàm xử lý khi nội dung thay đổi
 
-const MarkDown = () => {
+// Hàm xử lý khi nội dung thay đổi
+const MarkDown = ({ dataIntroduce, setIntroduce }) => {
     const [message, setMessage] = useState('');
     useEffect(() => {
         const socket = io('http://localhost:5000'); // Điều chỉnh URL máy chủ nếu cần thiết
@@ -38,8 +39,6 @@ const MarkDown = () => {
     }
     const [htmlContent, sethtmlContent] = useState('');
     const [markDownContent, setmarkDownContent] = useState('');
-    const [image, setimage] = useState('https://res.cloudinary.com/dw9w3kc49/image/upload/v1710429326/user/qwpelhpnb6ojj6eortq7.png');
-    const [title, settitle] = useState('Tin tức này test thôi :v');
     // Hàm xử lý tải ảnh lên và nhận về link
     const handleImageUpload = async (file, callback) => {
         try {
@@ -56,12 +55,23 @@ const MarkDown = () => {
         const postData = {
             htmlContent: htmlContent,
             markDownContent: markDownContent,
-            image: image,
-            title: title
+            image: dataIntroduce?.imageNews,
+            title: dataIntroduce?.titleNews,
+            description: dataIntroduce?.description
         };
+        console.log(postData)
 
         try {
+            setIntroduce({
+                titleNews: "",
+                imageNews: "",
+                description: ""
+            })
+            sethtmlContent("")
+            setmarkDownContent("")
             addNews(postData)
+           
+
         } catch (error) {
             console.error('Error posting to API:', error);
         }
@@ -69,15 +79,20 @@ const MarkDown = () => {
 
     return (
         <>
-            <MdEditor
-                style={{ height: '500px' }}
-                renderHTML={text => mdParser.render(text)}
-                onChange={handleEditorChange}
-                onImageUpload={handleImageUpload}
-            />
-            <button onClick={postToApi}>
-                Đăng bài
-            </button>
+            <div style={{ boxShadow: '2px 5px 15px rgba(0, 0, 0, 0.2)', border: '0.5px solid #ccc', borderRadius: '15px' }}>
+                <MdEditor
+                    style={{ height: '500px', borderRadius: '15px' }}
+                    renderHTML={text => mdParser.render(text)}
+                    onChange={handleEditorChange}
+                    onImageUpload={handleImageUpload}
+                    value={markDownContent}
+                />
+            </div>
+            <Flex style={{ marginTop: '20px' }} justify='center'>
+                <Button onClick={postToApi} type='primary' style={{ minWidth: '120px', background: 'rgb(62, 168, 255)' }}>
+                    Đăng bài
+                </Button>
+            </Flex>
             {message && <p>{message}</p>}
 
         </>

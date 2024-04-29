@@ -38,7 +38,16 @@
 .customUploadModal .ant-upload.ant-upload-select{
     width: 150px !important;
     height: 150px !important;
-}
+}   
+.customAddNews .ant-upload.ant-upload-select{
+    width:300px !important;
+    height: 200px !important;
+}  
 .content_ListHospital{
     margin-top:50px;
+}
+
+.rc-md-navigation{
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }

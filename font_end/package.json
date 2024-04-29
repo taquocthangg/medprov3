@@ -44,6 +44,7 @@
     "react-use-effect": "^0.0.1",
     "react-validation": "^3.0.7",
     "reactjs-social-login": "^2.6.3",
+    "recharts": "^2.12.6",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.7.5",
     "use-history": "^1.4.1",

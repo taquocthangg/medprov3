@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import AddTinTuc from '../Admin/pages/admin/AddTinTuc'
 import Add_Benh_Vien from '../Admin/pages/admin/Add_Benh_Vien'
@@ -14,6 +14,7 @@ import Add_lichKham from '../Admin/pages/doctor/Add_lichKham';
 import Ds_lichKham from '../Admin/pages/doctor/Ds_lichKham';
 import List_benhAn from './../Admin/pages/doctor/List_benhAn';
 import Add_benhAn from './../Admin/pages/doctor/Add_benhAn';
+import UpdateNewsAdmin from '../Admin/pages/admin/UpdateNewsAdmin';
 
 export default function AppRouteAdmin() {
   
@@ -25,6 +26,7 @@ export default function AppRouteAdmin() {
                     <Route path='benh-viens' element={<Add_Benh_Vien />} />
                     <Route path='ds-benh-vien' element={<ListHospital />} />
                     <Route path='ds-tin-tuc' element={<ListNews />} />
+                    <Route path='ds-tin-tuc/update-tin-tuc/:idNews' element={<UpdateNewsAdmin />} />
                     <Route path='thong-ke' element={<Statistical />} />
                     <Route path='thong-bao' element={<Notification />} />
                     <Route path='them-chuyen-khoa' element={<Add_chuyenKhoa />} />
