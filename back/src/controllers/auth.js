@@ -295,3 +295,17 @@ export const benhAnTheoLich = async (req, res) => {
         res.status(500).json({ error: 'Lỗi trong quá trình lấy lịch khám.' });
     }
 }
+
+
+
+export const createPayment = async (req, res) => {
+    try {
+        const { amount, language, bankCode, ipAddr } = req.body
+        const paymentUrl = await services.createPayment({ ipAddr, amount, language, bankCode });
+
+        return res.status(200).json(paymentUrl)
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};
