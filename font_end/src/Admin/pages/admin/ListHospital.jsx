@@ -5,6 +5,7 @@ import QueryAdmin from './../../service/QueryContext';
 import { dataHospital } from '../../../data_fake/dataHospital';
 import { EditOutlined, DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import ModalHopital from './ModalHopital';
+import { getAllBenhVien } from '../../../api';
 const screenWidth = window.innerWidth
 const { confirm } = Modal;
 export default function ListHospital() {
@@ -13,8 +14,10 @@ export default function ListHospital() {
   const [dataModal, setDataModal] = useState();
   const [queryHospital, setQueryHospital] = useState('')
   const { value } = useContext(QueryAdmin)
-  const handleGetDataHospital = () => {
-    setDataHospital(dataHospital)
+  const handleGetDataHospital = async () => {
+    const data= await getAllBenhVien()
+
+    setDataHospital(data?.benhvien?.rows)
   }
   const handleDeleteHospital = (idHospital) => {
     const indexToDelete = data.findIndex(hospital => hospital.id === idHospital);

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Avatar, Button, Modal, Col, Row, Flex, Upload, Input, ConfigProvider, message } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import '../../../css/admin/Insert_admin.css'
+import { updateUser } from '../../../api';
 const getBase64 = (img, callback) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
@@ -29,8 +30,9 @@ export default function ModalHopital({ openModal, setOpenModal, dataHopitals, da
         sdt: "",
         avatar: "",
         email: ""
+
     })
-    const handleUpdate = () => {
+    const handleUpdate = async () => {
         const updateDate = dataHopitals.map((item) => {
             if (item?.id === dataHopital?.id) {
                 const newData = {
@@ -43,19 +45,29 @@ export default function ModalHopital({ openModal, setOpenModal, dataHopitals, da
             }
             return item;
         })
-        setDataHospital(updateDate)
-        setDateUpdate({
-            name: "",
-            diaChi: "",
-            sdt: "",
-            avatar: "",
-            email: ""
-        })
-        message.success("Cập nhật thông tin thành công")
+        const res = await updateUser(updateDate)
+        console.log(res)
+        if (res?.message === "Cập nhật thông tin người dùng thành công") {
+            setDataHospital(updateDate)
+            message.success(res?.message)
+            setDateUpdate({
+                name: "",
+                diaChi: "",
+                sdt: "",
+                avatar: "",
+                email: ""
+            })
+            setOpenModal(false);
+        }
+        else {
+            message?.warning(res?.message)
+
+            setOpenModal(true)
+        }
     }
     const handleOk = () => {
         handleUpdate()
-        setOpenModal(false);
+
     };
     const handleCancel = () => {
         setOpenModal(false);

@@ -10,7 +10,7 @@ import AdHeader from "./Admin/componnents/AdHeader.jsx";
 import QueryAdmin from "./Admin/service/QueryContext.js";
 
 function App() {
-  const role_id = 'R4';
+  const role_id = 'R1';
   const isAdmin = ['R1', 'R2', 'R3'].includes(role_id);
   const [QueryValue, setQueryValue] = useState("")
   const handleUpdateQuery = (value) => {
