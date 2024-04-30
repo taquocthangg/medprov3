@@ -27,7 +27,7 @@ import Them_Moi_Chuyen_Khoa from './../pages/Them_Moi_Chuyen_Khoa';
 import GioiThieu from './../pages/GioiThieu';
 import Quytrinh from './../pages/QuyTrinh';
 import DangKy from './FromDangKy/DangKy';
-export default function AppRouter(role_id) {
+export default function AppRouter({ setInforUser, setRole_id, inforUser }) {
     return (
 
         <Routes>
@@ -42,21 +42,21 @@ export default function AppRouter(role_id) {
             <Route path='/admin' element={<Admin />} />
             <Route path='/' element={<Home />} />
             <Route path='dang-nhap' element={<LoginPhongKham />} />
-            <Route path='login' element={<Login />} />
+            <Route path='login' element={<Login setInforUser={setInforUser} setRole_id={setRole_id} />} />
             <Route path='dang-ky' element={<DangKy />} />
             <Route path='gioi-thieu' element={<GioiThieu />} />
             <Route path='quy-trinh' element={<Quytrinh />} />
-            <Route path='huong-dan' element={<HuongDan/>} />
+            <Route path='huong-dan' element={<HuongDan />} />
             <Route path='tin-tuc' element={<TinTuc />} />
             <Route path='thac-mac' element={<ThacMac />} />
             <Route path='lien-he' element={<LienHe />} />
             <Route path='phong-kham' element={<PhongKham />} />
             <Route path='chon-benh-vien' element={<Choose />} />
             <Route path='chon-benh-vien/chon-hinh-thuc' element={<ChonChucNang />} />
-            <Route path='dang-ki' element={<DangKi/>} />
+            <Route path='dang-ki' element={<DangKi />} />
             <Route path='quen-mat-khau' element={<QuenMatKhau />} />
             <Route path='benh-vien/:getId' element={<BenhVien />} />
-            <Route path='user' element={<User />} />
+            <Route path='user' element={<User inforUser={inforUser} />} />
 
             <Route path='benh-vien/:getId/them-moi-chuyen-khoa/:getId' element={<Them_Moi_Chuyen_Khoa />} />
             {/* <Route path='benh-vien/:getId/thembacsi/:getId' element={<Insert_Doctor />} />
@@ -70,7 +70,7 @@ export default function AppRouter(role_id) {
             <Route path='BenhAn' element={<BenhAn />} /> */}
 
             {/* Đặt lịch */}
-             {/* <Route path='/chon-benh-vien' element={<Choose />} />
+            {/* <Route path='/chon-benh-vien' element={<Choose />} />
             <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId' element={<Search_Chuyen_Khoa />} />
             <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId' element={<Search_Doctor />} />
             <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId/chon-lich/:getId' element={<Select_day />} /> */}

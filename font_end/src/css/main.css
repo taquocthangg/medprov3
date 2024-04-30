@@ -51,6 +51,11 @@
 }
 
 .icon-style:hover {
+    .container_user {
+        width: 1200px;
+        margin: 0 auto;
+    }
+
     animation: none;
     background: #fff;
     color: #551B54;
@@ -322,4 +327,9 @@ p:hover {
     transition-timing-function: cubic-bezier(0.47, 2.02, 0.31, -0.36);
     cursor: pointer;
     border-radius: 10px;
+}
+
+.container_user {
+    max-width: 1000px;
+    margin: 0 auto;
 }

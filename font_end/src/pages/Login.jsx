@@ -22,7 +22,9 @@ import { LoginSocialFacebook } from 'reactjs-social-login';
 import MarkDown from '../componnets/MarkDown/markDown';
 import Select_day from '../User/Select_day';
 import { getCurentUser, getUser, login } from '../api';
-const Login = () => {
+import { useCheckLogin } from '../api/auth';
+import { message } from 'antd';
+const Login = ({ setInforUser, setRole_id }) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -33,44 +35,11 @@ const Login = () => {
     const [name, setName] = useState('');
     const [avatar, setAvatar] = useState('');
     const [loading, setLoading] = useState(false);
+    const checkLogin = useCheckLogin({ setInforUser, setRole_id });
 
-    // Check người dùng đăng nhập chưa
+    // Check người dùng đăng nhập   chưa
 
-    useEffect(() => {
-        const userIsAuthenticated = isAuthenticated();
 
-        // Nếu người dùng đã đăng nhập, chuyển hướng đến trang khác (ví dụ: trang dashboard)
-        if (userIsAuthenticated) {
-            const decodedToken = decodeAccessToken();
-            if (userIsAuthenticated) {
-                console.log('Người dùng đã đăng nhập.');
-                notify();
-                const userId = decodedToken.id;
-                localStorage.setItem('userId', userId);
-                setTimeout(() => {
-                    switch (decodedToken.role_id) {
-                        case 'R1':
-                            navigate('/admin');
-                            break;
-                        case 'R2':
-                            navigate('/benh-vien' + decodedToken.id);
-                            break;
-                        case 'R3':
-                            navigate('/bac-si/' + decodedToken.id);
-                            break;
-                        case 'R4':
-                            navigate('/');
-                            break;
-                        default:
-                            console.log('Role không hợp lệ.');
-                    }
-                }, 1000);
-            } else {
-                console.log('Người dùng chưa đăng nhập. Chuyển hướng đến trang đăng nhập.');
-                navigate('/login');
-            }
-        }
-    }, [navigate]);
 
     //  Khi ấn đăn nhập 
     const handleLogin = async () => {
@@ -114,11 +83,7 @@ const Login = () => {
         //                             break;
         //                         default:
         //                             console.log('Role không hợp lệ.');
-        //                     }
-        //                 }, 1000);
-        //             } else {
-        //                 console.log('Người dùng chưa đăng nhập. Chuyển hướng đến trang đăng nhập.');
-        //                 navigate('/login');
+        //                     checkLogingate('/login');
         //             }
         //         }
         //         else {
@@ -138,13 +103,14 @@ const Login = () => {
 
         // Tự hiểu nhé :)))
         const response = await login(email, password)
-        console.log(response)
-
-        const in4User = await getUser({ limit: 5, sex: 'Nam', })
-        console.log(in4User)
-
-        const user = await getCurentUser(1)
-        console.log(user)
+        if (response.err == 1) {
+            message.error(response.mess)
+        }
+        else {
+            console.log(response)
+            localStorage.setItem('access_token', response.access_token);
+            checkLogin()
+        }
     };
     //  Khi ấn đăn nhậpvới gôgle
     const handleLoginWithGoogle = async () => {

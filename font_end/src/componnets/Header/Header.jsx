@@ -25,30 +25,10 @@ import { isAuthenticated, decodeAccessToken } from '../../pages/auth';
 import api from '../../pages/api';
 import { FaBars } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
-const Header = () => {
+const Header = ({ inforUser }) => {
   const userIsAuthenticated = isAuthenticated();
-  const [user, setUser] = useState(null);
-  const userId = localStorage.getItem('userId');
-  const [idUser, setIdUser] = useState(userId);
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
-  useEffect(() => {
-    setIdUser(userId)
-    console.log('User ID:', userId);
-  }, [userId]);
-  useEffect(() => {
-    api.get("/auth/getCurent/" + idUser)
-      .then((response) => {
-        const userData = response.data.user;
-        if (userData) {
-          setUser(userData);
-        }
-      })
-      .catch((error) => {
-        // Xử lý lỗi
-        console.error("Error fetching data:", error);
-      });
-  }, []);
   const { pathname } = useLocation();
   const isUpdateUserDetailPage = pathname.includes('/admin/Update_User_Detail');
   const isUpdate_Patent_Detail = pathname.includes('/Update_Patent_Detail');
@@ -94,7 +74,7 @@ const Header = () => {
 
                     to="/user"
                   >
-                    Xin chào {user ? user.name : "Ok"}
+                    Xin chào {inforUser ? inforUser.name : "Ok"}
                   </NavLink>
                 </div>
               ) : (

@@ -17,28 +17,28 @@ import Add_benhAn from './../Admin/pages/doctor/Add_benhAn';
 import UpdateNewsAdmin from '../Admin/pages/admin/UpdateNewsAdmin';
 
 export default function AppRouteAdmin() {
-  
+
     return (
         <div>
-          
-                <Routes>
-                    <Route path='tin-tuc' element={<AddTinTuc />} />
-                    <Route path='benh-viens' element={<Add_Benh_Vien />} />
-                    <Route path='ds-benh-vien' element={<ListHospital />} />
-                    <Route path='ds-tin-tuc' element={<ListNews />} />
-                    <Route path='ds-tin-tuc/update-tin-tuc/:idNews' element={<UpdateNewsAdmin />} />
-                    <Route path='thong-ke' element={<Statistical />} />
-                    <Route path='thong-bao' element={<Notification />} />
-                    <Route path='them-chuyen-khoa' element={<Add_chuyenKhoa />} />
-                    <Route path='ds-chuyen-khoa' element={<List_chuyenKhoa />} />
-                    <Route path='ds-bac-si' element={<List_bacSi />} />
-                    <Route path='them-bac-si' element={<Add_bacSi />} />
-                    <Route path='them-lich-kham' element={<Add_lichKham />} />
-                    <Route path='ds-lich-kham' element={<Ds_lichKham />} />
-                    <Route path='ds-benh-an' element={<List_benhAn />} />
-                    <Route path='them-benh-an' element={<Add_benhAn />} />
-                </Routes>
-          
+
+            <Routes>
+                <Route path='tin-tuc' element={<AddTinTuc />} />
+                <Route path='benh-viens' element={<Add_Benh_Vien />} />
+                <Route path='ds-benh-vien' element={<ListHospital />} />
+                <Route path='ds-tin-tuc' element={<ListNews />} />
+                <Route path='ds-tin-tuc/update-tin-tuc/:idNews' element={<UpdateNewsAdmin />} />
+                <Route path='thong-ke' element={<Statistical />} />
+                <Route path='thong-bao' element={<Notification />} />
+                <Route path='them-chuyen-khoa' element={<Add_chuyenKhoa />} />
+                <Route path='ds-chuyen-khoa' element={<List_chuyenKhoa />} />
+                <Route path='ds-bac-si' element={<List_bacSi />} />
+                <Route path='them-bac-si' element={<Add_bacSi />} />
+                <Route path='them-lich-kham' element={<Add_lichKham />} />
+                <Route path='ds-lich-kham' element={<Ds_lichKham />} />
+                <Route path='ds-benh-an' element={<List_benhAn />} />
+                <Route path='them-benh-an' element={<Add_benhAn />} />
+            </Routes>
+
         </div>
     )
 }
