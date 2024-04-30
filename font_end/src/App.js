@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, BrowserRouter as Router, Routes, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Header from './componnets/Header/Header';
 import Fooder from './componnets/Footer/Fooder';
 import ScrollToTop from "./componnets/ScrollToTop.js";
@@ -10,17 +10,9 @@ import AdHeader from "./Admin/componnents/AdHeader.jsx";
 import QueryAdmin from "./Admin/service/QueryContext.js";
 import { decodeAccessToken, isAuthenticated } from "./api/auth.js";
 import { getCurentUser } from "./api/index.js";
-import AppRouterUser from "./User/AppRouterUser.jsx";
 import User from "./pages/User.jsx";
-import SilerMenuUser from "./User/SilerMenuUser.jsx";
 
 function App() {
-<<<<<<< HEAD
-
-=======
-  const role_id = 'R1';
-  const isAdmin = ['R1', 'R2', 'R3'].includes(role_id);
->>>>>>> 8feb2dd27f2014690f405448485da72191d85bd1
   const [QueryValue, setQueryValue] = useState("")
   const [inforUser, setInforUser] = useState();
   const [role_id, setRole_id] = useState([]);
