@@ -27,8 +27,13 @@ export const getUser = async (params) => {
     })
 }
 export const getCurentUser = async (idUser) => {
-    const url = api
     return handleRequest(async () => {
         return await api.get(`/getCurentUser/${idUser}`)
+    })
+}
+
+export const deleteUser = async (idUser) => {
+    return handleRequest(async () => {
+        return await api.delete(`/getCurentUser/${idUser}`)
     })
 }
