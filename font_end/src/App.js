@@ -15,7 +15,12 @@ import User from "./pages/User.jsx";
 import SilerMenuUser from "./User/SilerMenuUser.jsx";
 
 function App() {
+<<<<<<< HEAD
 
+=======
+  const role_id = 'R1';
+  const isAdmin = ['R1', 'R2', 'R3'].includes(role_id);
+>>>>>>> 8feb2dd27f2014690f405448485da72191d85bd1
   const [QueryValue, setQueryValue] = useState("")
   const [inforUser, setInforUser] = useState();
   const [role_id, setRole_id] = useState([]);

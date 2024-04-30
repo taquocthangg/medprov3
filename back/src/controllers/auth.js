@@ -4,7 +4,7 @@ export const dangKi = async (req, res) => {
     try {
         const fileData = req.file;
         const avatar = fileData?.path;
-        const { name, email, password, gioiTinh, sdt, diaChi, namSinh, role_id, } = req.body
+        const { name, email, password, gioiTinh, sdt, diaChi, namSinh, role_id} = req.body
         if (!name || !email || !password) return res.status(400).json({
             err: 1,
             mess: "Điền đầy đủ thông tin"

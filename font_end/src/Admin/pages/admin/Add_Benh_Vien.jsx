@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Col, Row, Flex, Input, Button, Upload, message, ConfigProvider } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import '../../../css/admin/Insert_admin.css'
+import { regiter } from '../../../api';
 const screenWidth = window.innerWidth
 const getBase64 = (img, callback) => {
     const reader = new FileReader();
@@ -39,10 +40,34 @@ export default function Add_Benh_Vien() {
         checkPassword: "",
         sdt: "",
         diaChi: "",
-        avatar: ""
+        avatar: "",
+        role_id:"R2"
     });
-    const handlePostData = () => {
-        console.log(dataHopital)
+    const handlePostData = async () => {
+        if (dataHopital?.password === dataHopital?.checkPassword) {
+            const response = await regiter(dataHopital)
+            console.log(response)
+            if (response?.mess === "Đăng kí thành công") {
+                message.success(response?.mess)
+                setDataHopital({
+                    name: "",
+                    email: "",
+                    password: "",
+                    checkPassword: "",
+                    sdt: "",
+                    diaChi: "",
+                    avatar: "",
+                    role_id:"R2"
+                })
+            }
+            else {
+                message.warning(response?.mess)
+            }
+        }
+        else {
+            message.warning("Mật khẩu nhập lại không khớp !")
+        }
+
     }
     const handleChangeDataUser = (key, value) => {
         if (value) {
@@ -94,6 +119,7 @@ export default function Add_Benh_Vien() {
                         <Flex vertical className='form_InsertHopital' >
                             <p className='lable_InsertHopital' > Nhập địa chỉ email<sup>*</sup></p>
                             <Input
+                                value={dataHopital?.email}
                                 placeholder='Nhập email'
                                 onChange={(e) => handleChangeDataUser("email", e.target.value)}
                                 className='inout_InsertHopital'
@@ -103,6 +129,7 @@ export default function Add_Benh_Vien() {
                         <Flex vertical className='form_InsertHopital'>
                             <p className='lable_InsertHopital' >Nhập mật khẩu<sup>*</sup></p>
                             <Input.Password
+                                value={dataHopital?.password}
                                 placeholder='Nhập mật khẩu'
                                 className='inout_InsertHopital'
                                 onChange={(e) => handleChangeDataUser("password", e.target.value)}
@@ -111,6 +138,7 @@ export default function Add_Benh_Vien() {
                         <Flex vertical className='form_InsertHopital' >
                             <p className='lable_InsertHopital' >Nhập lại mật khẩu<sup>*</sup></p>
                             <Input.Password
+                                value={dataHopital?.checkPassword}
                                 placeholder='Nhập lại mật khẩu'
                                 className='inout_InsertHopital'
                                 onChange={(e) => handleChangeDataUser("checkPassword", e.target.value)}
@@ -121,7 +149,10 @@ export default function Add_Benh_Vien() {
                         <Flex vertical className='form_InsertHopital' >
                             <p className='lable_InsertHopital'  >Nhập số điện thoại<sup>*</sup></p>
                             <Input
+                                value={dataHopital?.sdt}
                                 placeholder='Nhập số điện thoại'
+                                maxLength={10}
+                                showCount
                                 className='inout_InsertHopital'
                                 onChange={(e) => handleChangeDataUser("sdt", e.target.value)}
                             />
@@ -129,6 +160,7 @@ export default function Add_Benh_Vien() {
                         <Flex vertical className='form_InsertHopital'  >
                             <p className='lable_InsertHopital'  >Nhập địa chỉ bệnh viện<sup>*</sup></p>
                             <Input
+                                value={dataHopital?.diaChi}
                                 placeholder='Nhập địa chỉ bệnh viện'
                                 className='inout_InsertHopital'
                                 onChange={(e) => handleChangeDataUser("diaChi", e.target.value)}
@@ -137,6 +169,7 @@ export default function Add_Benh_Vien() {
                         <Flex vertical className='form_InsertHopital'>
                             <p className='lable_InsertHopital' >Tên bệnh viện<sup>*</sup></p>
                             <Input
+                                value={dataHopital?.name}
                                 placeholder='Nhập tên bệnh viện'
                                 className='inout_InsertHopital'
                                 onChange={(e) => handleChangeDataUser("name", e.target.value)}
@@ -186,14 +219,14 @@ export default function Add_Benh_Vien() {
                         theme={{
                             components: {
                                 Button: {
-                                    defaultBg:"#fff"
+                                    defaultBg: "#fff"
                                 },
                             },
                         }}
                     >
                         <Button
                             type='primary'
-                            style={{ minWidth: '120px',background:'#3EA8FF' ,marginTop:'30px'}}
+                            style={{ minWidth: '120px', background: '#3EA8FF', marginTop: '30px' }}
                             onClick={() => handlePostData()}
                         >
                             Xác nhận
