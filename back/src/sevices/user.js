@@ -7,7 +7,7 @@ export const getUser = ({ page, limit, order, name, sex, address, ...query }) =>
     try {
         const queries = { raw: true, nest: true }
         const offset = (!page || +page <= 1) ? 0 : (+page - 1)
-        const fLimit = +limit || +process.env.LIMIT_BV
+        const fLimit = +limit || +process.env.LIMIT_USER
         queries.offset = offset * fLimit
         queries.limit = fLimit
 

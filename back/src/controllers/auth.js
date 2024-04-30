@@ -309,3 +309,14 @@ export const createPayment = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+export const returnPayment = async (req, res) => {
+    try {
+        let vnp_Params = req.query;
+        const paymentUrl = await services.returnPayment({ vnp_Params });
+
+        return res.status(200).json(paymentUrl)
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+};

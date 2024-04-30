@@ -46,6 +46,7 @@ router.get('/lich-kham-da-huy/:id_benhnhan', controller.lichKhamHuy);
 
 
 router.post('/create_payment_url', controller.createPayment);
+router.get('/vnpay_return', controller.returnPayment);
 
 module.exports = router
 
