@@ -18,12 +18,18 @@ function App() {
   const [role_id, setRole_id] = useState([]);
   const [pathname, set_Path_Name] = useState(['']);
   const isAdmin = ['R1', 'R2', 'R3'].includes(role_id);
-  const isUser = ['/user', '/phieu-kham-benh',].includes(pathname);
+  const isChiTietPhieuKham = /^\/chi-tiet-phieu-kham\/\d+$/.test(pathname);
+  const isUser = isChiTietPhieuKham || ['/user', '/phieu-kham-benh'].includes(pathname);
+
+  const [screenWidth, setScreenWidth] = useState()
   const location = useLocation();
   useEffect(() => {
     set_Path_Name(location.pathname);
   }, [location.pathname]);
-
+  useEffect(() => {
+    const screenWidth = window.innerWidth - 250
+    setScreenWidth(screenWidth)
+  }, [screenWidth]);
   useEffect(() => {
     async function fetchData() {
       const userIsAuthenticated = isAuthenticated();
@@ -54,7 +60,7 @@ function App() {
         {isAdmin ? <AdHeader /> : <Header inforUser={inforUser} />}
         <BackToTop />
         <ScrollToTop >
-          {isAdmin ? <MenuBar role_id={role_id} /> : <AppRouter inforUser={inforUser} setRole_id={setRole_id} setInforUser={setInforUser} />}
+          {isAdmin ? <MenuBar role_id={role_id} /> : <AppRouter inforUser={inforUser} setRole_id={setRole_id} setInforUser={setInforUser} screenWidth={screenWidth} />}
           {isUser ? <User /> : null}
         </ScrollToTop>
         <Fooder />

@@ -2,7 +2,7 @@ import React from 'react'
 import null_data from '../img/null-data.webp'
 import './css/phieu_kham.css'
 import { FaBriefcaseMedical, FaHandHoldingMedical, FaHospitalAlt } from 'react-icons/fa'
-import { MdOutlineAccessTimeFilled, MdOutlineDateRange } from 'react-icons/md'
+import { MdOutlineAccessTimeFilled, MdOutlineDateRange, MdPreview } from 'react-icons/md'
 export default function Da_Kham({ inforUser, data }) {
 
     return (
@@ -73,6 +73,9 @@ export default function Da_Kham({ inforUser, data }) {
                                     Đã Khám
                                 </div>
                             </div>
+                        </div>
+                        <div className="btn_ct">
+                            <MdPreview />  Xem chi tiết
                         </div>
                     </div>
                 </>

@@ -1,0 +1,116 @@
+.top_phieu_kham {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 10px;
+    position: relative;
+}
+
+.line_ct_phieu_kham {
+    border: 1.5px dashed #f0f2f5;
+    width: 280px;
+    margin: 0 auto;
+}
+
+.top_phieu_kham::after,
+.top_phieu_kham::before {
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background-color: #e8f2f7;
+    border-radius: 50%;
+}
+
+.top_phieu_kham::after {
+    top: -15px;
+    left: -15px;
+}
+
+.top_phieu_kham::before {
+    top: -15px;
+    right: -15px;
+}
+
+.top_phieu_kham::after,
+.top_phieu_kham::before {
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background-color: #e8f2f7;
+    border-radius: 50%;
+}
+
+.med_des {
+    text-align: center;
+    margin-top: -20px;
+    font-size: 11px;
+    color: #3e3e3e;
+    padding-bottom: 30px;
+    border-bottom: 1.5px dashed #f0f2f5;
+}
+
+.med_des::after,
+.med_des::before {
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background-color: #e8f2f7;
+    border-radius: 50%;
+}
+
+.med_des::after {
+    bottom: -15px;
+    left: -15px;
+}
+
+.med_des::before {
+    bottom: -15px;
+    right: -15px;
+}
+
+.ctpk {
+    background-color: #e8f2f7;
+}
+
+.top_phieu_kham h2 {
+    font-size: 18px;
+    color: #3e3e3e;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.show_status {
+    background-color: #f26f21;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.infor_kham_line {
+    display: flex;
+    justify-content: space-between;
+}
+
+.infor_kham {
+    width: 95%;
+    padding: 10px;
+}
+
+.infor_kham_line p {
+    line-height: 1.3rem;
+    margin-bottom: 5px;
+}
+
+.infor_kham_line p:first-child {
+    font-size: 13px;
+    color: #3e3e3e;
+}

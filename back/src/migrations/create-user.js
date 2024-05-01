@@ -32,13 +32,16 @@ module.exports = {
       },
       avatar: {
         type: Sequelize.STRING,
-        defaultValue:"https://res.cloudinary.com/dw9w3kc49/image/upload/v1696383687/user/user_defaut.png"
+        defaultValue: "https://res.cloudinary.com/dw9w3kc49/image/upload/v1696383687/user/user_defaut.png"
       },
       role_id: {
         type: Sequelize.STRING,
-        defaultValue: "R4" 
+        defaultValue: "R4"
       },
       id_chuyenKhoa: {
+        type: Sequelize.STRING,
+      },
+      id_benhVien: {
         type: Sequelize.STRING,
       },
       resetToken: {

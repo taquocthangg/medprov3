@@ -27,7 +27,7 @@ import Them_Moi_Chuyen_Khoa from './../pages/Them_Moi_Chuyen_Khoa';
 import GioiThieu from './../pages/GioiThieu';
 import Quytrinh from './../pages/QuyTrinh';
 import DangKy from './FromDangKy/DangKy';
-export default function AppRouter({ setInforUser, setRole_id, inforUser }) {
+export default function AppRouter({ setInforUser, setRole_id, inforUser, screenWidth }) {
     return (
 
         <Routes>
@@ -56,7 +56,7 @@ export default function AppRouter({ setInforUser, setRole_id, inforUser }) {
             <Route path='dang-ki' element={<DangKi />} />
             <Route path='quen-mat-khau' element={<QuenMatKhau />} />
             <Route path='benh-vien/:getId' element={<BenhVien />} />
-            <Route path='user' element={<User inforUser={inforUser} />} />
+            <Route path='user' element={<User screenWidth={screenWidth} inforUser={inforUser} setInforUser={setInforUser} />} />
 
             <Route path='benh-vien/:getId/them-moi-chuyen-khoa/:getId' element={<Them_Moi_Chuyen_Khoa />} />
             {/* <Route path='benh-vien/:getId/thembacsi/:getId' element={<Insert_Doctor />} />

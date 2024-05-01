@@ -17,7 +17,9 @@ export const getDocter = async (req, res) => {
 export const getAllBacSiByChuyenKhoa = async (req, res) => {
     try {
         const { id_chuyenKhoa } = req.params;
-        const result = await services.getBacSiByChuyenKhoa({ id_chuyenKhoa });
+        const { id_benhVien } = req.body;
+        console.log(id_benhVien)
+        const result = await services.getBacSiByChuyenKhoa({ id_chuyenKhoa, id_benhVien });
 
         if (result.err === 0) {
             res.status(200).json(result);
@@ -35,12 +37,12 @@ export const themMoiBacSi = async (req, res) => {
         const { id_chuyenKhoa } = req.params;
         const fileData = req.file;
         const avatar = fileData?.path;
-        const { name, email, password, gioiTinh, sdt, diaChi, namSinh, role_id, description } = req.body
+        const { name, email, password, gioiTinh, sdt, diaChi, namSinh, role_id, description, id_benhVien } = req.body
         if (!name) return res.status(400).json({
             err: 1,
             mess: "Điền đầy đủ thông tin"
         })
-        const response = await services.themBacSi({ name, email, password, gioiTinh, sdt, diaChi, namSinh, role_id, description, id_chuyenKhoa, avatar })
+        const response = await services.themBacSi({ name, email, password, gioiTinh, sdt, diaChi, namSinh, role_id, description, id_chuyenKhoa, avatar, id_benhVien })
 
         return res.status(200).json(response)
     }

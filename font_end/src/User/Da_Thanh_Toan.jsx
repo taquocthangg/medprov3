@@ -3,6 +3,7 @@ import null_data from '../img/null-data.webp'
 import './css/phieu_kham.css'
 import { FaBriefcaseMedical, FaHandHoldingMedical, FaHospitalAlt } from 'react-icons/fa'
 import { MdOutlineAccessTimeFilled, MdOutlineDateRange } from 'react-icons/md'
+import { Link } from 'react-router-dom'
 export default function Da_Thanh_Toan({ inforUser, data }) {
 
     return (
@@ -70,7 +71,9 @@ export default function Da_Thanh_Toan({ inforUser, data }) {
                             </div>
                             <div className="box_profile_avatar">
                                 <div className="btn_phieu_kham">
-                                    Đặt khám thành công
+                                    <Link to='/chi-tiet-phieu-kham/1'>
+                                        Đặt khám thành công
+                                    </Link>
                                 </div>
                             </div>
                         </div>

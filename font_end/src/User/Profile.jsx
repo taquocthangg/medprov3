@@ -5,7 +5,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { BiSolidEdit } from 'react-icons/bi';
 import Model_Update_User from './Model_Update_User.jsx';
 import { MdEmail } from 'react-icons/md';
-export default function Profile({ inforUser }) {
+export default function Profile({ inforUser, setInforUser }) {
     console.log(inforUser)
     const [openModal, setOpenModal] = useState();
     const showModal = () => {
@@ -89,7 +89,7 @@ export default function Profile({ inforUser }) {
                     </div>
                 </div>
             </div>
-            <Model_Update_User setOpenModal={setOpenModal} openModal={openModal} inforUser={inforUser} />
+            <Model_Update_User setOpenModal={setOpenModal} openModal={openModal} inforUser={inforUser} setInforUser={setInforUser} />
         </div>
     )
 }

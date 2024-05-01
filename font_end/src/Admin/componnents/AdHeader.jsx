@@ -1,30 +1,37 @@
 import React, { useContext, useState } from 'react'
 import '../../css/Admin_header.css'
-import { Avatar, ConfigProvider, Dropdown, Flex, Image, Input, Space } from 'antd'
+import { Avatar, ConfigProvider, Dropdown, Flex, Image, Input, Space, message } from 'antd'
 import icon_logo from '../../img/logo/logo.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Tooltip } from 'react-tooltip';
 import { DownOutlined, BellOutlined } from '@ant-design/icons';
 import { dataNoticeIcon } from '../../data'
 import QueryAdmin from '../service/QueryContext'
+import { logout } from '../../api/auth'
 export default function AdHeader() {
     const [focusBtnBell, setFocusBtnBell] = useState(true)
-    const {QueryValue,setQueryValue}=useContext(QueryAdmin)
-    // console.log(focusBtnBell)
+    const { QueryValue, setQueryValue } = useContext(QueryAdmin)
+    const navigte = useNavigate()
+
+    const handleLogout = () => {
+        logout()
+        message.success('Đã đăng xuất !!!')
+        navigte('/')
+    };
     const items = [
         {
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
+                <Link to='/'>
                     Thông tin cá nhân
-                </a>
+                </Link>
             ),
             key: '0',
         },
         {
             label: (
-                <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
+                <p onClick={handleLogout}>
                     Đăng xuất
-                </a>
+                </p>
             ),
             key: '1',
         },
@@ -58,7 +65,7 @@ export default function AdHeader() {
                             placeholder="Search"
                             //onSearch={onSearch}
                             style={{ width: '50%' }}
-                            onChange={(e)=>setQueryValue(e.target.value)}
+                            onChange={(e) => setQueryValue(e.target.value)}
                             allowClear
                         />
                     </ConfigProvider>
