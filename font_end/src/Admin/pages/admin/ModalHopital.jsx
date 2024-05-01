@@ -21,6 +21,7 @@ const beforeUpload = (file) => {
     return isJpgOrPng && isLt2M;
 };
 export default function ModalHopital({ openModal, setOpenModal, dataHopitals, dataHopital, setDataHospital }) {
+    console.log()
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
     const [btnOk, setBtnOk] = useState(false)
@@ -41,11 +42,12 @@ export default function ModalHopital({ openModal, setOpenModal, dataHopitals, da
                     sdt: dataUpdate.sdt || item.sdt,
                     email: dataUpdate.email || item.email
                 }
+            
                 return { ...item, ...newData }
             }
             return item;
         })
-        const res = await updateUser(updateDate)
+        const res = await updateUser(dataHopital?.id,dataUpdate)
         console.log(res)
         if (res?.message === "Cập nhật thông tin người dùng thành công") {
             setDataHospital(updateDate)

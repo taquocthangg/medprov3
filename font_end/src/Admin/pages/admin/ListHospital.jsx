@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import '../../../css/admin/Insert_admin.css'
-import { Tooltip, Avatar, Flex, ConfigProvider, Table, Button, Modal, message } from 'antd';
+import { Tooltip, Avatar, Flex, ConfigProvider, Table, Button, Modal, message, Pagination } from 'antd';
 import QueryAdmin from './../../service/QueryContext';
 import { dataHospital } from '../../../data_fake/dataHospital';
 import { EditOutlined, DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
@@ -10,14 +10,18 @@ const screenWidth = window.innerWidth
 const { confirm } = Modal;
 export default function ListHospital() {
   const [data, setDataHospital] = useState()
+  const [totalPage, setTotalPage] = useState(1)
   const [openModal, setOpenModal] = useState();
   const [dataModal, setDataModal] = useState();
+  const [loading, setLoading] = useState(false)
   const [queryHospital, setQueryHospital] = useState('')
   const { value } = useContext(QueryAdmin)
-  const handleGetDataHospital = async () => {
-    const data= await getAllBenhVien()
-
+  const handleGetDataHospital = async (page) => {
+    setLoading(true)
+    const data = await getAllBenhVien({ page: page })
     setDataHospital(data?.benhvien?.rows)
+    setTotalPage(data?.benhvien?.count)
+    setLoading(false)
   }
   const handleDeleteHospital = (idHospital) => {
     const indexToDelete = data.findIndex(hospital => hospital.id === idHospital);
@@ -155,9 +159,13 @@ export default function ListHospital() {
       width: '12%',
     },
   ];
+  const onShowSizeChange = (current, pageSize) => {
+    console.log(current)
+  }
   useEffect(() => {
-    handleGetDataHospital()
+    handleGetDataHospital(1)
   }, [])
+
 
   return (
     <div style={{ padding: '25px 100px', width: `${screenWidth}` }} className='container_addBenhVien' >
@@ -181,12 +189,31 @@ export default function ListHospital() {
             },
           }}
         >
-          <Table columns={columns}
+          <Table
+            columns={columns}
             dataSource={data}
-            pagination={{ pageSize: 5 }}
+            loading={loading}
+            pagination={{
+              total: totalPage,
+              pageSize: 5,
+              // current:totalPage,
+              // defaultPageSize:totalPage,
+              onChange: (page) => {
+                handleGetDataHospital(page)
+              }
+            }
+
+            }
             bordered={true}
             style={{ boxShadow: '2px 2px 10px 0 rgba(0, 0, 0, 0.3)' }}
           />
+          {/* <Pagination
+            showSizeChanger
+            onShowSizeChange={onShowSizeChange}
+            defaultCurrent={1}
+            total={totalPage}
+          /> */}
+
         </ConfigProvider>
         <ModalHopital dataHopital={dataModal} dataHopitals={data} setDataHospital={setDataHospital} setOpenModal={setOpenModal} openModal={openModal} />
 

@@ -38,6 +38,7 @@ export const regiter = async (data) => {
 }
 
 export const updateUser = async (idUser, dataUser) => {
+    console.log(idUser,dataUser)
     return handleRequest(async () => {
         return await api.post(`/auth/updateUser/${idUser}`,dataUser)
     })
@@ -99,9 +100,9 @@ export const layLichsukham = async (getLichSuKhamById,data) => {
     })
 }
 
-export const getAllBenhVien = async () => {
+export const getAllBenhVien = async (params) => {
     return handleRequest(async () => {
-        return await api.get(`/getAllBenhVien`)
+        return await api.get(`/getAllBenhVien`,{params})
     })
 }
 

@@ -31,7 +31,8 @@ export const getBenhVien = ({ page, limit, order, name, sex, address, ...query }
         resolve({
             err: 0,
             mess: 'Lấy thông tin bệnh viện thành công',
-            benhvien
+            benhvien,
+            totalPage:+benhvien?.count/fLimit
         });
     } catch (error) {
         reject(error);
