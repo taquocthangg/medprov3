@@ -53,7 +53,26 @@ export const updateUserController = async (req, res) => {
     }
 };
 
+export const updateChuyenKhoaControll = async (req, res) => {
+    try {
+        const fileData = req.file;
 
+        const image = fileData?.path;
+        const { id_chuyenKhoa } = req.params;
+        console.log(id_chuyenKhoa)
+        const { name, description, id_benhVien, price } = req.body;
+        const result = await services.updateChuyenKhoa({ id_chuyenKhoa, name, description, id_benhVien, price });
+
+
+        if (result.err === 0) {
+            res.status(200).json({ message: result.mess });
+        } else {
+            res.status(400).json({ message: result.mess });
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Lỗi server' });
+    }
+};
 export const deleteUsers = async (req, res) => {
     try {
         const { userId } = req.params;

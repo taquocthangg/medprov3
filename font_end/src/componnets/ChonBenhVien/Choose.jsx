@@ -3,6 +3,7 @@ import './Choose.css'
 import { Link, useNavigate } from 'react-router-dom';
 import api from './../../pages/api'
 import { isAuthenticated } from './../../pages/auth';
+import { getAllBenhVien } from '../../api';
 
 const Choose = () => {
   const [query, setQuery] = useState("");
@@ -13,23 +14,24 @@ const Choose = () => {
   const handleGetId = (id) => {
 
   }
-  const login = () => {
-    alert("Vui Lòng Đăng Nhập Để Tiếp Tục !!!")
-    history('/login')
-  }
+  // const login = () => {
+  //   alert("Vui Lòng Đăng Nhập Để Tiếp Tục !!!")
+  //   history('/login')
+  // }
   useEffect(() => {
-    api
-      .get("/getAllBenhVien")
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await getAllBenhVien();
         console.log(response);
-        setData_BV(response.data.users);
+        setData_BV(response.benhvien.rows);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-      })
-      .catch((error) => {
-        console.error("Lỗi:", error);
-      });
+    fetchData();
   }, []);
-  console.log(data_BV)
+
   return (
 
     <main>
@@ -64,7 +66,8 @@ const Choose = () => {
                   </div>
                 </Link>)
                 :
-                login()
+                // login()
+                null
               }
             </li>
           ))}

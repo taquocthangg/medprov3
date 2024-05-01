@@ -46,3 +46,37 @@ export const getChuyenKhoa = (id_benhVien) => new Promise(async (resolve, reject
         reject(error);
     }
 });
+
+
+export const updateChuyenKhoa = async ({ id_chuyenKhoa, name, description, id_benhVien, price }) => {
+    try {
+        const updateValues = {
+            name: name || undefined,
+            description: description || undefined,
+            id_benhVien: id_benhVien || undefined,
+            price: price || undefined,
+        };
+
+        // Lọc bỏ các giá trị undefined để giữ nguyên giá trị nếu không được cung cấp
+        const filteredUpdateValues = Object.fromEntries(Object.entries(updateValues).filter(([key, value]) => value !== undefined));
+        const response = await db.Sescription.update(
+            filteredUpdateValues,
+            {
+                where: { id: id_chuyenKhoa },
+            }
+        );
+        if (response === 0) {
+            return {
+                err: 1,
+                mess: 'Chuyên khoa không tồn tại',
+            };
+        }
+
+        return {
+            err: 0,
+            mess: 'Cập nhật chuyên khoa thành công',
+        };
+    } catch (e) {
+        throw e;
+    }
+};

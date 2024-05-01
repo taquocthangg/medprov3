@@ -8,8 +8,7 @@
 */
 import React, { useEffect, useState } from 'react';
 import './Header.css'
-import { Link } from 'react-scroll';
-import { useLocation } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 import { FiSmartphone } from 'react-icons/fi';
 import { BiLogIn } from 'react-icons/bi';
 import { AiFillHome } from "react-icons/ai"
@@ -25,6 +24,8 @@ import { isAuthenticated, decodeAccessToken } from '../../pages/auth';
 import api from '../../pages/api';
 import { FaBars } from "react-icons/fa";
 import { GrClose } from "react-icons/gr";
+import { Avatar, Dropdown, Flex, message } from 'antd';
+import { logout } from '../../api/auth';
 const Header = ({ inforUser }) => {
   const userIsAuthenticated = isAuthenticated();
   const [click, setClick] = useState(false);
@@ -39,7 +40,7 @@ const Header = ({ inforUser }) => {
   const isUpdate_Chuyen_Khoa = pathname.includes('/update_Chuyen_Khoa')
   const idDoc_tor = pathname.includes('/bac-si');
   const quen = pathname.includes('/quen-mat-khau')
-
+  const navigte = useNavigate()
   if (pathname === "/login" || pathname === "/QuanLyBV" || pathname === "admin/Update_User_Detail/:getId" || pathname === "/QuanLyNews" || pathname === "/QuanLyUsert" || pathname === "/phong-kham-phong-mach/dang-nhap" || pathname === "/phong-kham-phong-mach/dang-ky" || pathname === "/admin" || pathname === "/benh-vien" || pathname === '/dang-ki') return null;
   if (isUpdateUserDetailPage || isUpdate_Patent_Detail || idDoc_tor || isInsert_Patent_Detail || benhVien || isIsert_Doctor || isUpdate_Doctor || isUpdate_Chuyen_Khoa || quen) {
     return (
@@ -49,7 +50,32 @@ const Header = ({ inforUser }) => {
       </div>
     );
   }
-
+  const handleLogout = () => {
+    logout()
+    message.success('Đã đăng xuất !!!')
+    navigte('/')
+  };
+  const items = [
+    {
+      label: (
+        <Link to='/user'>
+          Thông tin cá nhân
+        </Link>
+      ),
+      key: '0',
+    },
+    {
+      label: (
+        <p onClick={handleLogout}>
+          Đăng xuất
+        </p>
+      ),
+      key: '1',
+    },
+    {
+      type: 'divider',
+    },
+  ];
 
 
   return (
@@ -69,13 +95,35 @@ const Header = ({ inforUser }) => {
                 </div>
               </Link>
               {userIsAuthenticated ? (
-                <div className="login item_header">
-                  <NavLink
+                <div >
+                  {/* <NavLink
 
                     to="/user"
                   >
                     Xin chào {inforUser ? inforUser.name : "Ok"}
-                  </NavLink>
+                  </NavLink> */}
+                  <Flex gap={10} align='center'>
+
+                    <Dropdown
+                      menu={{ items, }}
+                    >
+                      <a onClick={(e) => e.preventDefault()}>
+                        <Flex gap={10} style={{ marginRight: 10 }}>
+                          <Avatar
+                            size={'large'}
+                            src={inforUser?.avatar}
+                          />
+
+                          <Flex align='center' gap={5} className='box_infAdminUser' >
+                            <p >{inforUser ? inforUser.name : 'Khách'}</p>
+                            {/* <DownOutlined /> */}
+                          </Flex>
+
+                        </Flex>
+                      </a>
+
+                    </Dropdown>
+                  </Flex>
                 </div>
               ) : (
                 <div className="login item_header">

@@ -27,3 +27,26 @@
     border-radius: 8px;
     font-weight: 600;
 }
+
+/* .btn_ct {
+    cursor: pointer;
+    background-color: #3de68c;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    float: inline-end;
+    margin-top: -0px;
+} */
+.btn_ct {
+    float: right;
+    margin-top: -25px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: #b3b3b3;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}

@@ -41,11 +41,13 @@ export const getDotor = ({ page, limit, order, name, sex, address, ...query }) =
     }
 });
 
-export const getBacSiByChuyenKhoa = ({ id_chuyenKhoa }) => new Promise(async (resolve, reject) => {
+export const getBacSiByChuyenKhoa = ({ id_chuyenKhoa, id_benhVien }) => new Promise(async (resolve, reject) => {
     try {
+        const querySearch = id_chuyenKhoa ? id_chuyenKhoa : id_benhVien
+        const search = id_chuyenKhoa ? "id_chuyenKhoa" : "id_benhVien"
         const response = await db.User.findAll({
             where: {
-                id_chuyenKhoa: id_chuyenKhoa
+                [search]: querySearch
             }
         });
 
@@ -62,14 +64,14 @@ export const getBacSiByChuyenKhoa = ({ id_chuyenKhoa }) => new Promise(async (re
         resolve({
             err: 0,
             mess: response ? 'Lấy thông tin bác sĩ thành công' : "Lấy thông tin bác sĩ không thành công",
-            users
+            users: response
         });
     } catch (error) {
         reject(error);
     }
 });
 
-export const themBacSi = ({ name, email, password, gioiTinh, sdt, diaChi, namSinh, id_chuyenKhoa, avatar }) => new Promise(async (resolve, reject) => {
+export const themBacSi = ({ name, email, password, gioiTinh, sdt, diaChi, namSinh, id_chuyenKhoa, avatar, id_benhVien }) => new Promise(async (resolve, reject) => {
     try {
         const role_id = "R3"
         const user = await db.User.findOrCreate({
@@ -83,7 +85,8 @@ export const themBacSi = ({ name, email, password, gioiTinh, sdt, diaChi, namSin
                 diaChi,
                 namSinh,
                 role_id,
-                avatar
+                avatar,
+                id_benhVien
             },
         });
         if (id_chuyenKhoa) {

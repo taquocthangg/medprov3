@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Avatar, Button, Modal, Col, Row, Flex, Input, ConfigProvider, message, Radio, Dropdown, DatePicker, Upload } from 'antd';
 import viVN from 'antd/es/locale/vi_VN';
 import { LoadingOutlined, PlusOutlined, DownOutlined } from '@ant-design/icons';
+import { getCurentUser, getUser, updateUser } from '../api';
 const getBase64 = (img, callback) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
@@ -19,7 +20,7 @@ const beforeUpload = (file) => {
     return isJpgOrPng && isLt2M;
 };
 
-export default function Model_Update_User({ openModal, setOpenModal, inforUser }) {
+export default function Model_Update_User({ openModal, setOpenModal, inforUser, setInforUser }) {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
     const [dataUpdate, setDateUpdate] = useState({
@@ -32,10 +33,14 @@ export default function Model_Update_User({ openModal, setOpenModal, inforUser }
         namSinh: "",
         password: ""
     })
-    console.log(dataUpdate)
-
-    const handleOk = () => {
+    const handleOk = async () => {
+        const response = await updateUser(inforUser.id, dataUpdate)
+        message.success(response.message)
         setOpenModal(false);
+        const inforUser_updater = await getCurentUser(inforUser.id)
+        setInforUser(inforUser_updater.user)
+        const test = await getUser({ name: 'th', page: 2 })
+        console.log(test)
     };
     const handleCancel = () => {
         setOpenModal(false);
