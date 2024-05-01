@@ -3,34 +3,48 @@ import { Avatar, Button, Modal, Col, Row, Flex, Input, ConfigProvider, message }
 
 import '../../../../css/admin/Insert_admin.css'
 import { formatPrice } from '../../../../Common/dataFortmat';
-export default function ModalchuyenKhoa({ openModal, setOpenModal, dataHopitals, dataHopital, setDataHospital}) {
-
+import { suaChuyenKhoa } from '../../../../api';
+export default function ModalchuyenKhoa({ openModal, setOpenModal, dataHopitals, dataHopital, setDataHospital }) {
+    const idHopital = localStorage.getItem("idUser")
     const [dataUpdate, setDateUpdate] = useState({
         name: "",
         description: "",
         price: "",
+        id_benhVien:idHopital
     })
     console.log(dataUpdate)
-    const handleUpdate = () => {
+    const handleUpdate = async () => {
         const updateDate = dataHopitals.map((item) => {
             if (item?.id === dataHopital?.id) {
                 const newData = {
                     name: dataUpdate.name || item.name,
                     description: dataUpdate.description || item.description,
                     price: dataUpdate.price || item.price,
-                   
+
                 }
                 return { ...item, ...newData }
             }
             return item;
         })
-        setDataHospital(updateDate)
-        setDateUpdate({
-            name: "",
-            description: "",
-            price: "",
-        })
-        message.success("Cập nhật thông tin thành công")
+        const response = await suaChuyenKhoa(dataHopital?.id, dataUpdate)
+        console.log(response)
+        if (response?.message === "Cập nhật chuyên khoa thành công") {
+            message.success(response?.message)
+            setDataHospital(updateDate)
+            setDateUpdate({
+                name: "",
+                description: "",
+                price: "",
+                id_benhVien:idHopital
+            })
+            setOpenModal(false);
+        }
+        else {
+            message.warning(response?.message)
+            setOpenModal(true)
+        }
+
+
     }
     const handleOk = () => {
         handleUpdate()
@@ -114,7 +128,7 @@ export default function ModalchuyenKhoa({ openModal, setOpenModal, dataHopitals,
 
 
                 </Row>
-               
+
             </Modal>
 
         </ConfigProvider>

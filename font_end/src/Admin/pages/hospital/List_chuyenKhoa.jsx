@@ -142,7 +142,6 @@ export default function List_chuyenKhoa() {
   ];
   useEffect(() => {
     handleGetDataHopital();
-
   }, [])
 
   return (

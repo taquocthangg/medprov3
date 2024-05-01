@@ -9,6 +9,7 @@ import { dataChuyenKhoa } from '../../../data_fake/dataChuyenKhoa'
 import { formatDate } from '../../../Common/dataFortmat';
 import { dataDoctor } from '../../../data_fake/dataDoctor';
 import ModalDoctor from './modalHospital/ModalDoctor';
+import { deleteUser, getAllBacSiByBenhVien, getBacSiByChuyenKhoa } from '../../../api';
 const { confirm } = Modal;
 const screenWidth = window.innerWidth
 export default function List_bacSi() {
@@ -17,16 +18,25 @@ export default function List_bacSi() {
   const [dataModal, setDataModal] = useState();
   const [queryHospital, setQueryHospital] = useState('')
   const { value } = useContext(QueryAdmin)
-  const handleGetDataHospital = () => {
-    setDataHospital(dataDoctor)
+  const id_benhVien = localStorage.getItem("idUser")
+  const handleGetDataHospital = async () => {
+    const response =await getAllBacSiByBenhVien(id_benhVien)
+    setDataHospital(response?.users)
   }
-  const handleDeleteHospital = (idHospital) => {
+  const handleDeleteHospital = async (idHospital) => {
     const indexToDelete = data.findIndex(hospital => hospital.id === idHospital);
     if (indexToDelete !== -1) {
-      const newData = [...data]; // Tạo một bản sao của mảng dataHospital
-      newData.splice(indexToDelete, 1);
-      setDataHospital(newData);
-      message.success("Xóa thành công bệnh viện")
+      const response = await deleteUser(idHospital)
+      if(response?.mess==="Xóa user thành công"){
+        const newData = [...data]; // Tạo một bản sao của mảng dataHospital
+        newData.splice(indexToDelete, 1);
+        setDataHospital(newData);
+        message.success("Xóa thông tin bác sĩ thành công")
+      }
+      else{
+        message.warning(response?.mess)
+      }
+      
     }
   }
   const showDeleteConfirm = (idHospital) => {
@@ -146,20 +156,7 @@ export default function List_bacSi() {
         </Tooltip>
       ),
     },
-    {
-      title: 'Chuyên khoa',
-      dataIndex: 'chuyenKhoa',
-      key: 'chuyenKhoa',
-      align: 'center',
-      ellipsis: {
-        showTitle: false,
-      },
-      render: (chuyenKhoa) => (
-        <Tooltip placement="topLeft" title={chuyenKhoa}>
-          {chuyenKhoa}
-        </Tooltip>
-      ),
-    },
+
     {
       title: 'Chức Năng',
       dataIndex: 'Edit',
@@ -240,3 +237,4 @@ export default function List_bacSi() {
     </div>
   )
 }
+// mày đợi chút t cho thủy nó đi ngủ cái sau ae mình đóng tới sáng nhá

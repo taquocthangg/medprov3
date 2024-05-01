@@ -51,6 +51,7 @@ export const themchuyenkhoa = async (id_benhVien, data) => {
 }
 
 export const thembacsi = async (id_chuyenKhoa, data) => {
+    console.log(id_chuyenKhoa)
     return handleRequest(async () => {
         return await api.post(`auth/thembacsi/${id_chuyenKhoa}`,data)
     })
@@ -97,6 +98,12 @@ export const themLichsukham = async (scheduleId,data) => {
 export const layLichsukham = async (getLichSuKhamById,data) => {
     return handleRequest(async () => {
         return await api.post(`auth/laysulichkham/${getLichSuKhamById}`,data)
+    })
+}
+
+export const suaChuyenKhoa = async (idChuyenKhoa,data) => {
+    return handleRequest(async () => {
+        return await api.post(`auth/suaChuyenKhoa/${idChuyenKhoa}`,data)
     })
 }
 
@@ -172,11 +179,17 @@ export const getCurentUser = async (idUser) => {
     })
 }
 
-export const getBacSiByChuyenKhoa = async (id_chuyenKhoa) => {
+export const getBacSiByChuyenKhoa = async (id_chuyenKhoa,data) => {
+   
     return handleRequest(async () => {
-        return await api.get(`auth/getBacSiByChuyenKhoa/${id_chuyenKhoa}`)
+        return await api.post(`auth/getBacSiByChuyenKhoa/${id_chuyenKhoa}`,data)
     })
 }
+export const getAllBacSiByBenhVien = async (id_benhVien) => {
+     return handleRequest(async () => {
+         return await api.post(`auth/getBacSiByChuyenKhoa/`,{id_benhVien})
+     })
+ }
 
 export const getChuyenKhoas = async (id_benhVien) => {
     return handleRequest(async () => {
