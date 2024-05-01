@@ -13,13 +13,13 @@ const Choose = () => {
   const handleGetId = (id) => {
 
   }
-  const login = () =>{
+  const login = () => {
     alert("Vui Lòng Đăng Nhập Để Tiếp Tục !!!")
     history('/login')
   }
   useEffect(() => {
     api
-      .get("/auth/getAllBenhVien")
+      .get("/getAllBenhVien")
       .then((response) => {
         console.log(response);
         setData_BV(response.data.users);
@@ -45,7 +45,7 @@ const Choose = () => {
           />
         </div>
         <ul className="select__hopital-list">
-          {data_BV.map(choosehopital => (
+          {data_BV?.map(choosehopital => (
             <li className="listItem box_shawdown bob" key={choosehopital.id} onClick={handleGetId(choosehopital.id)} >
               {checkLogin ?
                 (<Link to={`chon-chuyen-khoa/${choosehopital.id}`}>

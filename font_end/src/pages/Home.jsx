@@ -25,13 +25,7 @@ import { isAuthenticated, logout, handleAuthentication } from './auth';
 const userId = localStorage.getItem('userId');
 
 const Home = () => {
-  const navigate = useNavigate();
 
-  // Kiểm tra xem người dùng đã đăng nhập chưa
-  const userIsAuthenticated = isAuthenticated();
-  useEffect(() => {
-    handleAuthentication(userIsAuthenticated, navigate)
-  }, [userIsAuthenticated, navigate]);
   // Thiết lập silder home page
   const settings = {
     dots: false,
@@ -100,7 +94,7 @@ const Home = () => {
                 {CHOOSE.map((choose) => {
                   return (
                     <div className="choose bob" key={choose.id}>
-                      <Link to={`${userId} /chon-benh-vien`}>
+                      <Link to={`/chon-benh-vien`}>
                         <img src={choose.img} alt="" />
                         <p>{choose.name}</p>
                       </Link>
