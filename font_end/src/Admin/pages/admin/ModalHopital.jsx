@@ -48,7 +48,6 @@ export default function ModalHopital({ openModal, setOpenModal, dataHopitals, da
             return item;
         })
         const res = await updateUser(dataHopital?.id,dataUpdate)
-        console.log(res)
         if (res?.message === "Cập nhật thông tin người dùng thành công") {
             setDataHospital(updateDate)
             message.success(res?.message)

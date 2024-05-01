@@ -5,7 +5,7 @@ import QueryAdmin from './../../service/QueryContext';
 import { dataHospital } from '../../../data_fake/dataHospital';
 import { EditOutlined, DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import ModalHopital from './ModalHopital';
-import { getAllBenhVien } from '../../../api';
+import { deleteUser, getAllBenhVien } from '../../../api';
 const screenWidth = window.innerWidth
 const { confirm } = Modal;
 export default function ListHospital() {
@@ -23,13 +23,20 @@ export default function ListHospital() {
     setTotalPage(data?.benhvien?.count)
     setLoading(false)
   }
-  const handleDeleteHospital = (idHospital) => {
+  const handleDeleteHospital = async (idHospital) => {
     const indexToDelete = data.findIndex(hospital => hospital.id === idHospital);
     if (indexToDelete !== -1) {
-      const newData = [...data]; // Tạo một bản sao của mảng dataHospital
-      newData.splice(indexToDelete, 1);
-      setDataHospital(newData);
-      message.success("Xóa thành công bệnh viện")
+      const response = await deleteUser(idHospital)
+      console.log(response)
+      if (response?.mess === "Xóa user thành công") {
+        const newData = [...data]; // Tạo một bản sao của mảng dataHospital
+        newData.splice(indexToDelete, 1);
+        setDataHospital(newData);
+        message.success("Xóa thành công bệnh viện")
+      }
+      else{
+        message.warning(response?.mess)
+      }
     }
   }
   const showDeleteConfirm = (idHospital) => {
@@ -159,9 +166,6 @@ export default function ListHospital() {
       width: '12%',
     },
   ];
-  const onShowSizeChange = (current, pageSize) => {
-    console.log(current)
-  }
   useEffect(() => {
     handleGetDataHospital(1)
   }, [])
@@ -194,16 +198,12 @@ export default function ListHospital() {
             dataSource={data}
             loading={loading}
             pagination={{
-              total: totalPage,
+              total: totalPage, // Tong so ban ghi
               pageSize: 5,
-              // current:totalPage,
-              // defaultPageSize:totalPage,
               onChange: (page) => {
                 handleGetDataHospital(page)
               }
-            }
-
-            }
+            }}
             bordered={true}
             style={{ boxShadow: '2px 2px 10px 0 rgba(0, 0, 0, 0.3)' }}
           />

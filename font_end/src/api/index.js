@@ -192,7 +192,7 @@ export const huylichkham = async (id_lichkham) => {
 
 export const deleteUser = async (idUser) => {
     return handleRequest(async () => {
-        return await api.delete(`/getCurentUser/${idUser}`)
+        return await api.delete(`auth/xoaUser/${idUser}`)
     })
 }
 

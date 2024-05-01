@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Row, Flex, Input, Button, Upload, message, ConfigProvider, Radio, DatePicker, Space, Dropdown } from 'antd';
 import { LoadingOutlined, PlusOutlined, DownOutlined } from '@ant-design/icons';
 import '../../../css/admin/Insert_admin.css'
 import viVN from 'antd/es/locale/vi_VN';
 import { dataChuyenKhoa } from '../../../data_fake/dataChuyenKhoa';
+import { getChuyenKhoas, thembacsi } from '../../../api';
 const screenWidth = window.innerWidth
 const getBase64 = (img, callback) => {
   const reader = new FileReader();
@@ -26,6 +27,7 @@ export default function Add_bacSi() {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
+  const [dataSescriptions, setDataSescriptions] = useState()
   const [dataHopital, setDataHopital] = useState({
     name: "",
     email: "",
@@ -39,25 +41,31 @@ export default function Add_bacSi() {
     chuyenKhoa: "",
     idchuyenKhoa: "",
   });
-  console.log(dataHopital)
+  const [dataUser, setDataUser] = useState()
   const onChangeDate = (date, dateString) => {
     handleChangeDataUser('namSinh', dateString);
   };
-  const handlePostData = () => {
-    if (dataHopital?.name && dataHopital.email && dataHopital.password && dataHopital.sdt && dataHopital.namSinh) {
-      message.success("Thêm bác sĩ thành công")
-      setDataHopital({
-        name: "",
-        email: "",
-        password: "",
-        checkPassword: "",
-        sdt: "",
-        diaChi: "",
-        avatar: "",
-        gioiTinh: "Nam",
-        namSinh: "",
-      })
-      console.log(dataHopital)
+  const handlePostData = async () => {
+    const idHopital = localStorage.getItem("idUser")
+    if (dataHopital?.name && dataHopital?.email && dataHopital?.password && dataHopital?.sdt && dataHopital?.namSinh && dataHopital?.checkPassword === dataHopital?.password) {
+      const response = await thembacsi(idHopital, dataHopital)
+      if (response?.mess === "Đăng ký thành công") {
+        message.success(response?.mess)
+        setDataHopital({
+          name: "",
+          email: "",
+          password: "",
+          checkPassword: "",
+          sdt: "",
+          diaChi: "",
+          avatar: "",
+          gioiTinh: "Nam",
+          namSinh: "",
+        })
+      }
+      else {
+        message.warning(response?.mess)
+      }
     }
     else {
       message.warning("Vui lòng điền đủ thông tin ")
@@ -104,7 +112,12 @@ export default function Add_bacSi() {
       </div>
     </button>
   );
-  const items = dataChuyenKhoa?.map(item => {
+  const handleGetDataSescription = async () => {
+    const idHopital = localStorage.getItem("idUser")
+    const response = await getChuyenKhoas(idHopital)
+    setDataSescriptions(response?.chuyenkhoa)
+  }
+  const items = dataSescriptions?.map(item => {
     return {
       key: item?.id,
       label: item?.name
@@ -116,19 +129,23 @@ export default function Add_bacSi() {
     handleChangeDataUser("chuyenKhoa", dataFitelCK[0].label)
   };
 
+  useEffect(() => {
+    handleGetDataSescription()
+  }, [])
+
   return (
     <div style={{ padding: '25px 100px', width: `${screenWidth}` }} className='container_addBenhVien'>
       <div className="content_addBenhVien">
         <p className='title_insertHopital'>THÊM THÔNG TIN BÁC SĨ</p>
         <Row>
-          <Col span={6} style={{  display: 'flex', flexDirection: 'column', alignItems: 'center' }}  >
+          <Col span={6} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}  >
             <Flex vertical className='form_InsertHopital' >
               <p className='lable_InsertHopital' > Nhập địa chỉ email<sup>*</sup></p>
               <Input
                 placeholder='Nhập email'
                 onChange={(e) => handleChangeDataUser("email", e.target.value)}
                 className='inout_InsertHopital'
-
+                value={dataHopital?.email}
               />
             </Flex>
             <Flex vertical className='form_InsertHopital'>
@@ -137,6 +154,7 @@ export default function Add_bacSi() {
                 placeholder='Nhập mật khẩu'
                 className='inout_InsertHopital'
                 onChange={(e) => handleChangeDataUser("password", e.target.value)}
+                value={dataHopital?.password}
               />
             </Flex>
             <Flex vertical className='form_InsertHopital' >
@@ -145,17 +163,19 @@ export default function Add_bacSi() {
                 placeholder='Nhập lại mật khẩu'
                 className='inout_InsertHopital'
                 onChange={(e) => handleChangeDataUser("checkPassword", e.target.value)}
+                value={dataHopital?.checkPassword}
               />
             </Flex>
 
           </Col>
-          <Col span={6} style={{  display: 'flex', flexDirection: 'column', alignItems: 'center' }}   >
+          <Col span={6} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}   >
             <Flex vertical className='form_InsertHopital' >
               <p className='lable_InsertHopital'  >Nhập số điện thoại<sup>*</sup></p>
               <Input
                 placeholder='Nhập số điện thoại'
                 className='inout_InsertHopital'
                 onChange={(e) => handleChangeDataUser("sdt", e.target.value)}
+                value={dataHopital?.sdt}
               />
             </Flex>
             <Flex vertical className='form_InsertHopital'  >
@@ -164,6 +184,7 @@ export default function Add_bacSi() {
                 placeholder='Nhập địa chỉ'
                 className='inout_InsertHopital'
                 onChange={(e) => handleChangeDataUser("diaChi", e.target.value)}
+                value={dataHopital?.diaChi}
               />
             </Flex>
             <Flex vertical className='form_InsertHopital'>
@@ -172,12 +193,13 @@ export default function Add_bacSi() {
                 placeholder='Nhập họ và tên'
                 className='inout_InsertHopital'
                 onChange={(e) => handleChangeDataUser("name", e.target.value)}
+                value={dataHopital?.name}
               />
             </Flex>
 
 
           </Col>
-          <Col span={6} style={{  display: 'flex', flexDirection: 'column', alignItems: 'center' }}   >
+          <Col span={6} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}   >
             <Flex vertical className='form_InsertHopital' >
               <p className='lable_InsertHopital' >Chọn giới tính<sup>*</sup></p>
               <Radio.Group name="radiogroup" defaultValue={"Nam"} onChange={e => handleChangeDataUser("gioiTinh", e.target.value)} style={{ paddingBottom: '7px' }}>
@@ -188,7 +210,12 @@ export default function Add_bacSi() {
             <Flex vertical className='form_InsertHopital'>
               <p className='lable_InsertHopital' >Nhập năm sinh<sup>*</sup></p>
               <ConfigProvider locale={viVN} >
-                <DatePicker onChange={onChangeDate} format="YYYY-MM-DD" className='inout_InsertHopital' />
+                <DatePicker
+                  onChange={onChangeDate}
+                  format="YYYY-MM-DD"
+                  className='inout_InsertHopital'
+                  
+                />
               </ConfigProvider>
             </Flex>
             <Flex vertical className='form_InsertHopital' >

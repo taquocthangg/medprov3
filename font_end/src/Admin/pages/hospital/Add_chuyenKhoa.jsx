@@ -1,27 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Row, Flex, Input, Button, ConfigProvider, Avatar, message } from 'antd';
 import '../../../css/admin/Insert_admin.css'
+import { getCurentUser, themchuyenkhoa } from '../../../api';
 const screenWidth = window.innerWidth;
 export default function Add_chuyenKhoa() {
   const nameHospital = "BẠCH MAI";
-  const avatarHospital = "https://ibrand.vn/wp-content/uploads/2022/10/logo-benh-vien-3.png";
+  const [dataUser, setDataUser] = useState()
   const [dataHopital, setDataHopital] = useState({
     name: "",
     description: "",
     price: "",
   });
-  const handlePostData = () => {
- 
-    if (dataHopital?.name !=="", dataHopital.description !=="", dataHopital.price !=="") {
-      message.success("Thêm chuyên khoa thành công")
-      setDataHopital({
-        name: "",
-        description: "",
-        price: "",
-      })
-      console.log(dataHopital)
+
+  const handlePostData = async () => {
+    if (dataHopital?.name !== "", dataHopital.description !== "", dataHopital.price !== "") {
+      const response = await themchuyenkhoa(dataUser?.id, dataHopital)
+      if (response?.mess === "Thêm mới chuyên khoa thành công !!!") {
+        message.success("Thêm chuyên khoa thành công")
+        setDataHopital({
+          name: "",
+          description: "",
+          price: "",
+        })
+      }
+      else {
+        message.warning(response?.mess)
+      }
     }
-    else{
+    else {
       message.warning("Vui lòng điền đủ thông tin ")
     }
   }
@@ -33,11 +39,18 @@ export default function Add_chuyenKhoa() {
       }))
     }
   }
-
+  const handleGetDataHopital = async () => {
+    const idHopital = localStorage.getItem("idUser")
+    const response = await getCurentUser(idHopital);
+    setDataUser(response?.user)
+  }
+  useEffect(() => {
+    handleGetDataHopital()
+  }, [])
   return (
     <div style={{ padding: '25px 100px', width: `${screenWidth}` }} className='container_addBenhVien'>
       <div className="content_addBenhVien">
-        <p className='title_insertHopital'>THÊM THÔNG TIN CHUYÊN KHOA BỆNH VIỆN {nameHospital}</p>
+        <p className='title_insertHopital'>THÊM THÔNG TIN CHUYÊN KHOA BỆNH VIỆN {dataUser?.name}</p>
         <Row>
           <Col span={12} style={{ padding: 10, display: 'flex', flexDirection: 'column', alignItems: 'center' }}  >
             <Flex vertical className='form_InsertHopital' >
@@ -47,7 +60,7 @@ export default function Add_chuyenKhoa() {
                 placeholder='Nhập tên chuyên khoa'
                 onChange={(e) => handleChangeDataUser("name", e.target.value)}
                 className='inout_InsertHopital'
-
+                allowClear
               />
             </Flex>
             <Flex vertical className='form_InsertHopital' >
@@ -57,6 +70,7 @@ export default function Add_chuyenKhoa() {
                 placeholder='Nhập mô tả chuyên khoa'
                 className='inout_InsertHopital'
                 onChange={(e) => handleChangeDataUser("description", e.target.value)}
+                allowClear
               />
             </Flex>
             <Flex vertical className='form_InsertHopital'  >
@@ -66,6 +80,7 @@ export default function Add_chuyenKhoa() {
                 placeholder='Nhập địa chỉ bệnh viện'
                 className='inout_InsertHopital'
                 onChange={(e) => handleChangeDataUser("price", e.target.value)}
+                allowClear
               />
             </Flex>
           </Col>
@@ -76,7 +91,7 @@ export default function Add_chuyenKhoa() {
           </Col> */}
           <Col span={12}>
             <Flex gap="middle" className='customUpload' style={{ marginTop: '50px', height: '120px' }} justify='center'>
-              <Avatar src={avatarHospital} style={{ fontSize: '100px', width: '200px', height: '200px' }} />
+              <Avatar src={dataUser?.avatar} style={{ fontSize: '100px', width: '200px', height: '200px' }} />
 
             </Flex>
 

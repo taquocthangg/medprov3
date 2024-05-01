@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import '../../../css/admin/Insert_admin.css'
-import { Tooltip, Avatar, Flex, ConfigProvider, Table, Button, Modal, message } from 'antd';
+import { Tooltip, Flex, ConfigProvider, Table, Button, Modal, message } from 'antd';
 import QueryAdmin from './../../service/QueryContext';
-
 import { EditOutlined, DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 import ModalchuyenKhoa from './modalHospital/ModalchuyenKhoa';
-import { dataChuyenKhoa } from '../../../data_fake/dataChuyenKhoa'
 import { formatPrice } from '../../../Common/dataFortmat';
+import { deleteChuyenKhoaS, getChuyenKhoas } from '../../../api';
 const { confirm } = Modal;
 const screenWidth = window.innerWidth
 export default function List_chuyenKhoa() {
@@ -15,16 +14,21 @@ export default function List_chuyenKhoa() {
   const [dataModal, setDataModal] = useState();
   const [queryHospital, setQueryHospital] = useState('')
   const { value } = useContext(QueryAdmin)
-  const handleGetDataHospital = () => {
-    setDataHospital(dataChuyenKhoa)
-  }
-  const handleDeleteHospital = (idHospital) => {
+
+  const handleDeleteHospital = async (idHospital) => {
     const indexToDelete = data.findIndex(hospital => hospital.id === idHospital);
     if (indexToDelete !== -1) {
-      const newData = [...data]; // Tạo một bản sao của mảng dataHospital
-      newData.splice(indexToDelete, 1);
-      setDataHospital(newData);
-      message.success("Xóa thành công bệnh viện")
+      const response = await deleteChuyenKhoaS(idHospital)
+      if (response?.mess === "Xóa chuyên khoa thành công") {
+        const newData = [...data]; // Tạo một bản sao của mảng dataHospital
+        newData.splice(indexToDelete, 1);
+        setDataHospital(newData);
+        message.success("Xóa chuyên khoa thành công")
+      }
+      else{
+        message.warning(response?.mess)
+      }
+
     }
   }
   const showDeleteConfirm = (idHospital) => {
@@ -54,7 +58,11 @@ export default function List_chuyenKhoa() {
     setOpenModal(true)
     setDataModal(data)
   }
-
+  const handleGetDataHopital = async () => {
+    const idHopital = localStorage.getItem("idUser")
+    const response = await getChuyenKhoas(idHopital)
+    setDataHospital(response?.chuyenkhoa)
+  }
   const columns = [
     {
       title: 'Tên chuyên khoa',
@@ -62,7 +70,7 @@ export default function List_chuyenKhoa() {
       key: 'name',
       align: 'center',
       render: (text) => <p>{text}</p>,
-   
+
     },
     {
       title: 'Mô tả',
@@ -74,7 +82,7 @@ export default function List_chuyenKhoa() {
           {diaChi}
         </Tooltip>
       ),
-   
+
     },
     {
       title: 'Giá dịch vụ',
@@ -133,12 +141,13 @@ export default function List_chuyenKhoa() {
     },
   ];
   useEffect(() => {
-    handleGetDataHospital()
+    handleGetDataHopital();
+
   }, [])
 
   return (
     <div style={{ padding: '25px 100px', width: `${screenWidth}` }} className='container_addBenhVien' >
-      <p className='title_insertHopital'>Quản lý bệnh viện</p>
+      <p className='title_insertHopital'>QUẢN LÝ BỆNH VIỆN</p>
       <div className="content_ListHospital">
         <ConfigProvider
           theme={{
