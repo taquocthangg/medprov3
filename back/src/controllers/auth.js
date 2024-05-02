@@ -4,7 +4,7 @@ export const dangKi = async (req, res) => {
     try {
         const fileData = req.file;
         const avatar = fileData?.path;
-        const { name, email, password, gioiTinh, sdt, diaChi, namSinh, role_id} = req.body
+        const { name, email, password, gioiTinh, sdt, diaChi, namSinh, role_id } = req.body
         if (!name || !email || !password) return res.status(400).json({
             err: 1,
             mess: "Điền đầy đủ thông tin"
@@ -300,8 +300,8 @@ export const benhAnTheoLich = async (req, res) => {
 
 export const createPayment = async (req, res) => {
     try {
-        const { amount, language, bankCode, ipAddr } = req.body
-        const paymentUrl = await services.createPayment({ ipAddr, amount, language, bankCode });
+        const { id_user, amount, language, bankCode, ipAddr } = req.body
+        const paymentUrl = await services.createPayment({ id_user, ipAddr, amount, language, bankCode });
 
         return res.status(200).json(paymentUrl)
     } catch (error) {
@@ -311,7 +311,7 @@ export const createPayment = async (req, res) => {
 };
 export const returnPayment = async (req, res) => {
     try {
-        let vnp_Params = req.query;
+        let vnp_Params = req.query.params;
         const paymentUrl = await services.returnPayment({ vnp_Params });
 
         return res.status(200).json(paymentUrl)

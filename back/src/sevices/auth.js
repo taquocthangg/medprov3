@@ -321,6 +321,20 @@ export const getLichKham = ({ activateDay, id_doctor }) => new Promise(async (re
         reject(error);
     }
 });
+export const getInfomationChuyenKhoa = ({ id_chuyenKhoa }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Sescription.findByPk(id_chuyenKhoa)
+        console.log(response)
+        resolve({
+            err: 0,
+            mess: response ? "Lấy thông tin chuyên khoa thành công" : "Lấy thông tin chuyên khoa thất bại",
+            chuyenKhoa: response
+        })
+    }
+    catch (e) {
+        reject(e)
+    }
+})
 export const getLichKhamById = ({ getSchedulebyID }) => new Promise(async (resolve, reject) => {
     try {
 
@@ -919,7 +933,7 @@ export const LichKhamDaHuy = ({ id_benhnhan }) => new Promise(async (resolve, re
 
 
 
-export const createPayment = ({ amount, language, bankCode, ipAddr }) => new Promise(async (resolve, reject) => {
+export const createPayment = ({ id_user, amount, language, bankCode, ipAddr }) => new Promise(async (resolve, reject) => {
     try {
         process.env.TZ = 'Asia/Ho_Chi_Minh';
         let date = new Date();
@@ -944,7 +958,7 @@ export const createPayment = ({ amount, language, bankCode, ipAddr }) => new Pro
         vnp_Params['vnp_Locale'] = 'vn';
         vnp_Params['vnp_CurrCode'] = currCode;
         vnp_Params['vnp_TxnRef'] = orderId;
-        vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + orderId;
+        vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + id_user + orderId;
         vnp_Params['vnp_OrderType'] = 'other';
         vnp_Params['vnp_Amount'] = amount * 100;
         vnp_Params['vnp_ReturnUrl'] = returnUrl;
@@ -990,7 +1004,7 @@ export const returnPayment = ({ vnp_Params }) => new Promise(async (resolve, rej
         let hmac = crypto.createHmac("sha512", secretKey);
         let signed = hmac.update(Buffer.from(signData, 'utf-8')).digest("hex");
 
-        if (secureHash === signed) {
+        if (vnp_Params['vnp_ResponseCode'] == "00") {
             //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
             resolve({
                 err: 0,
@@ -999,15 +1013,14 @@ export const returnPayment = ({ vnp_Params }) => new Promise(async (resolve, rej
             });
             // res.render('success', { code: vnp_Params['vnp_ResponseCode'] })
         } else {
-            // res.render('success', { code: '97' })
-            vnp_Params
+            resolve({
+                err: 0,
+                mess: 'Giao dịch thất bại',
+                code: vnp_Params['vnp_ResponseCode']
+            });
         }
         // Trả về thông tin lịch khám
-        resolve({
-            err: 0,
-            mess: secureHash === signed ? 'Thanh Toán thành công' : '',
-            vnpUrl
-        });
+
     } catch (error) {
         reject(error);
     }

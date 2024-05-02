@@ -5,6 +5,7 @@ import viVN from 'antd/es/locale/vi_VN';
 import { LoadingOutlined, PlusOutlined, DownOutlined } from '@ant-design/icons';
 import { formatPrice } from '../../../../Common/dataFortmat';
 import { dataChuyenKhoa } from '../../../../data_fake/dataChuyenKhoa';
+import { updateUser } from '../../../../api';
 const getBase64 = (img, callback) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
@@ -33,11 +34,11 @@ export default function ModalDoctor({ openModal, setOpenModal, dataHopitals, dat
         avatar: "",
         gioiTinh: "Nam",
         namSinh: "",
-        chuyenKhoa: "",
-        idchuyenKhoa: "",
+        // chuyenKhoa: "",
+        // id_chuyenKhoa: "",
     })
-    console.log(dataUpdate)
-    const handleUpdate = () => {
+    // console.log(dataUpdate)
+    const handleUpdate =async  () => {
         const updateDate = dataHopitals.map((item) => {
             if (item?.id === dataHopital?.id) {
                 const newData = {
@@ -47,7 +48,7 @@ export default function ModalDoctor({ openModal, setOpenModal, dataHopitals, dat
                     diaChi: dataUpdate.diaChi || item.diaChi,
                     gioiTinh: dataUpdate.gioiTinh || item.gioiTinh,
                     namSinh: dataUpdate.namSinh || item.namSinh,
-                    chuyenKhoa: dataUpdate.chuyenKhoa || item.chuyenKhoa,
+                    // chuyenKhoa: dataUpdate.chuyenKhoa || item.chuyenKhoa,
                     avatar: dataUpdate.avatar || item.avatar,
 
                 }
@@ -55,19 +56,26 @@ export default function ModalDoctor({ openModal, setOpenModal, dataHopitals, dat
             }
             return item;
         })
-        setDataHospital(updateDate)
-        setDateUpdate({
-            name: "",
-            email: "",
-            sdt: "",
-            diaChi: "",
-            avatar: "",
-            gioiTinh: "Nam",
-            namSinh: "",
-            chuyenKhoa: "",
-            idchuyenKhoa: "",
-        })
-        message.success("Cập nhật thông tin thành công")
+        const response = await updateUser(dataHopital?.id, dataUpdate)
+        if (response?.message === "Cập nhật thông tin người dùng thành công") {
+            message.success(response?.message)
+            setDataHospital(updateDate)
+            setDateUpdate({
+                name: "",
+                email: "",
+                sdt: "",
+                diaChi: "",
+                avatar: "",
+                gioiTinh: "Nam",
+                namSinh: "",
+            })
+            setOpenModal(false);
+        }
+        else {
+            message.warning(response?.message)
+            setOpenModal(true)
+        }
+
     }
     const handleOk = () => {
         handleUpdate()
@@ -84,20 +92,20 @@ export default function ModalDoctor({ openModal, setOpenModal, dataHopitals, dat
             }))
         }
     }
-    const items = dataChuyenKhoa?.map(item => {
-        return {
-            key: item?.id,
-            label: item?.name
-        }
-    })
+    // const items = dataChuyenKhoa?.map(item => {
+    //     return {
+    //         key: item?.id,
+    //         label: item?.name
+    //     }
+    // })
     const onChangeDate = (date, dateString) => {
         handleChangeDataUser('namSinh', dateString);
     };
-    const onClick = ({ key }) => {
-        const dataFitelCK = items.filter(item => item.key == key);
-        handleChangeDataUser("idchuyenKhoa", dataFitelCK[0].key)
-        handleChangeDataUser("chuyenKhoa", dataFitelCK[0].label)
-    };
+    // const onClick = ({ key }) => {
+    //     const dataFitelCK = items.filter(item => item.key == key);
+    //     handleChangeDataUser("idchuyenKhoa", dataFitelCK[0].key)
+    //     handleChangeDataUser("chuyenKhoa", dataFitelCK[0].label)
+    // };
     const uploadButton = (
         <button
             style={{
@@ -166,7 +174,7 @@ export default function ModalDoctor({ openModal, setOpenModal, dataHopitals, dat
                                 placeholder={dataHopital?.email}
                                 onChange={(e) => handleChangeDataUser("email", e.target.value)}
                                 className='inout_InsertHopital'
-
+                                value={dataUpdate?.email}
                             />
                         </Flex>
                         <Flex vertical className='form_InsertHopital' >
@@ -175,6 +183,9 @@ export default function ModalDoctor({ openModal, setOpenModal, dataHopitals, dat
                                 placeholder={dataHopital?.sdt}
                                 className='inout_InsertHopital'
                                 onChange={(e) => handleChangeDataUser("sdt", e.target.value)}
+                                value={dataUpdate?.sdt}
+                                maxLength={10}
+                                showCount
                             />
                         </Flex>
                         <Flex vertical className='form_InsertHopital'  >
@@ -183,11 +194,12 @@ export default function ModalDoctor({ openModal, setOpenModal, dataHopitals, dat
                                 placeholder={dataHopital?.diaChi}
                                 className='inout_InsertHopital'
                                 onChange={(e) => handleChangeDataUser("diaChi", e.target.value)}
+                                value={dataUpdate?.diaChi}
                             />
                         </Flex>
                     </Col>
                     <Col span={8} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}   >
-                        <Flex vertical className='form_InsertHopital' >
+                        {/* <Flex vertical className='form_InsertHopital' >
                             <p className='lable_InsertHopital' >Chọn chuyên khoa<sup>*</sup></p>
                             <Flex style={{  backgroundColor: 'rgba(255, 255, 255, 0.5)', padding: '3.5px 15px', borderRadius: '6px' }}>
                                 <Dropdown
@@ -215,7 +227,8 @@ export default function ModalDoctor({ openModal, setOpenModal, dataHopitals, dat
                                     </a>
                                 </Dropdown>
                             </Flex>
-                        </Flex>
+                        </Flex> */}
+                       
                         <Flex vertical className='form_InsertHopital'>
                             <p className='lable_InsertHopital' >Nhập năm sinh<sup>*</sup></p>
                             <ConfigProvider locale={viVN} >
@@ -228,10 +241,9 @@ export default function ModalDoctor({ openModal, setOpenModal, dataHopitals, dat
                                 placeholder={dataHopital?.name}
                                 className='inout_InsertHopital'
                                 onChange={(e) => handleChangeDataUser("name", e.target.value)}
+                                value={dataUpdate?.name}
                             />
                         </Flex>
-                    </Col>
-                    <Col span={8} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}   >
                         <Flex vertical className='form_InsertHopital' >
                             <p className='lable_InsertHopital' >Chọn giới tính<sup>*</sup></p>
                             <Radio.Group name="radiogroup" defaultValue={"Nam"} onChange={e => handleChangeDataUser("gioiTinh", e.target.value)} style={{ paddingBottom: '7px' }}>
@@ -239,7 +251,10 @@ export default function ModalDoctor({ openModal, setOpenModal, dataHopitals, dat
                                 <Radio value={"Nữ"}>Nữ</Radio>
                             </Radio.Group>
                         </Flex>
-                        <Flex gap="middle" className='customUploadModal' style={{ height: '120px',marginTop:'20px' }} justify='center'>
+                    </Col>
+                    <Col span={8} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center',marginTop:'60px' }}   >
+
+                        <Flex gap="middle" className='customUploadModal' style={{ height: '120px' }} justify='center'>
                             <ConfigProvider
                                 theme={{
                                     token: {

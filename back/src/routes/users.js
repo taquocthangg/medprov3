@@ -5,6 +5,6 @@ const router = express.Router();
 
 
 router.get('/getUser', controller.getUser)
-router.get('/getCurentUser/:idUser', controller.getCurent)
+router.get('/getCurentUser/:userId', controller.getCurent)
 
 module.exports = router

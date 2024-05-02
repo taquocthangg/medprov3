@@ -24,10 +24,10 @@ const beforeUpload = (file) => {
 };
 
 export default function Add_bacSi() {
-  const [passwordVisible, setPasswordVisible] = useState(false);
   const [loading, setLoading] = useState(false);
   const [imageUrl, setImageUrl] = useState();
   const [dataSescriptions, setDataSescriptions] = useState()
+  const idHopital = localStorage.getItem("idUser")
   const [dataHopital, setDataHopital] = useState({
     name: "",
     email: "",
@@ -39,8 +39,10 @@ export default function Add_bacSi() {
     gioiTinh: "Nam",
     namSinh: "",
     chuyenKhoa: "",
-    idchuyenKhoa: "",
+    id_chuyenKhoa: "",
+    id_benhVien:idHopital
   });
+
   const [dataUser, setDataUser] = useState()
   const onChangeDate = (date, dateString) => {
     handleChangeDataUser('namSinh', dateString);
@@ -48,7 +50,8 @@ export default function Add_bacSi() {
   const handlePostData = async () => {
     const idHopital = localStorage.getItem("idUser")
     if (dataHopital?.name && dataHopital?.email && dataHopital?.password && dataHopital?.sdt && dataHopital?.namSinh && dataHopital?.checkPassword === dataHopital?.password) {
-      const response = await thembacsi(idHopital, dataHopital)
+      const response = await thembacsi(dataHopital.id_chuyenKhoa, dataHopital)
+      console.log(response)
       if (response?.mess === "Đăng ký thành công") {
         message.success(response?.mess)
         setDataHopital({
@@ -61,6 +64,7 @@ export default function Add_bacSi() {
           avatar: "",
           gioiTinh: "Nam",
           namSinh: "",
+          id_chuyenKhoa: "",
         })
       }
       else {
@@ -125,7 +129,7 @@ export default function Add_bacSi() {
   })
   const onClick = ({ key }) => {
     const dataFitelCK = items.filter(item => item.key == key);
-    handleChangeDataUser("idchuyenKhoa", dataFitelCK[0].key)
+    handleChangeDataUser("id_chuyenKhoa", dataFitelCK[0].key.toString())
     handleChangeDataUser("chuyenKhoa", dataFitelCK[0].label)
   };
 
@@ -176,6 +180,8 @@ export default function Add_bacSi() {
                 className='inout_InsertHopital'
                 onChange={(e) => handleChangeDataUser("sdt", e.target.value)}
                 value={dataHopital?.sdt}
+                maxLength={10}
+                showCount
               />
             </Flex>
             <Flex vertical className='form_InsertHopital'  >

@@ -4,7 +4,6 @@ import '../../../css/admin/Insert_admin.css'
 import { getCurentUser, themchuyenkhoa } from '../../../api';
 const screenWidth = window.innerWidth;
 export default function Add_chuyenKhoa() {
-  const nameHospital = "BẠCH MAI";
   const [dataUser, setDataUser] = useState()
   const [dataHopital, setDataHopital] = useState({
     name: "",

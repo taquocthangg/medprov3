@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import '../../../css/admin/Insert_admin.css'
-import { Flex, ConfigProvider, Table, Button, Modal, DatePicker, Row, Col, Avatar,message } from 'antd';
+import { Flex, ConfigProvider, Table, Button, Modal, DatePicker, Row, Col, Avatar, message } from 'antd';
 import viVN from 'antd/es/locale/vi_VN';
-import { deleteLichKham, lichkham } from '../../../api';
+import { deleteLichKham, lichDatKham, lichkham } from '../../../api';
 import { formatDateNoHours } from '../../../Common/dataFortmat';
 import image_warring from '../../../img/image_doctor_waring.jpg'
 import { CloseOutlined } from '@mui/icons-material';
 import { EditOutlined, DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
+import Modal_lichKhamCho from './Modal_lichKhamCho';
 const screenWidth = window.innerWidth
 const { confirm } = Modal;
-
-export default function Ds_lichKham() {
+export default function List_lichKhamCho() {
   const today = new Date()
   const idDoctor = localStorage.getItem("idUser")
+  const [openModal, setOpenModal] = useState();
   const [dateTime, setDateTime] = useState(formatDateNoHours(today));
   const [dataSchedule, setDataSchedule] = useState()
+  const [dataModal,setDataModal]=useState()
 
   const getDataDoctor = async () => {
-    const response = await lichkham(idDoctor, dateTime)
-    console.log(dataSchedule)
+    const response = await lichDatKham(idDoctor, dateTime)
     if (response?.schedule === "Không có lịch khám") {
       setDataSchedule()
     }
@@ -37,7 +38,7 @@ export default function Ds_lichKham() {
         setDataSchedule(newData);
         message.success("Xóa lịch khám thành công")
       }
-      else{
+      else {
         message.warning(response?.mess)
       }
     }
@@ -67,23 +68,22 @@ export default function Ds_lichKham() {
     });
   }
 
-  const handleRigthClickDelete=(item)=>{
+  const handleRigthClickDelete = (item) => {
     showDeleteConfirm(item?.id)
   }
+  const handleDataModal=(item)=>{
+    setOpenModal(true)
+    setDataModal(item)
+  
+
+  }
+  
   useEffect(() => {
     getDataDoctor()
   }, [dateTime])
   const onChangeDate = (date, dateString) => {
     setDateTime(dateString);
   };
-  console.log(dateTime)
-
-
-
-
-
-
-
   return (
     <div style={{ padding: '25px 100px', width: `${screenWidth}` }} className='container_addBenhVien' >
       <p className='title_insertHopital'>QUẢN LÝ LỊCH KHÁM</p>
@@ -115,8 +115,8 @@ export default function Ds_lichKham() {
               <Avatar src={image_warring} style={{ width: '50%', height: '50%' }} />
             </Flex>
           ) : (
-            <Row>
-              {dataSchedule?.map((item) => (
+            <Flex style={{ flexWrap: 'wrap' }} justify='space-between' gap={30} >
+              {/* {dataSchedule?.map((item) => (
                 <Flex justify='center' style={{ margin: '20px', width: '20%', position: 'relative' }}>
                   <Button
                    onContextMenu={(event)=>{
@@ -135,10 +135,25 @@ export default function Ds_lichKham() {
                   </Button>
                 </Flex>
 
+              ))} */}
+              {dataSchedule?.map((item) => (
+                <Button 
+                style={{minHeight: '80px',width: '40%',borderRadius:'15px'}}
+                onClick={()=>handleDataModal(item)}
+                type='primary'
+                >
+                  <Flex style={{  }} justify='center' align='center' vertical gap={10}>
+                    <p ><strong>Bệnh nhân: </strong>{item?.Users?.name}</p>
+                    <p ><strong>Thời gian khám: </strong>{item?.timeSlot}</p>
+                  </Flex>
+                </Button>
+
+
               ))}
-            </Row>
+            </Flex>
           )
         }
+        <Modal_lichKhamCho openModal={openModal} setOpenModal={setOpenModal} dataModal={dataModal} dataSchedule={dataSchedule} setDataSchedule={setDataSchedule}  />
       </div>
     </div>
     // </div>
