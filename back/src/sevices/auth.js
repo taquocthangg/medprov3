@@ -321,6 +321,20 @@ export const getLichKham = ({ activateDay, id_doctor }) => new Promise(async (re
         reject(error);
     }
 });
+export const getInfomationChuyenKhoa =({id_chuyenKhoa})=>new Promise (async (resolve , reject )=>{
+    try{
+        const response = await db.Sescription.findByPk(id_chuyenKhoa)
+        console.log(response)
+        resolve({
+            err:0,
+            mess:response ?"Lấy thông tin chuyên khoa thành công":"Lấy thông tin chuyên khoa thất bại",
+            chuyenKhoa:response
+        })
+    }
+    catch(e){
+        reject(e)
+    }
+})
 export const getLichKhamById = ({ getSchedulebyID }) => new Promise(async (resolve, reject) => {
     try {
 

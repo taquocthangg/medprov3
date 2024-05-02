@@ -120,6 +120,10 @@ const menuConfig = {
                     {
                         key: "/ds-lich-kham",
                         label: "Danh sách lịch khám"
+                    },
+                    {
+                        key: "/ds-lich-kham-dang-cho",
+                        label: "Lịch khám đang chờ "
                     }
                 ]
             },

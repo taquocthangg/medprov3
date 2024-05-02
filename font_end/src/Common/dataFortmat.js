@@ -18,6 +18,14 @@ const formatDate=(dateTimeString)=>{
     return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
 
+const formatDateNoHours=(dateTimeString)=>{
+    const date = new Date(dateTimeString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();   
+    return `${year}-${month}-${day} `;
+}
+
 const formatVietnameseToString = (keyword) => {
     return keyword
         .toLowerCase()
@@ -27,5 +35,5 @@ const formatVietnameseToString = (keyword) => {
         .join("-")
 }
 export {
-    formatPrice,formatDate,formatVietnameseToString
+    formatPrice,formatDate,formatVietnameseToString,formatDateNoHours
 }

@@ -18,8 +18,8 @@ export const getUser = async (req, res) => {
 
 export const getCurent = async (req, res) => {
     try {
-        const { idUser } = req.params;
-        const result = await services.getCurents(idUser);
+        const { userId } = req.params;
+        const result = await services.getCurents(userId);
 
 
         if (result.err === 0) {

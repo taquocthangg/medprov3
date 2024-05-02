@@ -77,15 +77,15 @@ export const datlich = async (id_lichkham) => {
 
 
 // Lấy dữ liệu lịch khám
-export const lichkham = async (id_doctor) => {
+export const lichkham = async (id_doctor,data) => {
     return handleRequest(async () => {
-        return await api.post(`auth/lichkham/${id_doctor}`)
+        return await api.post(`auth/lichkham/${id_doctor}`,{activateDay:data})
     })
 }
 
 export const lichDatKham = async (id_doctor,data) => {
     return handleRequest(async () => {
-        return await api.post(`auth/lichDatKham/${id_doctor}`,data)
+        return await api.post(`auth/lichDatKham/${id_doctor}`,{activateDay:data})
     })
 }
 
@@ -110,6 +110,12 @@ export const suaChuyenKhoa = async (idChuyenKhoa,data) => {
 export const getAllBenhVien = async (params) => {
     return handleRequest(async () => {
         return await api.get(`/getAllBenhVien`,{params})
+    })
+}
+
+export const getCurent = async (params) => {
+    return handleRequest(async () => {
+        return await api.get(`auth/getCurent/${params}`)
     })
 }
 
@@ -194,6 +200,12 @@ export const getAllBacSiByBenhVien = async (id_benhVien) => {
 export const getChuyenKhoas = async (id_benhVien) => {
     return handleRequest(async () => {
         return await api.get(`auth/chuyenkhoa/${id_benhVien}`)
+    })
+}
+
+export const getInfChuyenKhoa =async (idChuyenKhoa)=>{
+    return handleRequest(async () => {
+        return await api.get(`auth/getInfomationChuyenKhoa/${idChuyenKhoa}`)
     })
 }
 

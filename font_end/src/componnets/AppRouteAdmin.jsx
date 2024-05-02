@@ -15,6 +15,7 @@ import Ds_lichKham from '../Admin/pages/doctor/Ds_lichKham';
 import List_benhAn from './../Admin/pages/doctor/List_benhAn';
 import Add_benhAn from './../Admin/pages/doctor/Add_benhAn';
 import UpdateNewsAdmin from '../Admin/pages/admin/UpdateNewsAdmin';
+import List_lichKhamCho from '../Admin/pages/doctor/List_lichKhamCho';
 
 export default function AppRouteAdmin() {
 
@@ -37,6 +38,7 @@ export default function AppRouteAdmin() {
                 <Route path='ds-lich-kham' element={<Ds_lichKham />} />
                 <Route path='ds-benh-an' element={<List_benhAn />} />
                 <Route path='them-benh-an' element={<Add_benhAn />} />
+                <Route path='ds-lich-kham-dang-cho' element={<List_lichKhamCho />} />
             </Routes>
 
         </div>

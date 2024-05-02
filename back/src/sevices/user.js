@@ -35,6 +35,7 @@ export const getUser = ({ page, limit, order, name, sex, address, ...query }) =>
 });
 
 export const getCurents = (userId) => new Promise(async (resolve, reject) => {
+    console.log(userId)
     try {
 
         const user = await db.User.findByPk(userId);
@@ -58,6 +59,7 @@ export const getCurents = (userId) => new Promise(async (resolve, reject) => {
         reject(error);
     }
 });
+
 
 export const updateUser = async ({ userId, name, newEmail, newPassword, gioiTinh, sdt, diaChi, image, namSinh }) => {
     try {

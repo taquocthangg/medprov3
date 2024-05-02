@@ -157,13 +157,13 @@ export const getSchedule = async (req, res) => {
     }
 };
 export const getSchedulebyID = async (req, res) => {
-    // try {
+    try {
     const { getSchedulebyID } = req.params;
     const response = await services.getLichKhamById({ getSchedulebyID })
     return res.status(200).json(response)
-    // } catch (error) {
-    //     res.status(500).json({ error: 'Lỗi trong quá trình lấy lịch khám.' });
-    // }
+    } catch (error) {
+        res.status(500).json({ error: 'Lỗi trong quá trình lấy lịch khám.' });
+    }
 };
 // Lấy dữ liệu lịch khám đã được đặt
 export const getScheduleByBooked = async (req, res) => {
@@ -214,6 +214,19 @@ export const getLichKhamHuy = async (req, res) => {
     }
 }
 
+export const getInfomationChuyenKhoa =async (req,res)=>{
+    try{
+        const {id_chuyenKhoa}=req.params;
+        const response =await services.getInfomationChuyenKhoa({id_chuyenKhoa})
+        return res.status(200).json(response)
+
+    }catch(error){
+        res.status(500)({
+            error:"Lỗi trong quá quá trình lấy thông tin"
+        })
+    }
+}
+
 export const deleteChuyenKhoaS = async (req, res) => {
     try {
         const { id_chuyenKhoa } = req.params;
@@ -225,14 +238,14 @@ export const deleteChuyenKhoaS = async (req, res) => {
 };
 
 export const createHistories = async (req, res) => {
-    //try {
+    try {
     const { scheduleId } = req.params;
     const { hospitalId, doctorId, patientId, timeSlot, appointmentDate, specialtyId, diagnosis, medication } = req.body;
     const response = await services.themLichSuKham({ hospitalId, doctorId, patientId, timeSlot, appointmentDate, specialtyId, diagnosis, medication, scheduleId })
     return res.status(200).json(response)
-    // } catch (error) {
-    //     res.status(500).json({ error: 'Lỗi trong quá trình tạo lịch khám.' });
-    // }
+    } catch (error) {
+        res.status(500).json({ error: 'Lỗi trong quá trình tạo lịch khám.' });
+    }
 };
 
 
@@ -250,13 +263,13 @@ export const getScheduleHistorybyID = async (req, res) => {
 };
 
 export const getScheduleHistory = async (req, res) => {
-    // try {
+    try {
     const { getLichSuKhamById } = req.params;
     const response = await services.getLichSuKhamBy({ getLichSuKhamById })
     return res.status(200).json(response)
-    // } catch (error) {
-    //     res.status(500).json({ error: 'Lỗi trong quá trình lấy lịch khám.' });
-    // }
+    } catch (error) {
+        res.status(500).json({ error: 'Lỗi trong quá trình lấy lịch khám.' });
+    }
 };
 
 export const lichKhamHuy = async (req, res) => {
@@ -320,3 +333,4 @@ export const returnPayment = async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 };
+
