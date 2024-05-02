@@ -15,6 +15,7 @@ router.post('/reset-password/:token', controller.resetPassword);
 router.get('/getCurent/:userId', controller.getCurent);
 router.post('/getBacSiByChuyenKhoa/:id_chuyenKhoa', controller.getAllBacSiByChuyenKhoa);
 router.post('/getBacSiByChuyenKhoa/', controller.getAllBacSiByChuyenKhoa);
+
 router.post('/updateUser/:userId', uploadCloud.single('image'), controller.updateUserController);
 router.post('/themchuyenkhoa/:id_benhVien', controller.themMoiChuyenKhoa);
 router.post('/thembacsi/:id_chuyenKhoa', uploadCloud.single("image"), controller.themMoiBacSi);
@@ -30,10 +31,13 @@ router.post('/lichDatKham/:id_doctor', controller.getScheduleByBooked);
 router.delete('/xoalich/:scheduleId', controller.deleteLichKham);
 router.delete('/xoaChuyenKhoa/:id_chuyenKhoa', controller.deleteChuyenKhoaS);
 router.delete('/xoaUser/:userId', controller.deleteUsers);
+//tao viết hàm này
+router.get('/getInfomationChuyenKhoa/:id_chuyenKhoa',controller.getInfomationChuyenKhoa)
+router.post('/getAllLichSuKham/:id_doctor',controller.getAllLichSuKham)
 
 
-
-router.post('/themsulichkham/:scheduleId', controller.createHistories);
+router.post('/themsulichkham/:scheduleId', controller.createHistories); // thêm bệnh án
+//diagnosis  chuẩn đoán
 router.post('/laysulichkham/:getLichSuKhamById', controller.getScheduleHistorybyID);
 router.get('/laysulichkham/:getLichSuKhamById', controller.getScheduleHistory);
 
@@ -42,7 +46,7 @@ router.get('/lich-kham-hoan-thanh-by-id-benhnhan/:id_benhnhan', controller.getLi
 router.get('/lich-kham-da-huy-by-id-benhnhan/:id_benhnhan', controller.getLichKhamHuy);
 router.get('/lich-kham-hoan-thanh/:id_benhnhan', controller.LichKhamHoanThanhbyBenhNhan);
 router.get('/lich-kham-hoan-thanh-bv/:id_benhnhan', controller.benhAn);
-router.get('/lich-kham-hoan-thanh-by-lichkham/:id_benhnhan', controller.benhAnTheoLich);
+router.get('/lich-kham-hoan-thanh-by-lichkham/:id_benhnhan', controller.benhAnTheoLich); // bệnh án
 router.get('/lich-kham-da-huy/:id_benhnhan', controller.lichKhamHuy);
 
 

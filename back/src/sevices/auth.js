@@ -607,7 +607,33 @@ export const themLichSuKham = ({ scheduleId, hospitalId, doctorId, patientId, ti
     }
 });
 
-const { Op } = require('sequelize');
+export const getAllLichSuKham = ({ id_doctor, appointmentDate }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.MedicalHistory.findAndCountAll({
+            where: {
+                doctorId:id_doctor,
+                appointmentDate:appointmentDate
+            },
+            include: [
+                {
+                    model: db.User,
+                    attributes: ['id', 'name','email','gioiTinh','namSinh','sdt','diaChi'],
+                },
+          
+            ],
+        })
+        console.log(response)
+        resolve({
+            err: response ? 0 : -1,
+            mess:response?"Lấy thông tin bệnh án thành công":"Lấy thông tin bệnh án thất bại",
+            MedicalHistory:response
+        })
+    } catch (e) {
+        reject(e);
+    }
+})
+
+const { Op, where } = require('sequelize');
 export const getLichSuKhamById = ({ getLichSuKhamById, ngay, tenBenhNhan }) => new Promise(async (resolve, reject) => {
     try {
         console.log(getLichSuKhamById)
@@ -933,7 +959,7 @@ export const LichKhamDaHuy = ({ id_benhnhan }) => new Promise(async (resolve, re
 
 
 
-export const createPayment = ({ id_user, amount, language, bankCode, ipAddr }) => new Promise(async (resolve, reject) => {
+export const createPayment = ({ amount, language, bankCode, ipAddr }) => new Promise(async (resolve, reject) => {
     try {
         process.env.TZ = 'Asia/Ho_Chi_Minh';
         let date = new Date();
@@ -958,7 +984,7 @@ export const createPayment = ({ id_user, amount, language, bankCode, ipAddr }) =
         vnp_Params['vnp_Locale'] = 'vn';
         vnp_Params['vnp_CurrCode'] = currCode;
         vnp_Params['vnp_TxnRef'] = orderId;
-        vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + id_user + orderId;
+        vnp_Params['vnp_OrderInfo'] = 'Thanh toan cho ma GD:' + orderId;
         vnp_Params['vnp_OrderType'] = 'other';
         vnp_Params['vnp_Amount'] = amount * 100;
         vnp_Params['vnp_ReturnUrl'] = returnUrl;
@@ -1004,7 +1030,7 @@ export const returnPayment = ({ vnp_Params }) => new Promise(async (resolve, rej
         let hmac = crypto.createHmac("sha512", secretKey);
         let signed = hmac.update(Buffer.from(signData, 'utf-8')).digest("hex");
 
-        if (vnp_Params['vnp_ResponseCode'] == "00") {
+        if (secureHash === signed) {
             //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
             resolve({
                 err: 0,
@@ -1013,14 +1039,15 @@ export const returnPayment = ({ vnp_Params }) => new Promise(async (resolve, rej
             });
             // res.render('success', { code: vnp_Params['vnp_ResponseCode'] })
         } else {
-            resolve({
-                err: 0,
-                mess: 'Giao dịch thất bại',
-                code: vnp_Params['vnp_ResponseCode']
-            });
+            // res.render('success', { code: '97' })
+            vnp_Params
         }
         // Trả về thông tin lịch khám
-
+        resolve({
+            err: 0,
+            mess: secureHash === signed ? 'Thanh Toán thành công' : '',
+            vnpUrl
+        });
     } catch (error) {
         reject(error);
     }

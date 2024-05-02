@@ -51,6 +51,7 @@ export const themchuyenkhoa = async (id_benhVien, data) => {
 }
 
 export const thembacsi = async (id_chuyenKhoa, data) => {
+    console.log(id_chuyenKhoa)
     return handleRequest(async () => {
         return await api.post(`auth/thembacsi/${id_chuyenKhoa}`, data)
     })
@@ -76,15 +77,15 @@ export const datlich = async (id_lichkham) => {
 
 
 // Lấy dữ liệu lịch khám
-export const lichkham = async (id_doctor) => {
+export const lichkham = async (id_doctor, data) => {
     return handleRequest(async () => {
-        return await api.post(`auth/lichkham/${id_doctor}`)
+        return await api.post(`auth/lichkham/${id_doctor}`, { activateDay: data })
     })
 }
 
 export const lichDatKham = async (id_doctor, data) => {
     return handleRequest(async () => {
-        return await api.post(`auth/lichDatKham/${id_doctor}`, data)
+        return await api.post(`auth/lichDatKham/${id_doctor}`, { activateDay: data })
     })
 }
 
@@ -100,9 +101,21 @@ export const layLichsukham = async (getLichSuKhamById, data) => {
     })
 }
 
+export const suaChuyenKhoa = async (idChuyenKhoa, data) => {
+    return handleRequest(async () => {
+        return await api.post(`auth/suaChuyenKhoa/${idChuyenKhoa}`, data)
+    })
+}
+
 export const getAllBenhVien = async (params) => {
     return handleRequest(async () => {
         return await api.get(`/getAllBenhVien`, { params })
+    })
+}
+
+export const getCurent = async (params) => {
+    return handleRequest(async () => {
+        return await api.get(`auth/getCurent/${params}`)
     })
 }
 
@@ -172,15 +185,27 @@ export const getCurentUser = async (idUser) => {
     })
 }
 
-export const getBacSiByChuyenKhoa = async (id_chuyenKhoa) => {
+export const getBacSiByChuyenKhoa = async (id_chuyenKhoa, data) => {
+
     return handleRequest(async () => {
-        return await api.get(`auth/getBacSiByChuyenKhoa/${id_chuyenKhoa}`)
+        return await api.post(`auth/getBacSiByChuyenKhoa/${id_chuyenKhoa}`, data)
+    })
+}
+export const getAllBacSiByBenhVien = async (id_benhVien) => {
+    return handleRequest(async () => {
+        return await api.post(`auth/getBacSiByChuyenKhoa/`, { id_benhVien })
     })
 }
 
 export const getChuyenKhoas = async (id_benhVien) => {
     return handleRequest(async () => {
         return await api.get(`auth/chuyenkhoa/${id_benhVien}`)
+    })
+}
+
+export const getInfChuyenKhoa = async (idChuyenKhoa) => {
+    return handleRequest(async () => {
+        return await api.get(`auth/getInfomationChuyenKhoa/${idChuyenKhoa}`)
     })
 }
 
@@ -211,5 +236,19 @@ export const deleteChuyenKhoaS = async (id_chuyenKhoa) => {
 export const deleteUsers = async (userId) => {
     return handleRequest(async () => {
         return await api.delete(`auth/xoaUser/${userId}`)
+    })
+}
+
+export const create_payment_url = async (amount, id_user) => {
+    return handleRequest(async () => {
+        return await api.post(`auth/create_payment_url`, { amount, id_user })
+    })
+}
+export const vnPay_Return = async (params) => {
+
+    return handleRequest(async () => {
+        return await api.get('auth/vnpay_return', {
+            params: { params }
+        })
     })
 }
