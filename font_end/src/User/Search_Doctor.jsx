@@ -1,26 +1,30 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { choosehopital } from '../../data'
 import '../../src/componnets/ChonBenhVien/Choose.css'
-import { Link, useNavigate ,useParams} from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
+import { getCurentUser } from '../api';
 const Search_Doctor = () => {
   const [query, setQuery] = useState("");
   const history = useNavigate()
-  const [data_BV,setData_BV]=useState([]);
+  const [data_BV, setData_BV] = useState([]);
   const { getId } = useParams();
-  console.log(getId)
+  const params = new URLSearchParams(window.location.search);
+  const hospital = params.get('hospital');
+  const specialist = params.get('specialist');
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/v1/auth/getBacSiByChuyenKhoa/"+getId)
+      .post("http://localhost:5000/api/v1/auth/getBacSiByChuyenKhoa/" + getId)
       .then((response) => {
-    
+
         setData_BV(response.data.users);
-       
+        console.log(response)
       })
       .catch((error) => {
         console.error("Lỗi:", error);
       });
   }, []);
+
 
   return (
 
@@ -37,24 +41,24 @@ const Search_Doctor = () => {
           />
         </div>
         <ul className="select__hopital-list">
-          {data_BV.map(choosehopital  => (
+          {data_BV?.map(choosehopital => (
             <li className="listItem box_shawdown bob" key={choosehopital.id} >
-            <Link to={"chon-lich/"+choosehopital.id}>
-              <div className="hopotal__box">
-                <div className="hopotal__box-img">
-                  <img src={choosehopital.avatar} alt="" />
-                </div>
-                <div className="hopotal__box-content">
-                  <div className="hopotal__box-content-name name_text">
-                    {choosehopital.name}
+              <Link to={"chon-lich/" + choosehopital.id + "?hospital=" + hospital + "&specialist=" + specialist}>
+                <div className="hopotal__box">
+                  <div className="hopotal__box-img">
+                    <img src={choosehopital.avatar} alt="" />
                   </div>
-                  <div className="hopotal__box-content-addres description">
-                    {choosehopital.diaChi}
+                  <div className="hopotal__box-content">
+                    <div className="hopotal__box-content-name name_text">
+                      {choosehopital.name}
+                    </div>
+                    <div className="hopotal__box-content-addres description">
+                      {choosehopital.diaChi}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          </li>
+              </Link>
+            </li>
           ))}
         </ul>
       </div>

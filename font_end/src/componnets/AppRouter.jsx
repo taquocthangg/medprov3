@@ -27,6 +27,9 @@ import Them_Moi_Chuyen_Khoa from './../pages/Them_Moi_Chuyen_Khoa';
 import GioiThieu from './../pages/GioiThieu';
 import Quytrinh from './../pages/QuyTrinh';
 import DangKy from './FromDangKy/DangKy';
+import Search_Chuyen_Khoa from '../User/Search_Chuyen_Khoa';
+import Search_Doctor from '../User/Search_Doctor';
+import Select_day from '../User/Select_day';
 export default function AppRouter({ setInforUser, setRole_id, inforUser, screenWidth }) {
     return (
 
@@ -59,6 +62,12 @@ export default function AppRouter({ setInforUser, setRole_id, inforUser, screenW
             <Route path='user' element={<User screenWidth={screenWidth} inforUser={inforUser} setInforUser={setInforUser} />} />
 
             <Route path='benh-vien/:getId/them-moi-chuyen-khoa/:getId' element={<Them_Moi_Chuyen_Khoa />} />
+
+
+            <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId' element={<Search_Chuyen_Khoa />} />
+            <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId' element={<Search_Doctor />} />
+            <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId/chon-lich/:getId' element={<Select_day />} />
+
             {/* <Route path='benh-vien/:getId/thembacsi/:getId' element={<Insert_Doctor />} />
             <Route path='/update_Chuyen_Khoa/:getId' element={<Sua_Chuyen_Khoa />} />
             <Route path='/updateUser/:getId' element={<Update_doctor />} />
@@ -71,9 +80,7 @@ export default function AppRouter({ setInforUser, setRole_id, inforUser, screenW
 
             {/* Đặt lịch */}
             {/* <Route path='/chon-benh-vien' element={<Choose />} />
-            <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId' element={<Search_Chuyen_Khoa />} />
-            <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId' element={<Search_Doctor />} />
-            <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId/chon-lich/:getId' element={<Select_day />} /> */}
+        */}
             <Route />
         </Routes>
     )
