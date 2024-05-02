@@ -240,8 +240,9 @@ export const deleteUsers = async (userId) => {
 }
 
 export const create_payment_url = async (amount, id_user) => {
+    console.log(amount)
     return handleRequest(async () => {
-        return await api.post(`auth/create_payment_url`, { amount, id_user })
+        return await api.post(`auth/create_payment_url`, { amount, id_user, bankCode: "", })
     })
 }
 export const vnPay_Return = async (params) => {

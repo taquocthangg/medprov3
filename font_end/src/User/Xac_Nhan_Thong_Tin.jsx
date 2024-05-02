@@ -10,13 +10,12 @@ import { useNavigate } from 'react-router-dom';
 export default function Xac_Nhan_Thong_Tin({ setOpenModal, openModal, infoDatKham, }) {
 
     const status = 'DTT'
-    const navigate = useNavigate
+    const navigate = useNavigate()
     const handleOk = async () => {
         message.success("Chuyển qua vnpay")
         const id_user = localStorage.getItem('idUser')
         const response = await create_payment_url(infoDatKham.price, id_user)
-        console.log(response)
-        navigate(`${response.vnpUrl}`)
+        window.location.href = response.vnpUrl;
     };
     const handleCancel = () => {
         setOpenModal(false);
