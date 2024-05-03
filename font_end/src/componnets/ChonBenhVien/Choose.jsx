@@ -50,7 +50,7 @@ const Choose = () => {
           {data_BV?.map(choosehopital => (
             <li className="listItem box_shawdown bob" key={choosehopital.id} onClick={handleGetId(choosehopital.id)} >
               {checkLogin ?
-                (<Link to={`chon-chuyen-khoa/${choosehopital.id}`}>
+                (<Link to={'chon-chuyen-khoa/' + choosehopital.id + "?hospital=" + choosehopital.id}>
                   <div className="hopotal__box">
                     <div className="hopotal__box-img">
                       <img src={choosehopital.avatar} alt="" />

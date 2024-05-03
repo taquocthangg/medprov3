@@ -1,21 +1,23 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { choosehopital } from '../../data'
 import '../../src/componnets/ChonBenhVien/Choose.css'
-import { Link, useNavigate ,useParams} from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from './../pages/api'
+import { formatPrice } from '../Common/dataFortmat';
 const Search_Chuyen_Khoa = () => {
   const [query, setQuery] = useState("");
   const history = useNavigate()
-  const [data_BV,setData_BV]=useState([]);
+  const [data_BV, setData_BV] = useState([]);
   const { getId } = useParams();
-  localStorage.setItem('id_benhVien', getId);
+  const params = new URLSearchParams(window.location.search);
+  const hospital = params.get('hospital');
   useEffect(() => {
     api
-      .get("/auth/chuyenkhoa/"+getId)
+      .get("/auth/chuyenkhoa/" + getId)
       .then((response) => {
-    
+
         setData_BV(response.data.chuyenkhoa);
-       
+
       })
       .catch((error) => {
         console.error("Lỗi:", error);
@@ -37,24 +39,27 @@ const Search_Chuyen_Khoa = () => {
           />
         </div>
         <ul className="select__hopital-list">
-          {data_BV.map(choosehopital  => (
+          {data_BV.map(choosehopital => (
             <li className="listItem box_shawdown bob" key={choosehopital.id} >
-            <Link to={"chon-bac-si/"+choosehopital.id}>
-              <div className="hopotal__box">
-                <div className="hopotal__box-img">
-                  <img src={choosehopital.avatar} alt="" />
-                </div>
-                <div className="hopotal__box-content">
-                  <div className="hopotal__box-content-name name_text">
-                    {choosehopital.name}
+              <Link to={"chon-bac-si/" + choosehopital.id + "?hospital=" + hospital + "&specialist=" + choosehopital.id} >
+                <div className="hopotal__box">
+                  <div className="hopotal__box-img">
+                    <img src={choosehopital.avatar} alt="" />
                   </div>
-                  <div className="hopotal__box-content-addres description">
-                    {choosehopital.diaChi}
+                  <div className="hopotal__box-content">
+                    <div className="hopotal__box-content-name name_text">
+                      {choosehopital.name}
+                    </div>
+                    <div className="hopotal__box-content-addres description">
+                      {choosehopital.diaChi}
+                    </div>
+                    <div className="hopotal__box-content-addres description">
+                      {formatPrice(choosehopital.price)} VNĐ
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          </li>
+              </Link>
+            </li>
           ))}
         </ul>
       </div>

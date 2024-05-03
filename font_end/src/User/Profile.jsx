@@ -6,7 +6,6 @@ import { BiSolidEdit } from 'react-icons/bi';
 import Model_Update_User from './Model_Update_User.jsx';
 import { MdEmail } from 'react-icons/md';
 export default function Profile({ inforUser, setInforUser }) {
-    console.log(inforUser)
     const [openModal, setOpenModal] = useState();
     const showModal = () => {
         setOpenModal(true)

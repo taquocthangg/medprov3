@@ -39,7 +39,7 @@ export default function Chi_Tiet_Phieu_Kham({ inforPhieuKham, }) {
                             <QRCode
                                 size={256}
                                 style={{ height: "150px", maxWidth: "100%", width: "150px" }}
-                                value='Con chó Khoái'
+                                value='Lan là con chó hehe'
                                 viewBox={`0 0 256 256`}
                             />
                             <div className="show_status">
