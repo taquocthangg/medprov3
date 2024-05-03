@@ -41,8 +41,10 @@ export default function Add_chuyenKhoa() {
   const handleGetDataHopital = async () => {
     const idHopital = localStorage.getItem("idUser")
     const response = await getCurentUser(idHopital);
+
     setDataUser(response?.user)
   }
+  console.log(dataUser)
   useEffect(() => {
     handleGetDataHopital()
   }, [])

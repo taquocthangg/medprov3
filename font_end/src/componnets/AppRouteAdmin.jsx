@@ -37,7 +37,7 @@ export default function AppRouteAdmin() {
                 <Route path='them-lich-kham' element={<Add_lichKham />} />
                 <Route path='ds-lich-kham' element={<Ds_lichKham />} />
                 <Route path='ds-benh-an' element={<List_benhAn />} />
-                <Route path='them-benh-an' element={<Add_benhAn />} />
+                {/* <Route path='them-benh-an' element={<Add_benhAn />} /> */}
                 <Route path='ds-lich-kham-dang-cho' element={<List_lichKhamCho />} />
             </Routes>
 

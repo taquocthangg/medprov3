@@ -38,7 +38,7 @@ export const regiter = async (data) => {
 }
 
 export const updateUser = async (idUser, dataUser) => {
-    console.log(idUser,dataUser)
+   
     return handleRequest(async () => {
         return await api.post(`/auth/updateUser/${idUser}`,dataUser)
     })
@@ -51,7 +51,7 @@ export const themchuyenkhoa = async (id_benhVien, data) => {
 }
 
 export const thembacsi = async (id_chuyenKhoa, data) => {
-    console.log(id_chuyenKhoa)
+    
     return handleRequest(async () => {
         return await api.post(`auth/thembacsi/${id_chuyenKhoa}`,data)
     })
@@ -98,6 +98,13 @@ export const themLichsukham = async (scheduleId,data) => {
 export const layLichsukham = async (getLichSuKhamById,data) => {
     return handleRequest(async () => {
         return await api.post(`auth/laysulichkham/${getLichSuKhamById}`,data)
+    })
+}
+
+export const getAllLichSuKham = async (idDoctor,date) => {
+    console.log(date)
+    return handleRequest(async () => {
+        return await api.post(`auth/getAllLichSuKham/${idDoctor}`,{appointmentDate:date})
     })
 }
 

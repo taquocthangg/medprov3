@@ -321,17 +321,17 @@ export const getLichKham = ({ activateDay, id_doctor }) => new Promise(async (re
         reject(error);
     }
 });
-export const getInfomationChuyenKhoa =({id_chuyenKhoa})=>new Promise (async (resolve , reject )=>{
-    try{
+export const getInfomationChuyenKhoa = ({ id_chuyenKhoa }) => new Promise(async (resolve, reject) => {
+    try {
         const response = await db.Sescription.findByPk(id_chuyenKhoa)
         console.log(response)
         resolve({
-            err:0,
-            mess:response ?"Lấy thông tin chuyên khoa thành công":"Lấy thông tin chuyên khoa thất bại",
-            chuyenKhoa:response
+            err: 0,
+            mess: response ? "Lấy thông tin chuyên khoa thành công" : "Lấy thông tin chuyên khoa thất bại",
+            chuyenKhoa: response
         })
     }
-    catch(e){
+    catch (e) {
         reject(e)
     }
 })
@@ -607,7 +607,33 @@ export const themLichSuKham = ({ scheduleId, hospitalId, doctorId, patientId, ti
     }
 });
 
-const { Op } = require('sequelize');
+export const getAllLichSuKham = ({ id_doctor, appointmentDate }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.MedicalHistory.findAndCountAll({
+            where: {
+                doctorId:id_doctor,
+                appointmentDate:appointmentDate
+            },
+            include: [
+                {
+                    model: db.User,
+                    attributes: ['id', 'name','email','gioiTinh','namSinh','sdt','diaChi'],
+                },
+          
+            ],
+        })
+        console.log(response)
+        resolve({
+            err: response ? 0 : -1,
+            mess:response?"Lấy thông tin bệnh án thành công":"Lấy thông tin bệnh án thất bại",
+            MedicalHistory:response
+        })
+    } catch (e) {
+        reject(e);
+    }
+})
+
+const { Op, where } = require('sequelize');
 export const getLichSuKhamById = ({ getLichSuKhamById, ngay, tenBenhNhan }) => new Promise(async (resolve, reject) => {
     try {
         console.log(getLichSuKhamById)

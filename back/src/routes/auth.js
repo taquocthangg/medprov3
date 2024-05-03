@@ -33,6 +33,7 @@ router.delete('/xoaChuyenKhoa/:id_chuyenKhoa', controller.deleteChuyenKhoaS);
 router.delete('/xoaUser/:userId', controller.deleteUsers);
 //tao viết hàm này
 router.get('/getInfomationChuyenKhoa/:id_chuyenKhoa',controller.getInfomationChuyenKhoa)
+router.post('/getAllLichSuKham/:id_doctor',controller.getAllLichSuKham)
 
 
 router.post('/themsulichkham/:scheduleId', controller.createHistories); // thêm bệnh án
