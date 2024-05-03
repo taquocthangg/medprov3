@@ -58,7 +58,25 @@ export const addNews = (io, { image, title, description, htmlContent, markDownCo
         }
     });
 };
+export const addComments = ({ newsId, userID, content }) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const response = await db.Comment.create({
+                newsId,
+                userID,
+                content,
+            });
 
+            resolve({
+                err: response ? 0 : 1,
+                mess: response ? 'Thêm mới bình luận thành công !!!' : "Bình luận đã tồn tại",
+            });
+        } catch (error) {
+
+            reject(error);
+        }
+    });
+};
 export const getNews = ({ page, limit, order, name, sex, address, ...query }) => new Promise(async (resolve, reject) => {
     try {
         const queries = { raw: true, nest: true }

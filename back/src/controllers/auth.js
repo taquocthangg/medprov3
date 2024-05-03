@@ -335,7 +335,7 @@ export const createPayment = async (req, res) => {
 };
 export const returnPayment = async (req, res) => {
     try {
-        let vnp_Params = req.query;
+        let vnp_Params = req.query.params;
         const paymentUrl = await services.returnPayment({ vnp_Params });
 
         return res.status(200).json(paymentUrl)

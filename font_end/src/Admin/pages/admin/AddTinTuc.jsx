@@ -3,6 +3,7 @@ import MarkDown from '../../../componnets/MarkDown/markDown'
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import TextArea from 'antd/es/input/TextArea'
 import { Flex, Input, Row, Upload, message, Col, ConfigProvider } from 'antd'
+import { uploadImage } from '../../../api';
 const screenWidthNews = window.innerWidth
 const getBase64 = (img, callback) => {
     const reader = new FileReader();
@@ -23,10 +24,10 @@ const beforeUpload = (file) => {
 export default function AddTinTuc() {
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState();
-    const [dataIntroduce,setIntroduce]=useState({
-        titleNews:"",
-        imageNews:"",
-        description:""
+    const [dataIntroduce, setIntroduce] = useState({
+        titleNews: "",
+        imageNews: "",
+        description: ""
     })
 
     const handleChangeDataUser = (key, value) => {
@@ -37,17 +38,16 @@ export default function AddTinTuc() {
             }))
         }
     }
-    const handleChange = (info) => {
-        if (info.file.status === 'uploading') {
-            setLoading(true);
-            return;
-        }
-        if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            getBase64(info.file.originFileObj, (url) => {
-                setLoading(false);
-                setImageUrl(url);
-            });
+    const handleChange = async (info) => {
+        try {
+            const response = await uploadImage(info.file);
+            console.log(response);
+            setImageUrl(response);
+            setIntroduce({ ...dataIntroduce, imageNews: response })
+        } catch (error) {
+            console.error('Lỗi khi tải ảnh lên:', error);
+            message.error('Đã xảy ra lỗi, vui lòng thử lại sau!');
+        } finally {
         }
     };
     const uploadButton = (
@@ -79,20 +79,20 @@ export default function AddTinTuc() {
                     <Row style={{ marginTop: '20px', padding: '35px', boxShadow: '2px 5px 15px rgba(0, 0, 0, 0.2)', border: '0.5px solid #ccc', borderRadius: '15px', backgroundColor: "#fff" }}>
                         <Col span={12}>
                             <Flex className="" style={{ width: '80%' }} vertical gap={10} align='center'>
-                                <Input 
-                                value={dataIntroduce.titleNews}
-                                placeholder='Nhập tiêu đề...'
-                                 maxLength={200}
-                                  showCount 
-                                  onChange={(e)=>handleChangeDataUser("titleNews",e.target.value)}
-                                  />
+                                <Input
+                                    value={dataIntroduce.titleNews}
+                                    placeholder='Nhập tiêu đề...'
+                                    maxLength={200}
+                                    showCount
+                                    onChange={(e) => handleChangeDataUser("titleNews", e.target.value)}
+                                />
                                 <TextArea
                                     style={{ minHeight: '150px' }}
                                     value={dataIntroduce.description}
                                     placeholder='Nhập mô tả ngắn ....'
                                     maxLength={300}
                                     showCount
-                                    onChange={(e)=>handleChangeDataUser("description",e.target.value)}
+                                    onChange={(e) => handleChangeDataUser("description", e.target.value)}
                                 />
                             </Flex>
                         </Col>
@@ -107,11 +107,10 @@ export default function AddTinTuc() {
                                 >
                                     <Upload
                                         name="avatar"
-                                        listType="picture-card"
+                                        listType="picture-circle"
                                         className="avatar-uploader"
                                         showUploadList={false}
-                                        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-                                        beforeUpload={beforeUpload}
+                                        beforeUpload={() => false}
                                         onChange={handleChange}
                                         size="large"
                                     >
@@ -132,7 +131,7 @@ export default function AddTinTuc() {
                             </Flex>
                         </Col>
                     </Row >
-                    <h3 style={{ margin:'30px 20px 20px 15px' }}>
+                    <h3 style={{ margin: '30px 20px 20px 15px' }}>
                         Thêm nội dung bài viết
                     </h3>
 

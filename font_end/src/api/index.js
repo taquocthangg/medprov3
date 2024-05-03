@@ -261,3 +261,30 @@ export const vnPay_Return = async (params) => {
         })
     })
 }
+export const getCurentNews = async (id_tinTuc) => {
+    return handleRequest(async () => {
+        return await api.get(`/getCurentNews/${id_tinTuc}`)
+    })
+}
+export const getCurentNew = async (id_tinTuc) => {
+    return handleRequest(async () => {
+        return await api.get(`/getCurentNews/2`)
+    })
+}
+
+export const getNews = async (params) => {
+    return handleRequest(async () => {
+        return await api.get(`/getNews`, { params })
+    })
+}
+export const addNews = async (data) => {
+    return handleRequest(async () => {
+        return await api.post(`addNews`, { data })
+    })
+}
+export const addComment = async (data) => {
+    console.log(data)
+    return handleRequest(async () => {
+        return await api.post(`addComment`, data)
+    })
+}

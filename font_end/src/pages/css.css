@@ -2,3 +2,79 @@
     display: grid;
     grid-template-columns: 1fr 4fr;
 }
+
+.box_coments {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background-color: #e4ecf3;
+    margin-top: 25px;
+    border-radius: 15px;
+    box-shadow: 8px 8px 30px 0 rgba(177, 196, 218, .35);
+}
+
+.detail_news {
+    max-width: 800px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.format_news_parse p {
+    padding: 10px 0;
+    line-height: 1.3rem;
+    color: #003553;
+}
+
+.box_coments img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.format_news_parse img {
+    max-width: 800px;
+}
+
+.info_user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.info_user span {
+    color: #858585;
+}
+
+.detail_des {
+    border-left: 2px solid #ffb54a;
+    padding: 5px 15px;
+}
+
+.coments_content {
+    width: 100%;
+}
+
+.coments_content_text {
+    font-size: 16px;
+    padding: 10px 0;
+    line-height: 1.3rem;
+}
+
+.ngaycmt {
+    float: right;
+    font-size: 14px;
+    color: #858585;
+}
+
+.detail_back {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    color: #858585;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    cursor: pointer;
+    font-weight: 100;
+}

@@ -18,6 +18,7 @@ const router = express.Router();
 
 const newsRoutes = (io) => {
     router.post('/addNews', controller.addNews(io))
+    router.post('/addComment', controller.addComents)
     router.get('/getNews', controller.getNews)
     router.get('/getCurentNews/:newsId', controller.getCurentNews)
     router.get('/getRates/:newsId', controller.getRates)
