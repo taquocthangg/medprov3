@@ -7,18 +7,36 @@ import { formatDate } from '../Common/dataFortmat';
 import { Image } from 'antd';
 import { Link } from 'react-router-dom';
 const TinTuc = () => {
-    const [data, setData] = useState()
+    const [page, setPage] = useState(1);
+    const [data, setData] = useState([]);
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getNews();
-                setData(response.response.rows)
+                const response = await getNews({ page: page });
+                setData(prevData => [...prevData, ...response.response.rows]);
             } catch (error) {
                 console.error('Error:', error);
             }
         };
-        fetchData()
-    }, [])
+
+        fetchData();
+    }, [page]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+            if (scrollTop + clientHeight >= scrollHeight - 50) {
+                setPage(prevPage => prevPage + 1);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
     console.log(data)
     return (
         <main>
@@ -56,33 +74,21 @@ const TinTuc = () => {
                     </div>
                     <div className="container_sukien2">
                         <div className="sukien2">
-                            {data?.map((item) => (
-                                <div className="content_sukien" key={item.id} >
+                            {data?.slice(1).map((item) => (
+                                <div className="content_sukien" key={item.id}>
                                     <Link to={"/tin-tuc/" + item.id} >
-
                                         <div className="sukien_img">
-                                            <img src={item.image} alt="" srcset="" />
+                                            <img src={item.image} alt="" srcSet="" />
                                         </div>
                                         <div className="sukien_text">
                                             <p className="tieude_sukien2">{item.title}</p>
-                                            <p classname="sukien_mota">{item.description}</p>
+                                            <p className="sukien_mota">{item.description}</p>
                                             <p className="sukien_time">{formatDate(item.createdAt)}</p>
                                         </div>
                                     </Link>
                                 </div>
-
                             ))}
-                            <div className="content_stt">
-                                <ul class="pagition">
-                                    <li class="page_item icon_item page_itemn"><MdArrowBackIosNew /></li>
-                                    <li class="page_item page_item1"><a class="page1" href="#">1</a></li>
-                                    <li class="page_item page_itemn"><a href="#">2</a></li>
-                                    <li class="page_item page_itemn"><a href="#">3</a></li>
-                                    <li class="page_item page_itemn"><a href="#">4</a></li>
-                                    <li class="page_item page_itemn"><a href="#">5</a></li>
-                                    <li class="page_item icon_item page_itemn"><MdArrowForwardIos /></li>
-                                </ul>
-                            </div>
+
                         </div>
 
                     </div>
