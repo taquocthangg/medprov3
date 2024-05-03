@@ -38,7 +38,11 @@ export const regiter = async (data) => {
 }
 
 export const updateUser = async (idUser, dataUser) => {
+<<<<<<< HEAD
+   
+=======
     console.log(idUser, dataUser)
+>>>>>>> b7916befeda51d0928cc6f90208dce28eb91e8fa
     return handleRequest(async () => {
         return await api.post(`/auth/updateUser/${idUser}`, dataUser)
     })
@@ -51,7 +55,7 @@ export const themchuyenkhoa = async (id_benhVien, data) => {
 }
 
 export const thembacsi = async (id_chuyenKhoa, data) => {
-    console.log(id_chuyenKhoa)
+    
     return handleRequest(async () => {
         return await api.post(`auth/thembacsi/${id_chuyenKhoa}`, data)
     })
@@ -101,7 +105,18 @@ export const layLichsukham = async (getLichSuKhamById, data) => {
     })
 }
 
+<<<<<<< HEAD
+export const getAllLichSuKham = async (idDoctor,date) => {
+    console.log(date)
+    return handleRequest(async () => {
+        return await api.post(`auth/getAllLichSuKham/${idDoctor}`,{appointmentDate:date})
+    })
+}
+
+export const suaChuyenKhoa = async (idChuyenKhoa,data) => {
+=======
 export const suaChuyenKhoa = async (idChuyenKhoa, data) => {
+>>>>>>> b7916befeda51d0928cc6f90208dce28eb91e8fa
     return handleRequest(async () => {
         return await api.post(`auth/suaChuyenKhoa/${idChuyenKhoa}`, data)
     })

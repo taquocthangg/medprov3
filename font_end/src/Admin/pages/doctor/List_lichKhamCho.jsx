@@ -27,50 +27,6 @@ export default function List_lichKhamCho() {
       setDataSchedule(response?.schedule)
     }
   }
-
-  const handleDeleteHospital = async (idTimeSlot) => {
-    const indexToDelete = dataSchedule.findIndex(hospital => hospital.id === idTimeSlot);
-    if (indexToDelete !== -1) {
-      const response = await deleteLichKham(idTimeSlot)
-      if (response?.mess === "Xóa lịch khám thành công") {
-        const newData = [...dataSchedule]; // Tạo một bản sao của mảng dataHospital
-        newData.splice(indexToDelete, 1);
-        setDataSchedule(newData);
-        message.success("Xóa lịch khám thành công")
-      }
-      else {
-        message.warning(response?.mess)
-      }
-    }
-  }
-
-  const showDeleteConfirm = (idTimeSlot) => {
-    confirm({
-      title: 'Cảnh báo',
-      icon: <ExclamationCircleFilled />,
-      content: 'Dữ liệu sẽ mất và không thể khôi phục',
-      okText: 'Có',
-      okType: 'danger',
-      cancelText: 'Không',
-      onOk() {
-        try {
-
-          handleDeleteHospital(idTimeSlot)
-
-        }
-        catch (e) {
-          message.error(e)
-        }
-      },
-      onCancel() {
-
-      },
-    });
-  }
-
-  const handleRigthClickDelete = (item) => {
-    showDeleteConfirm(item?.id)
-  }
   const handleDataModal=(item)=>{
     setOpenModal(true)
     setDataModal(item)

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Avatar, Button, Modal, Col, Row, Flex, Input, ConfigProvider, message } from 'antd';
 
 import '../../../css/admin/Insert_admin.css'
-import { getCurent } from '../../../api';
+import { getCurent, themLichsukham } from '../../../api';
 import TextArea from 'antd/es/input/TextArea';
-export default function Modal_lichKhamCho({ openModal, setOpenModal, dataModal,dataSchedule,setDataSchedule }) {
+export default function Modal_lichKhamCho({ openModal, setOpenModal, dataModal, dataSchedule, setDataSchedule }) {
   console.log(dataModal)
 
   const idDoctor = localStorage.getItem("idUser")
@@ -18,44 +18,41 @@ export default function Modal_lichKhamCho({ openModal, setOpenModal, dataModal,d
     diagnosis: "", // chuẩn đoán
     medication: "" // đơn thuốc
   })
-  
-  const handleUpdate = async () => {
-    console.log(dataSchedules)
-
-    // const updateDate = dataHopitals.map((item) => {
-    //     if (item?.id === dataHopital?.id) {
-    //         const newData = {
-    //             name: dataUpdate.name || item.name,
-    //             description: dataUpdate.description || item.description,
-    //             price: dataUpdate.price || item.price,
-
-    //         }
-    //         return { ...item, ...newData }
-    //     }
-    //     return item;
-    // })
-    // const response = await suaChuyenKhoa(dataHopital?.id, dataUpdate)
-    // console.log(response)
-    // if (response?.message === "Cập nhật chuyên khoa thành công") {
-    //     message.success(response?.message)
-    //     setDataHospital(updateDate)
-    //     setDateUpdate({
-    //         name: "",
-    //         description: "",
-    //         price: "",
-    //         id_benhVien:idHopital
-    //     })
-    //     setOpenModal(false);
-    // }
-    // else {
-    //     message.warning(response?.message)
-    //     setOpenModal(true)
-    // }
-
-
+  console.log(dataSchedules)
+  const handleDeleteHospital = async () => {
+    if (dataSchedules.diagnosis && dataSchedules.medication) {
+      const indexToDelete = dataSchedule.findIndex(item => item.id === dataModal?.id);
+      if (indexToDelete !== -1) {
+        const response = await themLichsukham(dataModal?.id, dataSchedules)
+        console.log(response)
+        if (response?.mess === "Thêm lịch sử khám mới thành công") {
+          const newData = [...dataSchedule]; // Tạo một bản sao của mảng dataHospital
+          newData.splice(indexToDelete, 1);
+          setDataSchedule(newData);
+          message.success("Thêm lịch sử khám thành công")
+          setOpenModal(false)
+          setDataSchedules({
+            hospitalId: "",
+            doctorId: idDoctor,
+            patientId: dataModal?.Users?.id,
+            timeSlot: dataModal?.timeSlot,
+            appointmentDate: dataModal?.activateDay,
+            specialtyId: "",
+            diagnosis: "", // chuẩn đoán
+            medication: "" // đơn thuốc
+          })
+        }
+        else {
+          message.warning(response?.mess)
+        }
+      }
+    }
+    else{
+      message.warning("Vui lòng điền đầy đủ thông tin")
+    }
   }
   const handleOk = () => {
-    handleUpdate()
+    handleDeleteHospital()
     setOpenModal(true);
   };
   const handleCancel = () => {
@@ -74,6 +71,9 @@ export default function Modal_lichKhamCho({ openModal, setOpenModal, dataModal,d
     const response = await getCurent(idDoctor)
     handleChangeDataUser("hospitalId", response?.user?.id_benhVien)
     handleChangeDataUser("specialtyId", response?.user?.id_chuyenKhoa)
+    handleChangeDataUser("patientId", dataModal?.Users?.id)
+    handleChangeDataUser("timeSlot", dataModal?.timeSlot)
+    handleChangeDataUser("appointmentDate", dataModal?.activateDay)
   }
   useEffect(() => {
     handleGetInfDoctor()
@@ -115,7 +115,7 @@ export default function Modal_lichKhamCho({ openModal, setOpenModal, dataModal,d
         <Flex vertical className='form_InsertHopital'  >
           <p className='lable_InsertHopital'  >Nhập đơn thuốc:<sup>*</sup></p>
           <TextArea
-            value={dataSchedules.medication}
+            value={dataSchedules?.medication}
             className='inout_InsertHopital'
             onChange={(e) => handleChangeDataUser("medication", e.target.value)}
           />
@@ -123,7 +123,7 @@ export default function Modal_lichKhamCho({ openModal, setOpenModal, dataModal,d
         <Flex vertical className='form_InsertHopital'  >
           <p className='lable_InsertHopital'  >Nhập chuẩn đoán bệnh<sup>*</sup></p>
           <TextArea
-            value={dataSchedules.diagnosis}
+            value={dataSchedules?.diagnosis}
             className='inout_InsertHopital'
             onChange={(e) => handleChangeDataUser("diagnosis", e.target.value)}
           />

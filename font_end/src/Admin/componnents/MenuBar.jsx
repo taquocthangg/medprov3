@@ -132,10 +132,6 @@ const menuConfig = {
                 icon: <ShopOutlined />,
                 items: [
                     {
-                        key: "/them-benh-an",
-                        label: "Thêm bệnh án"
-                    },
-                    {
                         key: "/ds-benh-an",
                         label: "Danh sách bệnh án"
                     }
