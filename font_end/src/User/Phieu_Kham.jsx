@@ -8,9 +8,9 @@ import Da_Huy from './Da_Huy'
 export default function Phieu_Kham() {
     return (
         <div className='main_profile'>
-            <h4 style={{ marginBottom: '20px' }}>
+            <h2 style={{ marginBottom: '20px' }}>
                 Danh sách phiếu khám bệnh
-            </h4>
+            </h2>
             <ConfigProvider
                 theme={{
                     token: {

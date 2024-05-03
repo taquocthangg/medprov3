@@ -36,8 +36,8 @@ export const getCurent = async (req, res) => {
 export const updateUserController = async (req, res) => {
     try {
         const fileData = req.file;
-
-        const image = fileData?.path;
+        const avatar = req.body.image;
+        const image = fileData?.path ? fileData?.path : avatar;
         const userId = req.params.userId;
         const { name, newEmail, newPassword, gioiTinh, sdt, diaChi, namSinh } = req.body;
         const result = await services.updateUser({ userId, name, newEmail, newPassword, namSinh, gioiTinh, sdt, diaChi, image });

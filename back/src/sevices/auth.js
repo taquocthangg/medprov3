@@ -1028,11 +1028,11 @@ export const returnPayment = ({ vnp_Params }) => new Promise(async (resolve, rej
         let hmac = crypto.createHmac("sha512", secretKey);
         let signed = hmac.update(Buffer.from(signData, 'utf-8')).digest("hex");
 
-        if (secureHash === signed) {
+        if (vnp_Params['vnp_ResponseCode'] == "00") {
             //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
             resolve({
                 err: 0,
-                mess: secureHash === signed ? 'Giao dịch thất bại' : 'Thanh Toán thành công',
+                mess: secureHash === signed ? 'Thanh Toán thành công' : 'Thanh Toán thành công',
                 code: vnp_Params['vnp_ResponseCode']
             });
             // res.render('success', { code: vnp_Params['vnp_ResponseCode'] })

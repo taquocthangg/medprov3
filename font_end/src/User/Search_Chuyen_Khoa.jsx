@@ -4,6 +4,7 @@ import '../../src/componnets/ChonBenhVien/Choose.css'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import api from './../pages/api'
 import { formatPrice } from '../Common/dataFortmat';
+import logo from '../img/logo.webp'
 const Search_Chuyen_Khoa = () => {
   const [query, setQuery] = useState("");
   const history = useNavigate()
@@ -44,7 +45,7 @@ const Search_Chuyen_Khoa = () => {
               <Link to={"chon-bac-si/" + choosehopital.id + "?hospital=" + hospital + "&specialist=" + choosehopital.id} >
                 <div className="hopotal__box">
                   <div className="hopotal__box-img">
-                    <img src={choosehopital.avatar} alt="" />
+                    <img src={choosehopital.avatar ? choosehopital.avatar : logo} alt="" />
                   </div>
                   <div className="hopotal__box-content">
                     <div className="hopotal__box-content-name name_text">

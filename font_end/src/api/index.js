@@ -69,9 +69,9 @@ export const xacnhanlichkham = async (id_lichkham) => {
     })
 }
 
-export const datlich = async (id_lichkham) => {
+export const datlich = async (id_lichkham, id_benhNhan) => {
     return handleRequest(async () => {
-        return await api.post(`auth/datlich/${id_lichkham}`)
+        return await api.post(`auth/datlich/${id_lichkham}`, id_benhNhan)
     })
 }
 

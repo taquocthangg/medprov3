@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react';
-// import { choosehopital } from '../../data'
 import { DatePicker, Modal, message } from "antd";
 import '../../src/componnets/ChonBenhVien/Choose.css'
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import api from './../pages/api'
 import io from 'socket.io-client';
 import moment from 'moment';
 import { getCurentUser, getInfChuyenKhoa } from '../api';
 import Xac_Nhan_Thong_Tin from './Xac_Nhan_Thong_Tin';
 import { formatDateNoHours } from '../Common/dataFortmat';
-import { EditOutlined, DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
-
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import noDate from '../img/noDate.png'
 const Select_day = () => {
   const { confirm } = Modal;
 
   const socket = io('http://localhost:5000');
-  const [query, setQuery] = useState("");
   const history = useNavigate()
-  const [data_BV, setData_BV] = useState([]);
-  const [selectedScheduleId, setSelectedScheduleId] = useState(null);
 
   const params = new URLSearchParams(window.location.search);
   const { getId } = useParams();
+  localStorage.setItem('idDoctor', getId)
   const hospital = params.get('hospital');
   const specialist = params.get('specialist');
   const idUser = localStorage.getItem('idUser')
@@ -29,16 +26,16 @@ const Select_day = () => {
   const [openModal, setOpenModal] = useState();
 
   useEffect(() => {
-
-    socket.on('getLichKham', (data) => {
-      console.log('getLichKham :', data);
-      // Xử lý dữ liệu từ server nếu cần
-    });
-    const activateDay = '2024-05-02'
     const userId = localStorage.getItem('idUser');
-    const doctorId = getId; // Thay doctorId bằng dữ liệu thích hợp
-    socket.emit('joinGroupAndGetSchedule', { userId, doctorId, activateDay });
-  })
+    const doctorId = getId;
+    socket.emit('joinGroupAndGetSchedule', { userId, doctorId });
+
+  },)
+  useEffect(() => {
+    const userId = localStorage.getItem('idUser');
+    socket.emit('setUserId', { userId });
+
+  },)
   useEffect(() => {
     const fetchData = async () => {
       const inforDotor = await getCurentUser(getId);
@@ -124,14 +121,16 @@ const Select_day = () => {
           const userId = localStorage.getItem('idUser');
           const doctorId = getId;
           socket.emit('selectSchedule', { userId, doctorId, scheduleId: item.id });
-
+          localStorage.setItem('scheduleId', item.id);
         }
         catch (e) {
           message.error(e)
         }
       },
       onCancel() {
-
+        const userId = localStorage.getItem('idUser');
+        const doctorId = getId;
+        socket.emit('scheduleSelectionCancelled', { userId, doctorId });
       },
     });
   }
@@ -142,35 +141,43 @@ const Select_day = () => {
         <p onClick={() => { history(-1) }}>Trang Chủ </p> {'>'}  <p onClick={() => { history(-1) }}>Chọn Bệnh Viện</p> {'>'} <p onClick={() => { history(-1) }} >Chọn chuyên khoa</p> {'>'}<p onClick={() => { history(-1) }}>Chọn bác sĩ</p> {'>'} <p>Đặt lịch</p>
       </div>
       <div className="select__hopital">
-        <ul className="select__hopital-list">
-          <div className="basi_body_add">
-            <label htmlFor="username">Chọn ngày : </label>
+        <div className="basi_body_add">
+          <div className="date_time_kham">
+            <label style={{
+              fontWeight: '700'
+            }} htmlFor="username">Chọn ngày khám: </label>
             <DatePicker
               selected={selectedDate}
               minDate={moment().startOf('day')}
               onChange={handleDateChange}
-              disabledDate={disabledDate} />
-            <div className="bacsi_body_div">
-
-              <p>Thông tin lịch khám:</p>
-              {(Array.isArray(scheduleData.schedule) && scheduleData.schedule.length > 0) ? (
-
-                scheduleData.schedule.map(item => (
-                  <div key={item.id} onClick={() => showDeleteConfirm(item)}  >
-                    <button className="basi_body_time-btn">
-                      {item.timeSlot}
-                    </button>
-                  </div>
-                ))
-              ) : (
-                <p>Không có lịch khám.</p>
-              )}
-            </div>
-
+              disabledDate={disabledDate}
+              placeholder='Chọn ngày khám' />
           </div>
-        </ul>
+          <p style={{
+            marginTop: '30px', textAlign: 'center'
+          }}>Thông tin lịch khám:</p>
+          <div className="bacsi_body_div">
+
+            {(Array.isArray(scheduleData.schedule) && scheduleData.schedule.length > 0) ? (
+
+              scheduleData.schedule.map(item => (
+                <div className='box_chon_lcih_kham' key={item.id} onClick={() => showDeleteConfirm(item)}  >
+                  <button className="basi_body_time-btn">
+                    {item.timeSlot}
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="no_date">
+                <p>Hiện chưa có lịch khám nào</p>
+                <img src={noDate} alt="" />
+              </div>
+            )}
+          </div>
+
+        </div>
       </div>
-      <Xac_Nhan_Thong_Tin setOpenModal={setOpenModal} openModal={openModal} infoDatKham={infoDatKham} />
+      <Xac_Nhan_Thong_Tin setOpenModal={setOpenModal} openModal={openModal} infoDatKham={infoDatKham} getId={getId} />
     </main>
 
   )

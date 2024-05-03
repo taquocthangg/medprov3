@@ -7,7 +7,9 @@ import { ConfigProvider, Modal, message } from 'antd';
 import { formatPrice } from '../Common/dataFortmat';
 import { create_payment_url } from '../api';
 import { useNavigate } from 'react-router-dom';
-export default function Xac_Nhan_Thong_Tin({ setOpenModal, openModal, infoDatKham, }) {
+import { io } from 'socket.io-client';
+export default function Xac_Nhan_Thong_Tin({ setOpenModal, openModal, infoDatKham, getId }) {
+    const socket = io('http://localhost:5000');
 
     const status = 'DTT'
     const navigate = useNavigate()
@@ -18,6 +20,10 @@ export default function Xac_Nhan_Thong_Tin({ setOpenModal, openModal, infoDatKha
         window.location.href = response.vnpUrl;
     };
     const handleCancel = () => {
+        console.log("first")
+        const userId = localStorage.getItem('idUser');
+        const doctorId = getId;
+        socket.emit('cancelScheduleSelection', { userId, doctorId });
         setOpenModal(false);
     };
     return (

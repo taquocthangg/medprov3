@@ -52,6 +52,71 @@
     transition: all 0.3s ease-in-out;
 }
 
+.select__hopital {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.date_time_kham {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.bacsi_body_div {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    min-width: 660px;
+    max-width: 660px;
+}
+
+.basi_body_time-btn {
+    cursor: pointer;
+    background-color: #3de68c;
+    color: #fff;
+    padding: 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-top: 10px;
+    min-width: 150px;
+}
+
+.no_date {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.no_date p {
+    margin-top: 50px;
+    font-weight: 700;
+    font-size: 20px;
+    color: #eb3131;
+}
+
+.no_date img {
+    width: 180px;
+    height: 180px;
+}
+
+.basi_body_time-btn:hover {
+    background-color: #1da1f2;
+    transition: 0.5s ease-in-out;
+}
+
+.box_chon_lcih_kham {
+    display: flex;
+}
+
 @media screen and (max-width: 960px) {
     .format__header {
         background-color: #1da1f2 !important;
