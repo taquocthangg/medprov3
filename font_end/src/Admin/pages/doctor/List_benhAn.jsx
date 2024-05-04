@@ -3,7 +3,7 @@ import '../../../css/admin/Insert_admin.css'
 import { Tooltip, Avatar, Flex, ConfigProvider, Table, Button, Modal, message, DatePicker, Col, Row } from 'antd';
 import QueryAdmin from './../../service/QueryContext';
 import viVN from 'antd/es/locale/vi_VN';
-import { EditOutlined, DeleteOutlined, ExclamationCircleFilled,PrinterFilled } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, ExclamationCircleFilled, PrinterFilled } from '@ant-design/icons';
 import { deleteUser, getAllBacSiByBenhVien, getAllLichSuKham, getBacSiByChuyenKhoa } from '../../../api';
 import { formatDateNoHours } from '../../../Common/dataFortmat';
 import Modal_BenhAn from './Modal_BenhAn';
@@ -193,15 +193,18 @@ export default function List_benhAn() {
                 },
               }}
             >
-              <Button
-                style={{ border: 'none', background: 'none' }}
-                onClick={() => showModal(record)}
+              <Tooltip placement="topLeft" title={'In bệnh án'}>
+                <Button
+                  style={{ border: 'none', background: 'none' }}
+                  onClick={() => showModal(record)}
 
-              >
-                <PrinterFilled style={{ fontSize: '20px', color: '#008CFF' }}/>
-          
 
-              </Button>
+                >
+                  <PrinterFilled style={{ fontSize: '20px', color: '#008CFF' }} />
+
+
+                </Button>
+              </Tooltip>
 
             </ConfigProvider>
 
@@ -254,7 +257,8 @@ export default function List_benhAn() {
             },
           }}
         >
-          <Table columns={columns}
+          <Table
+            columns={columns}
             dataSource={data}
             pagination={{ pageSize: 5 }}
             bordered={true}

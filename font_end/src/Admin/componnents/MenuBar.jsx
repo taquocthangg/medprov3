@@ -157,7 +157,7 @@ export default function MenuBar({ role_id }) {
                 <SideMenu subMenus={subMenus} additionalMenuItems={additionalMenuItems} />
             </div>
             <div style={{ marginLeft: '250px', width: screenWidth, minHeight: '60vh' }}>
-                <AppRouteAdmin />
+                <AppRouteAdmin role_id={role_id}/>
             </div>
         </div>
     );

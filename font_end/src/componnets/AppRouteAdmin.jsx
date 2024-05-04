@@ -16,19 +16,20 @@ import List_benhAn from './../Admin/pages/doctor/List_benhAn';
 import Add_benhAn from './../Admin/pages/doctor/Add_benhAn';
 import UpdateNewsAdmin from '../Admin/pages/admin/UpdateNewsAdmin';
 import List_lichKhamCho from '../Admin/pages/doctor/List_lichKhamCho';
+import Dashboard from '../Admin/pages/Dashboard';
 
-export default function AppRouteAdmin() {
+export default function AppRouteAdmin({ role_id }) {
 
     return (
         <div>
-
             <Routes>
+                <Route path='bang-dieu-khien' element={<Dashboard role_id={role_id} />} />
                 <Route path='tin-tuc' element={<AddTinTuc />} />
                 <Route path='benh-viens' element={<Add_Benh_Vien />} />
                 <Route path='ds-benh-vien' element={<ListHospital />} />
                 <Route path='ds-tin-tuc' element={<ListNews />} />
                 <Route path='ds-tin-tuc/update-tin-tuc/:idNews' element={<UpdateNewsAdmin />} />
-                <Route path='thong-ke' element={<Statistical />} />
+                <Route path='thong-ke' element={<Statistical role_id={role_id} />} />
                 <Route path='thong-bao' element={<Notification />} />
                 <Route path='them-chuyen-khoa' element={<Add_chuyenKhoa />} />
                 <Route path='ds-chuyen-khoa' element={<List_chuyenKhoa />} />

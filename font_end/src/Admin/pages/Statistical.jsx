@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ChartAdmin from '../../componnets/chart/chartAdmin'
 import '../../css/admin/Insert_admin.css'
-import { Flex } from 'antd';
-//LineChartWithReferenceLines
-//CustomActiveShapePieChart
+import { Flex, message } from 'antd';
+import StatisticalDoctor from './doctor/StatisticalDoctor';
+import StastisticalHospital from './hospital/StastisticalHospital';
 const screenWidth = window.innerWidth
 const dataBar = [
   {
@@ -67,19 +67,40 @@ const data = [
   },
 
 ]
-export default function Statistical() {
+
+export default function Statistical({ role_id }) {
+  console.log(role_id)
+  const handleLoadComponetChart = (role_id) => {
+    console.log(role_id)
+    switch (role_id) {
+      case "R2":
+        return <StastisticalHospital />
+      case "R3":
+        return <StatisticalDoctor />
+      // Nhiều case khác nếu cần
+      default:
+        return (
+          message.success("Không lấy được quyền sử dụng của tài khoản này")
+        )
+    }
+  }
+
+  useEffect(() => {
+    handleLoadComponetChart(role_id)
+  }, [])
   return (
     <div style={{ padding: '25px 100px', width: `${screenWidth}` }} className='container_addBenhVien'>
-      <div className="content_addBenhVien">
-        <Flex vertical >
-          <div className="" style={{ width: '800px', height: '300px' }}>
+      {/* <div className="content_addBenhVien"> */}
+      <Flex vertical >
+        {/* <div className="" style={{ width: '800px', height: '300px' }}>
             <ChartAdmin name='line' data={dataBar} />
           </div>
           <div className="" style={{ width: '400px', height: '300px' }}>
             <ChartAdmin name='circle' data={data} />
-          </div>
-        </Flex>
-      </div>
+          </div> */}
+        {handleLoadComponetChart(role_id)}
+      </Flex>
+      {/* </div> */}
     </div>
   )
 }
