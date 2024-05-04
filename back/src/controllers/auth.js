@@ -264,7 +264,7 @@ export const getSearchDoctor = async (req, res) => {
         const { id_benhvien } = req.params;
         const { name, sdt } = req.body;
         const response = await services.getSearchDoctor({ id_benhvien, name, sdt })
-        
+
         return res.status(200).json(response)
     } catch (error) {
         res.status(500).json({ error: 'Lỗi trong quá trình lấy bệnh án' });
@@ -393,8 +393,3 @@ export const returnPayment = async (req, res) => {
 
 
 
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 92872b1a2e08a6f73bbf8775fa0cba517f62aaee

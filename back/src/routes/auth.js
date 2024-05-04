@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 92872b1a2e08a6f73bbf8775fa0cba517f62aaee
 import * as controller from '../controllers'
 import express from 'express'
 import uploadCloud from '../mid/cloudinary-upload';
@@ -36,19 +32,16 @@ router.delete('/xoalich/:scheduleId', controller.deleteLichKham);
 router.delete('/xoaChuyenKhoa/:id_chuyenKhoa', controller.deleteChuyenKhoaS);
 router.delete('/xoaUser/:userId', controller.deleteUsers);
 //tao viết hàm này
-<<<<<<< HEAD
-router.get('/getInfomationChuyenKhoa/:id_chuyenKhoa',controller.getInfomationChuyenKhoa)
-router.post('/getAllLichSuKham/:id_doctor',controller.getAllLichSuKham)
-router.post('/getAllLichSuKhamStatus/:id_doctor',controller.getAllLichSuKhamStatus)
-router.post('/getSearchDoctor/:id_benhvien',controller.getSearchDoctor)
+router.get('/getInfomationChuyenKhoa/:id_chuyenKhoa', controller.getInfomationChuyenKhoa)
+router.post('/getAllLichSuKham/:id_doctor', controller.getAllLichSuKham)
+router.post('/getAllLichSuKhamStatus/:id_doctor', controller.getAllLichSuKhamStatus)
+router.post('/getSearchDoctor/:id_benhvien', controller.getSearchDoctor)
 //get Doanh Thu 
-router.get('/getDoanhThuHospital/:id_benhvien',controller.getDoanhThuHospital)
-=======
+router.get('/getDoanhThuHospital/:id_benhvien', controller.getDoanhThuHospital)
 router.get('/getInfomationChuyenKhoa/:id_chuyenKhoa', controller.getInfomationChuyenKhoa)
 router.post('/getAllLichSuKham/:id_doctor', controller.getAllLichSuKham)
 
 
->>>>>>> 92872b1a2e08a6f73bbf8775fa0cba517f62aaee
 router.post('/themsulichkham/:scheduleId', controller.createHistories); // thêm bệnh án
 //diagnosis  chuẩn đoán
 //Có bao nhiêu bác sĩ

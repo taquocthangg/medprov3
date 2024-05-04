@@ -100,28 +100,24 @@ export const layLichsukham = async (getLichSuKhamById, data) => {
     })
 }
 
-<<<<<<< HEAD
-export const getAllLichSuKham = async (idDoctor,date) => {
-=======
+
 
 export const getAllLichSuKham = async (idDoctor, date) => {
-    console.log(date)
->>>>>>> 92872b1a2e08a6f73bbf8775fa0cba517f62aaee
     return handleRequest(async () => {
         return await api.post(`auth/getAllLichSuKham/${idDoctor}`, { appointmentDate: date })
     })
 }
 
-<<<<<<< HEAD
-export const getAllLichSuKhamStatus = async (idDoctor,data) => {
+
+export const getAllLichSuKhamStatus = async (idDoctor, data) => {
     return handleRequest(async () => {
-        return await api.post(`auth/getAllLichSuKhamStatus/${idDoctor}`,{status:data})
+        return await api.post(`auth/getAllLichSuKhamStatus/${idDoctor}`, { status: data })
     })
 }
 
-export const getSearchDoctor = async (idBenhVien,data) => {
+export const getSearchDoctor = async (idBenhVien, data) => {
     return handleRequest(async () => {
-        return await api.post(`auth/getSearchDoctor/${idBenhVien}`,data)
+        return await api.post(`auth/getSearchDoctor/${idBenhVien}`, data)
     })
 }
 
@@ -130,8 +126,7 @@ export const getDoanhThu = async (idBenhVien) => {
         return await api.get(`auth/getDoanhThuHospital/${idBenhVien}`)
     })
 }
-=======
->>>>>>> 92872b1a2e08a6f73bbf8775fa0cba517f62aaee
+
 
 export const suaChuyenKhoa = async (idChuyenKhoa, data) => {
     return handleRequest(async () => {
