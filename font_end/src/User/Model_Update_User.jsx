@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Avatar, Button, Modal, Col, Row, Flex, Input, ConfigProvider, message, Radio, Dropdown, DatePicker, Upload } from 'antd';
 import viVN from 'antd/es/locale/vi_VN';
 import { LoadingOutlined, PlusOutlined, DownOutlined } from '@ant-design/icons';
-import { getCurentUser, getUser, updateUser } from '../api';
+import { getCurentUser, getUser, updateUser, uploadImage } from '../api';
 const getBase64 = (img, callback) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => callback(reader.result));
@@ -28,13 +28,14 @@ export default function Model_Update_User({ openModal, setOpenModal, inforUser, 
         email: "",
         sdt: "",
         diaChi: "",
-        avatar: "",
+        image: "",
         gioiTinh: "Nam",
         namSinh: "",
         password: ""
     })
     const handleOk = async () => {
         const response = await updateUser(inforUser.id, dataUpdate)
+        console.log(response)
         message.success(response.message)
         setOpenModal(false);
         const inforUser_updater = await getCurentUser(inforUser.id)
@@ -56,6 +57,9 @@ export default function Model_Update_User({ openModal, setOpenModal, inforUser, 
     const onChangeDate = (date, dateString) => {
         handleChangeDataUser('namSinh', dateString);
     };
+
+    const [uploading, setUploading] = useState(false);
+
     const uploadButton = (
         <button
             style={{
@@ -65,7 +69,7 @@ export default function Model_Update_User({ openModal, setOpenModal, inforUser, 
             }}
             type="button"
         >
-            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+            {uploading ? <LoadingOutlined /> : <PlusOutlined />}
             <div
                 style={{
                     marginTop: 8,
@@ -76,17 +80,18 @@ export default function Model_Update_User({ openModal, setOpenModal, inforUser, 
             </div>
         </button>
     );
-    const handleChange = (info) => {
-        if (info.file.status === 'uploading') {
-            setLoading(true);
-            return;
-        }
-        if (info.file.status === 'done') {
-            // Get this url from response in real world.
-            getBase64(info.file.originFileObj, (url) => {
-                setLoading(false);
-                setImageUrl(url);
-            });
+    const handleChange = async (info) => {
+        setUploading(true);
+        try {
+            const response = await uploadImage(info.file);
+            console.log(response);
+            setImageUrl(response);
+            setDateUpdate({ ...dataUpdate, image: response })
+        } catch (error) {
+            console.error('Lỗi khi tải ảnh lên:', error);
+            message.error('Đã xảy ra lỗi, vui lòng thử lại sau!');
+        } finally {
+            setUploading(false);
         }
     };
     return (
@@ -189,10 +194,10 @@ export default function Model_Update_User({ openModal, setOpenModal, inforUser, 
                                     listType="picture-circle"
                                     className="avatar-uploader"
                                     showUploadList={false}
-                                    action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
-                                    beforeUpload={beforeUpload}
+                                    beforeUpload={() => false}
                                     onChange={handleChange}
                                     size="large"
+                                    loading={uploading}
                                 >
                                     {imageUrl ? (
                                         <img

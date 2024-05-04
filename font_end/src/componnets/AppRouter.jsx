@@ -31,6 +31,7 @@ import Search_Chuyen_Khoa from '../User/Search_Chuyen_Khoa';
 import Search_Doctor from '../User/Search_Doctor';
 import Select_day from '../User/Select_day';
 import VnPay_return from '../User/VnPay_return';
+import Detail_tinTuc from '../pages/Detail_tinTuc';
 export default function AppRouter({ setInforUser, setRole_id, inforUser, screenWidth }) {
     return (
 
@@ -69,6 +70,7 @@ export default function AppRouter({ setInforUser, setRole_id, inforUser, screenW
             <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId' element={<Search_Doctor />} />
             <Route path='/chon-benh-vien/chon-chuyen-khoa/:getId/chon-bac-si/:getId/chon-lich/:getId' element={<Select_day />} />
             <Route path='/vnpay_return' element={<VnPay_return />} />
+            <Route path='/tin-tuc/:id_tinTuc' element={<Detail_tinTuc />} />
 
             {/* <Route path='benh-vien/:getId/thembacsi/:getId' element={<Insert_Doctor />} />
             <Route path='/update_Chuyen_Khoa/:getId' element={<Sua_Chuyen_Khoa />} />

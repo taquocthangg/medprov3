@@ -50,7 +50,7 @@ export const themchuyenkhoa = async (id_benhVien, data) => {
 }
 
 export const thembacsi = async (id_chuyenKhoa, data) => {
-    
+
     return handleRequest(async () => {
         return await api.post(`auth/thembacsi/${id_chuyenKhoa}`, data)
     })
@@ -68,9 +68,9 @@ export const xacnhanlichkham = async (id_lichkham) => {
     })
 }
 
-export const datlich = async (id_lichkham) => {
+export const datlich = async (id_lichkham, id_benhNhan) => {
     return handleRequest(async () => {
-        return await api.post(`auth/datlich/${id_lichkham}`)
+        return await api.post(`auth/datlich/${id_lichkham}`, id_benhNhan)
     })
 }
 
@@ -100,12 +100,19 @@ export const layLichsukham = async (getLichSuKhamById, data) => {
     })
 }
 
+<<<<<<< HEAD
 export const getAllLichSuKham = async (idDoctor,date) => {
+=======
+
+export const getAllLichSuKham = async (idDoctor, date) => {
+    console.log(date)
+>>>>>>> 92872b1a2e08a6f73bbf8775fa0cba517f62aaee
     return handleRequest(async () => {
-        return await api.post(`auth/getAllLichSuKham/${idDoctor}`,{appointmentDate:date})
+        return await api.post(`auth/getAllLichSuKham/${idDoctor}`, { appointmentDate: date })
     })
 }
 
+<<<<<<< HEAD
 export const getAllLichSuKhamStatus = async (idDoctor,data) => {
     return handleRequest(async () => {
         return await api.post(`auth/getAllLichSuKhamStatus/${idDoctor}`,{status:data})
@@ -123,6 +130,8 @@ export const getDoanhThu = async (idBenhVien) => {
         return await api.get(`auth/getDoanhThuHospital/${idBenhVien}`)
     })
 }
+=======
+>>>>>>> 92872b1a2e08a6f73bbf8775fa0cba517f62aaee
 
 export const suaChuyenKhoa = async (idChuyenKhoa, data) => {
     return handleRequest(async () => {
@@ -273,5 +282,32 @@ export const vnPay_Return = async (params) => {
         return await api.get('auth/vnpay_return', {
             params: { params }
         })
+    })
+}
+export const getCurentNews = async (id_tinTuc) => {
+    return handleRequest(async () => {
+        return await api.get(`/getCurentNews/${id_tinTuc}`)
+    })
+}
+export const getCurentNew = async (id_tinTuc) => {
+    return handleRequest(async () => {
+        return await api.get(`/getCurentNews/2`)
+    })
+}
+
+export const getNews = async (params) => {
+    return handleRequest(async () => {
+        return await api.get(`/getNews`, { params })
+    })
+}
+export const addNews = async (data) => {
+    return handleRequest(async () => {
+        return await api.post(`addNews`, { data })
+    })
+}
+export const addComment = async (data) => {
+    console.log(data)
+    return handleRequest(async () => {
+        return await api.post(`addComment`, data)
     })
 }

@@ -16,7 +16,8 @@ export default function AdHeader() {
     const handleLogout = () => {
         logout()
         message.success('Đã đăng xuất !!!')
-        navigte('/')
+        window.location.href = '/';
+
     };
     const items = [
         {

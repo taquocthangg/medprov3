@@ -5,6 +5,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { BiSolidEdit } from 'react-icons/bi';
 import Model_Update_User from './Model_Update_User.jsx';
 import { MdEmail } from 'react-icons/md';
+import { Image } from 'antd';
 export default function Profile({ inforUser, setInforUser }) {
     const [openModal, setOpenModal] = useState();
     const showModal = () => {
@@ -12,9 +13,9 @@ export default function Profile({ inforUser, setInforUser }) {
     }
     return (
         <div className='main_profile'>
-            <h4>
+            <h2>
                 Hồ sơ bệnh nhân
-            </h4>
+            </h2>
             <div className="box_profile">
                 <div className="infor_user">
                     <div className="infor_user_text">
@@ -79,7 +80,8 @@ export default function Profile({ inforUser, setInforUser }) {
                         </p>
                     </div>
                     <div className="box_profile_avatar">
-                        <img src={inforUser?.avatar} alt="" />
+                        {/* <img src={inforUser?.avatar} alt="" /> */}
+                        <Image src={inforUser?.avatar}></Image>
                     </div>
                 </div>
                 <div className="box_profile_btn">

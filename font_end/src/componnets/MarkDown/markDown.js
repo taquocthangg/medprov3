@@ -57,7 +57,8 @@ const MarkDown = ({ dataIntroduce, setIntroduce }) => {
             markDownContent: markDownContent,
             image: dataIntroduce?.imageNews,
             title: dataIntroduce?.titleNews,
-            description: dataIntroduce?.description
+            description: dataIntroduce?.description,
+            author: localStorage.getItem('idUser')
         };
         console.log(postData)
 
@@ -70,7 +71,7 @@ const MarkDown = ({ dataIntroduce, setIntroduce }) => {
             sethtmlContent("")
             setmarkDownContent("")
             addNews(postData)
-           
+
 
         } catch (error) {
             console.error('Error posting to API:', error);
