@@ -18,7 +18,6 @@ export const getAllBacSiByChuyenKhoa = async (req, res) => {
     try {
         const { id_chuyenKhoa } = req.params;
         const { id_benhVien } = req.body;
-        console.log(id_benhVien)
         const result = await services.getBacSiByChuyenKhoa({ id_chuyenKhoa, id_benhVien });
 
         if (result.err === 0) {
@@ -30,6 +29,7 @@ export const getAllBacSiByChuyenKhoa = async (req, res) => {
         res.status(500).json({ message: 'Lỗi server' });
     }
 };
+
 
 
 export const themMoiBacSi = async (req, res) => {

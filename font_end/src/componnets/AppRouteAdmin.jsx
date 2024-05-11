@@ -13,7 +13,6 @@ import Add_bacSi from './../Admin/pages/hospital/Add_bacSi';
 import Add_lichKham from '../Admin/pages/doctor/Add_lichKham';
 import Ds_lichKham from '../Admin/pages/doctor/Ds_lichKham';
 import List_benhAn from './../Admin/pages/doctor/List_benhAn';
-import Add_benhAn from './../Admin/pages/doctor/Add_benhAn';
 import UpdateNewsAdmin from '../Admin/pages/admin/UpdateNewsAdmin';
 import List_lichKhamCho from '../Admin/pages/doctor/List_lichKhamCho';
 import Dashboard from '../Admin/pages/Dashboard';
@@ -23,7 +22,8 @@ export default function AppRouteAdmin({ role_id }) {
     return (
         <div>
             <Routes>
-                <Route path='bang-dieu-khien' element={<Dashboard role_id={role_id} />} />
+                {/* <Route path='/' element={<Dashboard role_id={role_id} />} /> */}
+                <Route path='/' element={<Dashboard role_id={role_id} />} />
                 <Route path='tin-tuc' element={<AddTinTuc />} />
                 <Route path='benh-viens' element={<Add_Benh_Vien />} />
                 <Route path='ds-benh-vien' element={<ListHospital />} />

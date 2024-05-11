@@ -634,6 +634,31 @@ export const getAllLichSuKham = ({ id_doctor, appointmentDate }) => new Promise(
     }
 })
 
+
+export const getAllLichSuKhamFull = ({ id_doctor }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.MedicalHistory.findAndCountAll({
+            where: {
+                doctorId: id_doctor,
+            },
+            include: [
+                {
+                    model: db.User,
+                    attributes: ['id', 'name', 'email', 'gioiTinh', 'namSinh', 'sdt', 'diaChi'],
+                },
+
+            ],
+        })
+        resolve({
+            err: response ? 0 : -1,
+            mess: response ? "Lấy thông tin bệnh án thành công" : "Lấy thông tin bệnh án thất bại",
+            MedicalHistory: response
+        })
+    } catch (e) {
+        reject(e);
+    }
+})
+
 export const getDoanhThuHospital = ({ id_benhvien }) => new Promise(async (resolve, reject) => {
     try {
         const response = await db.Schedule.findAndCountAll({
@@ -688,6 +713,72 @@ export const getSearchDoctor = ({ id_benhvien, name, sdt }) => new Promise(async
     }
 })
 
+export const getAllBacSiByHospital = ({idHospital }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.User.findAndCountAll({
+            where: {
+                id_benhVien:`${idHospital}`
+            },
+        })
+        // console.log(response)
+        resolve({
+            err: response ? 0 : -1,
+            mess: response ? "Lấy thông tin tất cả bác sĩ thành công" : "Lấy thông tin bác sĩ thất bại",
+            User: response
+        })
+    } catch (e) {
+        reject(e);
+    }
+})
+
+export const getAllLichSuKhamByHospital = ({idHospital }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.Schedule.findAndCountAll({
+            where: {
+                hospitalId:`${idHospital}`,
+             
+            },
+        })
+        resolve({
+            err: response ? 0 : -1,
+            mess: response ? "Lấy thông tin tất cả bệnh án thành công" : "Lấy thông tin bệnh án thất bại",
+            Schedule: response
+        })
+    } catch (e) {
+        reject(e);
+    }
+})
+
+export const getAllNewsByHospital = ({idHospital }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.New.findAndCountAll({
+            where: {
+                author:`${idHospital}`,
+            },
+        })
+        resolve({
+            err: response ? 0 : -1,
+            mess: response ? "Lấy thông tin tất cả tin tức thành công" : "Lấy thông tin tất cả tin tức thất bại",
+            Schedule: response
+        })
+    } catch (e) {
+        reject(e);
+    }
+})
+
+export const getAllNews = () => new Promise(async (resolve, reject) => {
+    try {
+        const response = await db.New.findAndCountAll()
+        resolve({
+            err: response ? 0 : -1,
+            mess: response ? "Lấy thông tin tất cả tin tức thành công" : "Lấy thông tin tất cả tin tức thất bại",
+            Schedule: response
+        })
+    } catch (e) {
+        reject(e);
+    }
+})
+
 export const getAllLichSuKhamStatus = ({ id_doctor, status }) => new Promise(async (resolve, reject) => {
     console.log(status);
     try {
@@ -719,6 +810,8 @@ export const getAllLichSuKhamStatus = ({ id_doctor, status }) => new Promise(asy
         reject(e);
     }
 });
+
+
 
 
 const { Op, where } = require('sequelize');
@@ -819,6 +912,94 @@ export const getLichSuKhamBy = ({ getLichSuKhamById, }) => new Promise(async (re
         reject(error);
     }
 });
+
+
+
+export const getSoLuongLich = ({ id_doctor, year }) => new Promise(async (resolve, reject) => {
+    try {
+        const monthlyCounts = [];
+        // Lặp qua từng tháng trong năm
+        for (let month = 0; month < 12; month++) {
+            // Tính toán ngày bắt đầu và kết thúc của tháng
+            const startDate = new Date(year, month, 1);
+            const endDate = new Date(year, month + 1, 0);
+
+            // Truy vấn cơ sở dữ liệu để lấy số lượng lịch đặt trong từng tháng cho mỗi trạng thái
+            const counts = {};
+            for (const status of ['available', 'completed', 'canceled']) {
+                const count = await db.Schedule.count({
+                    where: {
+                        doctorId: id_doctor,
+                        activateDay: {
+                            [Op.between]: [startDate, endDate],
+                        },
+                        status: status,
+                    },
+                });
+                counts[status] = count;
+            }
+
+            // Thêm kết quả vào mảng monthlyCounts
+            monthlyCounts.push({
+                month: month + 1,
+                counts,
+            });
+        }
+
+        // Trả về số liệu lịch khám của từng tháng trong năm cho mỗi trạng thái
+        resolve({
+            err: 0,
+            mess: 'Lấy thông tin số lượng lịch thành công',
+            monthlyCounts,
+        });
+    } catch (error) {
+        reject(error);
+    }
+});
+
+export const LaySoLuongLichHospital = ({ id_Hospital, year }) => new Promise(async (resolve, reject) => {
+    try {
+        const monthlyCounts = [];
+        // Lặp qua từng tháng trong năm
+        for (let month = 0; month < 12; month++) {
+            // Tính toán ngày bắt đầu và kết thúc của tháng
+            const startDate = new Date(year, month, 1);
+            const endDate = new Date(year, month + 1, 0);
+
+            // Truy vấn cơ sở dữ liệu để lấy số lượng lịch đặt trong từng tháng cho mỗi trạng thái
+            const counts = {};
+            for (const status of ['available', 'completed', 'canceled']) {
+                const count = await db.Schedule.count({
+                    where: {
+                        hospitalId: id_Hospital,
+                        activateDay: {
+                            [Op.between]: [startDate, endDate],
+                        },
+                        status: status,
+                    },
+                });
+                counts[status] = count;
+            }
+
+            // Thêm kết quả vào mảng monthlyCounts
+            monthlyCounts.push({
+                month: month + 1,
+                counts,
+            });
+        }
+
+        // Trả về số liệu lịch khám của từng tháng trong năm cho mỗi trạng thái
+        resolve({
+            err: 0,
+            mess: 'Lấy thông tin số lượng lịch thành công',
+            monthlyCounts,
+        });
+    } catch (error) {
+        reject(error);
+    }
+});
+
+
 
 
 export const deleteChuyenKhoa = ({ id_chuyenKhoa }) => new Promise(async (resolve, reject) => {
@@ -1134,7 +1315,9 @@ export const returnPayment = ({ vnp_Params }) => new Promise(async (resolve, rej
         resolve({
             err: 0,
             mess: secureHash === signed ? 'Thanh Toán thành công' : '',
-            vnpUrl
+            // vnpUrl
+            // vnp_Params,
+             code: vnp_Params['vnp_ResponseCode']
         });
     } catch (error) {
         reject(error);

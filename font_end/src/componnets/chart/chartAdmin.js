@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { PieChart, Pie, Sector, ResponsiveContainer, LineChart, Line, XAxis, YAxis, ReferenceLine, BarChart, Bar,CartesianGrid,Tooltip, Legend
+import {
+    PieChart, Pie, Sector, ResponsiveContainer, LineChart, Line, XAxis, YAxis, ReferenceLine, BarChart, Bar, CartesianGrid, Tooltip, Legend
 } from 'recharts';
 // TinyLineChart (Admin Thống kê số lượng người dùng mới )
 // CustomContentOfTooltip (Top bác sĩ có  đánh giá tốt )
@@ -65,15 +66,15 @@ const Round_shape = ({ data }) => {
 
     return (
         <ResponsiveContainer width="100%" height="100%">
-            <PieChart width={400} height={400}>
+            <PieChart >
                 <Pie
                     activeIndex={activeIndex}
                     activeShape={renderActiveShape}
                     data={data}
                     cx="50%"
                     cy="50%"
-                    innerRadius={60}
-                    outerRadius={80}
+                    innerRadius={80}
+                    outerRadius={100}
                     fill="#8884d8"
                     dataKey="value"
                     onMouseEnter={onPieEnter}
@@ -91,6 +92,9 @@ const Round_shape = ({ data }) => {
 //     amt: 2400,
 //   },
 const Line_Chart = ({ data }) => {
+    const formatTooltipLabel = (value) => {
+        return `Tháng ${value}`;
+    };
     return (
         <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -105,14 +109,25 @@ const Line_Chart = ({ data }) => {
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis
+                    dataKey="month"
+                    tickFormatter={(month) => `Tháng ${month}`}
+                    angle={0} // Góc quay -45 độ
+                    textAnchor="end" // Đảm bảo căn chỉnh theo phía cuối của vùng được quay
+                    interval={0} 
+                />
                 <YAxis />
-                <Tooltip />
+                <Tooltip
+                    labelFormatter={formatTooltipLabel}
+                    // formatter={formatTooltipValue}
+                />
                 <Legend />
                 <ReferenceLine x="Page C" stroke="red" label="Max PV PAGE" />
                 <ReferenceLine y={9800} label="Max" stroke="red" />
-                <Line type="monotone" dataKey="pv" stroke="#8884d8" />
-                <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+                <Line type="monotone" dataKey="available" stroke="#8884d8" />
+                <Line type="monotone" dataKey="completed" stroke="#82ca9d" />
+                <Line type="monotone" dataKey="canceled" stroke="red" />
+
             </LineChart>
         </ResponsiveContainer>
     );
@@ -125,7 +140,7 @@ const Line_Chart = ({ data }) => {
 //     amt: 2400,
 //   },
 
-const TinyLine = ({data}) => {
+const TinyLine = ({ data }) => {
     return (
         <ResponsiveContainer width="100%" height="100%">
             <LineChart
@@ -161,56 +176,56 @@ const TinyLine = ({data}) => {
 //   },
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip">
-          <p className="label">{`${label} : ${payload[0].value}`}</p>
-        </div>
-      );
+        return (
+            <div className="custom-tooltip">
+                <p className="label">{`${label} : ${payload[0].value}`}</p>
+            </div>
+        );
     }
-  
-    return null;
-  };
 
-const Bar_Chart=({data})=>{
-     return (
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip content={<CustomTooltip />} />
-          <Legend />
-          <Bar dataKey="pv" barSize={20} fill="#8884d8" />
-        </BarChart>
-      </ResponsiveContainer>
+    return null;
+};
+
+const Bar_Chart = ({ data }) => {
+    return (
+        <ResponsiveContainer width="100%" height="100%">
+            <BarChart
+                width={500}
+                height={300}
+                data={data}
+                margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                }}
+            >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip content={<CustomTooltip />} />
+                <Legend />
+                <Bar dataKey="pv" barSize={20} fill="#8884d8" />
+            </BarChart>
+        </ResponsiveContainer>
     );
-  
+
 }
 
 
 
 
 const ChartAdmin = ({ name, data }) => {
-    console.log(name,data)
+    
     switch (name) {
         case 'circle':
             return <Round_shape data={data} />
         case 'line':
             return <Line_Chart data={data} />
         case 'TinyLine':
-            return <TinyLine data={data}/>
+            return <TinyLine data={data} />
         case 'Bar':
-            return <Bar_Chart data={data}/>
+            return <Bar_Chart data={data} />
         default:
             return (
                 <p>Chưa nhận được data</p>

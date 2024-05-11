@@ -1,5 +1,18 @@
 import * as services from '../sevices'
 
+export const getAllUser = async (req, res) => {
+    try {
+        const result = await services.getAllUser();
+        if (result.err === 0) {
+            res.status(200).json(result);
+        } else {
+            res.status(500).json(result);
+        }
+    } catch (error) {
+        res.status(500).json({ message: 'Lỗi server', users: null });
+    }
+};
+
 export const getUser = async (req, res) => {
     try {
         const result = await services.getUser(req.query);

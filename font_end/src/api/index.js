@@ -101,23 +101,38 @@ export const layLichsukham = async (getLichSuKhamById, data) => {
 }
 
 
-
+// Lấy lịch khám theo ngày
 export const getAllLichSuKham = async (idDoctor, date) => {
     return handleRequest(async () => {
         return await api.post(`auth/getAllLichSuKham/${idDoctor}`, { appointmentDate: date })
     })
 }
 
+// Lấy lịch khám theo idBacSi
+export const getAllLichSuKhamFull = async (idDoctor) => {
+    return handleRequest(async () => {
+        return await api.get(`auth/getAllLichSuKham/${idDoctor}`)
+    })
+}
 
+// Lấy lịch khám theo trạng thái
 export const getAllLichSuKhamStatus = async (idDoctor, data) => {
     return handleRequest(async () => {
         return await api.post(`auth/getAllLichSuKhamStatus/${idDoctor}`, { status: data })
     })
 }
 
+
+
 export const getSearchDoctor = async (idBenhVien, data) => {
     return handleRequest(async () => {
         return await api.post(`auth/getSearchDoctor/${idBenhVien}`, data)
+    })
+}
+
+export const getAllBacSi = async (idBenhVien) => {
+    return handleRequest(async () => {
+        return await api.get(`auth/getAllBacSiByHospital/${idBenhVien}`)
     })
 }
 
@@ -155,6 +170,19 @@ export const lichkhamdadat = async (getSchedulebyID) => {
 export const GetLayLichsukham = async (getLichSuKhamById) => {
     return handleRequest(async () => {
         return await api.get(`auth/laysulichkham/${getLichSuKhamById}`)
+    })
+}
+
+//Dashboard 
+export const getAllLichSuKhamByStatus = async (id_doctor) => {
+    return handleRequest(async () => {
+        return await api.get(`auth/LaySoLuongLich/${id_doctor}`)
+    })
+}
+
+export const getAllLichSuKhamByHospital = async (id_hospital) => {
+    return handleRequest(async () => {
+        return await api.get(`auth/LaySoLuongLichHospital/${id_hospital}`)
     })
 }
 
@@ -229,6 +257,33 @@ export const getChuyenKhoas = async (id_benhVien) => {
         return await api.get(`auth/chuyenkhoa/${id_benhVien}`)
     })
 }
+//lấy số lượng bệnh án theo bệnh viện
+
+export const getAllBenhAnByHospital = async (id_benhVien) => {
+    return handleRequest(async () => {
+        return await api.get(`auth/getAllLichSuKhamByHospital/${id_benhVien}`)
+    })
+}
+
+export const getAllUser = async () => {
+    return handleRequest(async () => {
+        return await api.get(`/getAllUser`)
+    })
+}
+
+//Lấy thông tin tất cả tin tức theo bệnh viện
+export const getAllNewsbyHospital = async (id_benhVien) => {
+    return handleRequest(async () => {
+        return await api.get(`auth/getAllNewsByHospital/${id_benhVien}`)
+    })
+}
+
+export const getAllNews = async () => {
+    return handleRequest(async () => {
+        return await api.get(`auth/getAllNews`)
+    })
+}
+
 
 export const getInfChuyenKhoa = async (idChuyenKhoa) => {
     return handleRequest(async () => {
@@ -306,3 +361,4 @@ export const addComment = async (data) => {
         return await api.post(`addComment`, data)
     })
 }
+

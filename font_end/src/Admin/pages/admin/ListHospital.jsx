@@ -173,7 +173,7 @@ export default function ListHospital() {
 
   return (
     <div style={{ padding: '25px 100px', width: `${screenWidth}` }} className='container_addBenhVien' >
-      <p className='title_insertHopital'>Quản lý bệnh viện</p>
+      <p className='title_insertHopital'>QUẢN LÝ BỆNH VIỆN</p>
       <div className="content_ListHospital">
         <ConfigProvider
           theme={{

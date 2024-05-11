@@ -3,6 +3,20 @@ import db from '../models'
 
 
 
+export const getAllUser = () => new Promise(async (resolve, reject) => {
+    try {
+        const user = await db.User.findAndCountAll();
+        // Trả về thông tin người dùng
+        resolve({
+            err: 0 ,
+            mess: user ? 'Lấy thông tin người dùng thành công' : "Lấy thông tin người dùng thất bại",
+            user: user ? user :"Không có người dùng nào"
+        });
+    } catch (error) {
+        reject(error);
+    }
+});
+
 export const getUser = ({ page, limit, order, name, sex, address, ...query }) => new Promise(async (resolve, reject) => {
     try {
         const queries = { raw: true, nest: true }

@@ -34,18 +34,24 @@ router.delete('/xoaUser/:userId', controller.deleteUsers);
 //tao viết hàm này
 router.get('/getInfomationChuyenKhoa/:id_chuyenKhoa', controller.getInfomationChuyenKhoa)
 router.post('/getAllLichSuKham/:id_doctor', controller.getAllLichSuKham)
+
+//Lấy lịch theo trạng thái
 router.post('/getAllLichSuKhamStatus/:id_doctor', controller.getAllLichSuKhamStatus)
 router.post('/getSearchDoctor/:id_benhvien', controller.getSearchDoctor)
 //get Doanh Thu 
 router.get('/getDoanhThuHospital/:id_benhvien', controller.getDoanhThuHospital)
 router.get('/getInfomationChuyenKhoa/:id_chuyenKhoa', controller.getInfomationChuyenKhoa)
+//getAll theo ngày
 router.post('/getAllLichSuKham/:id_doctor', controller.getAllLichSuKham)
-
-
+// get All từ đầu đến cuối
+router.get('/getAllLichSuKham/:id_doctor',controller.getAllLichSuKhamFull)
 router.post('/themsulichkham/:scheduleId', controller.createHistories); // thêm bệnh án
-//diagnosis  chuẩn đoán
-//Có bao nhiêu bác sĩ
-// có bao nhiêu chuyên khoa
+router.get('/getAllBacSiByHospital/:idHospital',controller.getAllBacSiByHospital)
+router.get('/getAllLichSuKhamByHospital/:idHospital',controller.getAllLichSuKhamByHospital) // Lấy thông tin bệnh nhân theo bệnh viện
+router.get('/getAllNewsByHospital/:idHospital',controller.getAllNewsByHospital) 
+router.get('/getAllNews',controller.getAllNews)
+router.get('/LaySoLuongLich/:id_doctor',controller.getSoLuongLich)
+router.get('/LaySoLuongLichHospital/:id_Hospital',controller.LaySoLuongLichHospital)
 router.post('/laysulichkham/:getLichSuKhamById', controller.getScheduleHistorybyID);
 router.get('/laysulichkham/:getLichSuKhamById', controller.getScheduleHistory);
 

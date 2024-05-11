@@ -1,0 +1,12 @@
+.box_contentStastistical{
+    border-radius: 10px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .3), 0 1px 3px 1px rgba(60, 64, 67, .15) ;
+    margin-bottom: 5px;
+    transition: all .25s ease-in-out;
+    cursor: pointer;
+    background-color:rgba(255, 255, 255, 0.5);
+    padding:10px 20px;
+}
+.box_contentStastistical:hover{
+    background-color:rgba(255, 255, 255, 0.7);
+}

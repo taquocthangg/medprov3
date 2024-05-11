@@ -4,6 +4,7 @@ import '../../css/admin/Insert_admin.css'
 import { Flex, message } from 'antd';
 import StatisticalDoctor from './doctor/StatisticalDoctor';
 import StastisticalHospital from './hospital/StastisticalHospital';
+import Statistical_admin from './admin/Statistical_admin';
 const screenWidth = window.innerWidth
 const dataBar = [
   {
@@ -73,6 +74,8 @@ export default function Statistical({ role_id }) {
   const handleLoadComponetChart = (role_id) => {
     console.log(role_id)
     switch (role_id) {
+      case 'R1':
+        return <Statistical_admin/>
       case "R2":
         return <StastisticalHospital />
       case "R3":

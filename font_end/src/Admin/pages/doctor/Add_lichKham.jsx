@@ -4,8 +4,10 @@ import '../../../css/admin/Insert_admin.css'
 import { getCurent, getInfChuyenKhoa, themlichkham } from '../../../api';
 import { data_time } from '../../../data_fake/data_time';
 import viVN from 'antd/es/locale/vi_VN';
+import { formatDateNoHours } from '../../../Common/dataFortmat';
 const screenWidth = window.innerWidth
 export default function Add_lichKham() {
+  const today = new Date()
   const idDoctor = localStorage.getItem("idUser")
   // Trạng thái để lưu trữ các nút đã được chọn
   const [activeButtons, setActiveButtons] = useState([]);
@@ -117,7 +119,7 @@ export default function Add_lichKham() {
                   onChange={onChangeDate}
                   format="YYYY-MM-DD"
                   className='inout_InsertHopital'
-
+                  placeholder={formatDateNoHours(today)}
                 />
               </ConfigProvider>
             </Flex>

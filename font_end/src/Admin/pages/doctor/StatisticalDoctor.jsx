@@ -100,7 +100,7 @@ const columns = [
         },
         render: (item) => (
             <Tooltip placement="topLeft" title={item}>
-               {formatPrice(item)} vnđ
+               {formatPrice(item)} VNĐ
             </Tooltip>
         ),
     },

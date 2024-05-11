@@ -45,7 +45,7 @@ export const getBacSiByChuyenKhoa = ({ id_chuyenKhoa, id_benhVien }) => new Prom
     try {
         const querySearch = id_chuyenKhoa ? id_chuyenKhoa : id_benhVien
         const search = id_chuyenKhoa ? "id_chuyenKhoa" : "id_benhVien"
-        const response = await db.User.findAll({
+        const response = await db.User.findAndCountAll({
             where: {
                 [search]: querySearch
             }
@@ -64,7 +64,8 @@ export const getBacSiByChuyenKhoa = ({ id_chuyenKhoa, id_benhVien }) => new Prom
         resolve({
             err: 0,
             mess: response ? 'Lấy thông tin bác sĩ thành công' : "Lấy thông tin bác sĩ không thành công",
-            users: response
+            users: response?.rows,
+            count:response?.count
         });
     } catch (error) {
         reject(error);

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../../css/Admin_header.css'
 import { Avatar, ConfigProvider, Dropdown, Flex, Image, Input, Space, message } from 'antd'
 import icon_logo from '../../img/logo/logo.png'
@@ -8,11 +8,17 @@ import { DownOutlined, BellOutlined } from '@ant-design/icons';
 import { dataNoticeIcon } from '../../data'
 import QueryAdmin from '../service/QueryContext'
 import { logout } from '../../api/auth'
+import { getCurent } from '../../api'
 export default function AdHeader() {
     const [focusBtnBell, setFocusBtnBell] = useState(true)
+    const idDoctor = localStorage.getItem("idUser")
+    const [dataUser, setDataUser] = useState("")
     const { QueryValue, setQueryValue } = useContext(QueryAdmin)
     const navigte = useNavigate()
-
+    const handleGetDataUser = async () => {
+        const response = await getCurent(idDoctor)
+        setDataUser(response?.user)
+    }
     const handleLogout = () => {
         logout()
         message.success('Đã đăng xuất !!!')
@@ -40,7 +46,9 @@ export default function AdHeader() {
             type: 'divider',
         },
     ];
-
+    useEffect(()=>{
+        handleGetDataUser()
+    },[])
     return (
         <div className="container_headerAdmin">
             <Flex justify='space-between' align='center'>
@@ -81,11 +89,11 @@ export default function AdHeader() {
                             <Flex gap={10} style={{ marginRight: 10 }}>
                                 <Avatar
                                     size={'large'}
-                                    src="https://scontent.fhan15-2.fna.fbcdn.net/v/t39.30808-1/283650867_1078709262713252_2832944920731518682_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeHkxUyUwhMfGdwdfSHy_jp-JJeTLkBxGWYkl5MuQHEZZuu_URsp38NKkmo2y_O98V1PlHkikMQpaEAZh_qYwf_S&_nc_ohc=7DDJUxkcjOwAb6voAOg&_nc_ht=scontent.fhan15-2.fna&oh=00_AfAzbrmlN8InmhUOtC7m5UzaA1lNGlXbHarFsBz5jMmFSw&oe=663200E8"
+                                    src={dataUser?.avatar}
                                 />
 
                                 <Flex align='center' gap={5} className='box_infAdminUser' >
-                                    <p >Vũ Tiến Khoái</p>
+                                    <p style={{textTransform:'uppercase'}}>{dataUser?.name}</p>
                                     <DownOutlined />
                                 </Flex>
 

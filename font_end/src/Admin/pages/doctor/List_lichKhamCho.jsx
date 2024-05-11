@@ -55,6 +55,7 @@ export default function List_lichKhamCho() {
                   onChange={onChangeDate}
                   format="YYYY-MM-DD"
                   className='inout_InsertHopital'
+                  placeholder={formatDateNoHours(today)}
 
                 />
               </ConfigProvider>

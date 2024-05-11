@@ -99,6 +99,7 @@ export default function Ds_lichKham() {
                   onChange={onChangeDate}
                   format="YYYY-MM-DD"
                   className='inout_InsertHopital'
+                  placeholder={formatDateNoHours(today)}
 
                 />
               </ConfigProvider>

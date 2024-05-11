@@ -259,6 +259,16 @@ export const getAllLichSuKham = async (req, res) => {
     }
 };
 
+export const getAllLichSuKhamFull = async (req, res) => {
+    try {
+        const { id_doctor } = req.params;
+        const response = await services.getAllLichSuKhamFull({ id_doctor })
+        return res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({ error: 'Lỗi trong quá trình lấy bệnh án' });
+    }
+};
+
 export const getSearchDoctor = async (req, res) => {
     try {
         const { id_benhvien } = req.params;
@@ -281,6 +291,48 @@ export const getAllLichSuKhamStatus = async (req, res) => {
         res.status(500).json({ error: 'Lỗi trong quá trình lấy bệnh án' });
     }
 };
+
+
+export const getAllBacSiByHospital = async (req, res) => {
+    try {
+        const { idHospital } = req.params;
+        const response = await services.getAllBacSiByHospital({ idHospital })
+        return res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({ error: 'Lỗi trong quá trình lấy bệnh án' });
+    }
+};
+
+export const getAllLichSuKhamByHospital = async (req, res) => {
+    try {
+        const { idHospital } = req.params;
+        const response = await services.getAllLichSuKhamByHospital({ idHospital })
+        return res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({ error: 'Lỗi trong quá trình lấy bệnh án' });
+    }
+};
+
+export const getAllNewsByHospital = async (req, res) => {
+    try {
+        const { idHospital } = req.params;
+        const response = await services.getAllNewsByHospital({ idHospital })
+        return res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({ error: 'Lỗi trong quá trình lấy bệnh án' });
+    }
+};
+
+export const getAllNews = async (req, res) => {
+    try {
+   
+        const response = await services.getAllNews()
+        return res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({ error: 'Lỗi trong quá trình lấy bệnh án' });
+    }
+};
+
 export const getDoanhThuHospital = async (req, res) => {
     try {
         const { id_benhvien } = req.params;
@@ -299,6 +351,29 @@ export const getScheduleHistorybyID = async (req, res) => {
         console.log(getLichSuKhamById)
         const { ngay, tenBenhNhan } = req.body;
         const response = await services.getLichSuKhamById({ getLichSuKhamById, ngay, tenBenhNhan })
+        return res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({ error: 'Lỗi trong quá trình lấy lịch khám.' });
+    }
+};
+
+export const getSoLuongLich = async (req, res) => {
+    try {
+        const { id_doctor } = req.params;
+        const {status}=req.body;
+        const year= new Date().getFullYear();
+        const response = await services.getSoLuongLich({id_doctor,year })
+        return res.status(200).json(response)
+    } catch (error) {
+        res.status(500).json({ error: 'Lỗi trong quá trình lấy lịch khám.' });
+    }
+};
+
+export const LaySoLuongLichHospital = async (req, res) => {
+    try {
+        const { id_Hospital } = req.params;
+        const year= new Date().getFullYear();
+        const response = await services.LaySoLuongLichHospital({id_Hospital,year })
         return res.status(200).json(response)
     } catch (error) {
         res.status(500).json({ error: 'Lỗi trong quá trình lấy lịch khám.' });
@@ -367,7 +442,8 @@ export const createPayment = async (req, res) => {
 };
 export const returnPayment = async (req, res) => {
     try {
-        let vnp_Params = req.query;
+        let vnp_Params = req.query.params;
+        console.log(req.query.params)
         const paymentUrl = await services.returnPayment({ vnp_Params });
 
         return res.status(200).json(paymentUrl)

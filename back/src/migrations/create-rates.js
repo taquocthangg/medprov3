@@ -10,10 +10,10 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
             evaluatedID: {
-                type: Sequelize.TEXT,
+                type: Sequelize.INTEGER,
             },
             userID: {
-                type: Sequelize.TEXT,
+                type: Sequelize.INTEGER,
             },
             rates: {
                 type: Sequelize.TEXT,
